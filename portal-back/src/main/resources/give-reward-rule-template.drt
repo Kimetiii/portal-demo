@@ -1,0 +1,39 @@
+template header
+
+rule
+accumulateFlag
+eventType
+ruleCode
+ruleId
+awardeeType
+priority
+beginTime
+endTime
+
+
+package com.lgp.droolsdrt.engineer;
+
+import  com.example.portalback.common.util.ActivityContextUtil;
+import  com.example.portalback.drools.domain.fact.RegisterFact;
+
+import  com.example.portalback.drools.domain.fact.BaseFact;
+import  com.lgp.droolsdrt.service.PrizeSendService;
+global com.example.portalback.people.service.PrizeSendService;
+
+template "judge condition"
+
+rule "judge_@{ruleCode}"
+date-effective "@{beginTime}"
+date-expires "@{endTime}"
+when
+   @{eventType}(@{rule})
+then
+
+   //此处修改result值不太对，应该在下面这些方法设置
+   //globalParams.getResult().setSuccess(1);
+   //发奖品
+   ActivityContextUtil.getBean(PrizeSendService.class).sendAward(globalParams,@{awardeeType});
+   System.out.println("发送奖励" +  @{awardeeType});
+end
+
+end template

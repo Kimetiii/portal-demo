@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    druid:
+      url: jdbc:mysql://localhost:3306/daily?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+      username: root
+      password: D48kl&xjRrzp
+      driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+localpath:
+  template: /home/daily/template

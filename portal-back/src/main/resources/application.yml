@@ -1,0 +1,27 @@
+server:
+  port: 8890
+spring:
+  datasource:
+    druid:
+      initial-size: 5
+      min-idle: 5
+      max-active: 10
+      max-wait: 60000
+  profiles:
+    active: dev
+  jpa:
+    properties:
+      hibernate:
+        dialect: com.example.portalback.common.config.MysqlConfig
+mini:
+  appid: wx6bfe38387f8aaadd
+  appsecret: ec9df32de719350d7534955a8a0ae30e
+  code2Session: https://api.weixin.qq.com/sns/jscode2session
+cloud:
+  secretid: AKID1nLfkyYay6wsYxK8RWMbojOncBTf2D6n
+  secretkey: bwBCzauxjEUWLtENIwLSL2Tgf2727vWq
+  bucket: daily-1301633250
+system:
+  filePath: D:\test
+  urlPath: file:///D:/test/
+

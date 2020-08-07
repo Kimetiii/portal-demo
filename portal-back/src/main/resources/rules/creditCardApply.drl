@@ -1,0 +1,29 @@
+// 当前规则文件负责处理两类规则：用户合法性 信用卡额度
+package creditCardApply
+import com.example.portalback.drools.model.CreditCardApplyInfo
+
+// 用户合法性检查 ==>四个规则
+rule "没房没车，学历大专以下，月薪少于5000，直接不通过"
+    salience 100
+    no-loop true
+    when
+        $c:CreditCardApplyInfo(hasHouse==false,hasCar==false,education==CreditCardApplyInfo.EDUCATION_1,monthlyIncome<5000)
+    then
+        $c.setCheckResult(false);
+        drools.halt(); // 直接终止规则
+end
+
+rule "没房没车，学历大专或本科，月薪少于3000，直接不通过"
+    when
+    then
+end
+
+rule "没房没车，学历本科以上，月薪少于2000，直接不通过"
+    when
+    then
+end
+
+rule "现持有信用卡数量大于10，直接不通过"
+    when
+    then
+end
