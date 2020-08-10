@@ -10,7 +10,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7a278a0a-1d98-4e4b-ae88-c41edfa41781" name="Default Changelist" comment="" />
+    <list default="true" id="7a278a0a-1d98-4e4b-ae88-c41edfa41781" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -63,8 +66,8 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
@@ -77,7 +80,10 @@
       <option name="presentableId" value="Default" />
       <updated>1596097291452</updated>
       <workItem from="1596097294377" duration="105000" />
-      <workItem from="1596790963170" duration="31000" />
+      <workItem from="1596790963170" duration="239000" />
+      <workItem from="1596791298868" duration="594000" />
+      <workItem from="1597019812359" duration="21000" />
+      <workItem from="1597020532858" duration="303000" />
     </task>
     <servers />
   </component>
@@ -101,9 +107,13 @@
       <screen x="0" y="30" width="1536" height="834" />
     </state>
     <state x="542" y="202" key="FileChooserDialogImpl/0.30.1536.834/-1920.30.1920.1050@0.30.1536.834" timestamp="1596097352988" />
-    <state x="-1671" y="30" key="SettingsEditor" timestamp="1596790992801">
+    <state x="-1300" y="345" width="428" height="260" key="Github.ShareDialog" timestamp="1596791137551">
       <screen x="-1920" y="30" width="1536" height="834" />
     </state>
-    <state x="-1671" y="30" key="SettingsEditor/0.30.1536.834/-1920.30.1536.834@-1920.30.1536.834" timestamp="1596790992801" />
+    <state x="-1300" y="345" width="428" height="260" key="Github.ShareDialog/0.30.1536.834/-1920.30.1536.834@-1920.30.1536.834" timestamp="1596791137551" />
+    <state x="-1671" y="30" key="SettingsEditor" timestamp="1596791166338">
+      <screen x="-1920" y="30" width="1536" height="834" />
+    </state>
+    <state x="-1671" y="30" key="SettingsEditor/0.30.1536.834/-1920.30.1536.834@-1920.30.1536.834" timestamp="1596791166338" />
   </component>
 </project>
