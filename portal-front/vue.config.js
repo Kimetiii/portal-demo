@@ -35,7 +35,7 @@ module.exports = {
   devServer: {
     proxy: 'http://dut.portal.com:8890',
     port: port,
-    open: true,
+    open: false,
     overlay: {
       warnings: false,
       errors: true
