@@ -1,7 +1,7 @@
 package com.example.portalback.sys.core;
 
 import com.example.portalback.base.model.PageModel;
-import com.example.portalback.sys.bean.SysAccountBean;
+import com.example.portalback.sys.bean.AccountBean;
 import com.example.portalback.sys.model.AccountModel;
 import com.example.portalback.sys.service.SysAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ public class SysManager {
     @Autowired
     private SysAccountService sysAccountService;
 
-    public Page<SysAccountBean> pageAccount(PageModel model) {
+    public Page<AccountBean> pageAccount(PageModel model) {
         return sysAccountService.pageAccount(model);
     }
 
@@ -23,7 +23,7 @@ public class SysManager {
     }
 
     public void addAccount(AccountModel model) {
-        SysAccountBean bean = AccountModel.formatBean(model);
+        AccountBean bean = AccountModel.formatBean(model);
         sysAccountService.addAccount(bean);
     }
 }

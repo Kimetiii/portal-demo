@@ -12,18 +12,22 @@ import java.io.*;
 @SpringBootTest
 class ToolControllerTest {
 
-    @Autowired
-    private ToolManager toolManager;
+	@Autowired
+	private ToolManager toolManager;
 
+	@Test
+	void uploadFile() throws IOException {
+		InputStream inputStream = new FileInputStream(new File("/Users/lin/Documents/workspace/Daily/daily-back/src/main/resources/static/test.png"));
+		MultipartFile multipartFile = new MockMultipartFile("test.png", "test.png", null, inputStream);
 
-    @Test
-    void uploadFile() throws IOException {
-        InputStream inputStream = new FileInputStream(new File("/Users/lin/Documents/workspace/Daily/daily-back/src/main/resources/static/test.png"));
-        MultipartFile multipartFile = new MockMultipartFile("test.png", "test.png", null, inputStream);
+		String file = toolManager.uploadFile(multipartFile);
 
-        String file = toolManager.uploadFile(multipartFile);
+		System.out.println(file);
 
-        System.out.println(file);
+	}
 
-    }
+	@Test
+	void testEnum() {
+
+	}
 }

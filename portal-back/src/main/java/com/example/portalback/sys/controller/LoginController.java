@@ -2,7 +2,7 @@ package com.example.portalback.sys.controller;
 
 import com.example.portalback.common.constant.Constant;
 import com.example.portalback.common.entity.ResponseObj;
-import com.example.portalback.sys.bean.SysAccountBean;
+import com.example.portalback.sys.bean.AccountBean;
 import com.example.portalback.sys.core.SysManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/login")
 @RestController
 public class LoginController {
-
-
     @Autowired
     private SysManager sysManager;
 
@@ -37,7 +35,8 @@ public class LoginController {
     @PostMapping("/success")
     public ResponseObj loginSuccess() {
         // 登录成功后用户的认证信息 UserDetails会存在 安全上下文寄存器 SecurityContextHolder 中
-        SysAccountBean principal = (SysAccountBean) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        AccountBean principal =
+            (AccountBean) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         // 脱敏
         principal.setPassword(Constant.PROTECT_PWD);
         sysManager.loginSuccess(principal.getId());

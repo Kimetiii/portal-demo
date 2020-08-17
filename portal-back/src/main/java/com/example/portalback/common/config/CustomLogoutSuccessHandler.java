@@ -1,7 +1,7 @@
 package com.example.portalback.common.config;
 
 import com.example.portalback.common.entity.ResponseObj;
-import com.example.portalback.sys.bean.SysAccountBean;
+import com.example.portalback.sys.bean.AccountBean;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -20,7 +20,7 @@ public class CustomLogoutSuccessHandler implements LogoutSuccessHandler {
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
 
-        SysAccountBean user = (SysAccountBean) authentication.getPrincipal();
+		AccountBean user = (AccountBean) authentication.getPrincipal();
         String username = user.getUsername();
         log.info("username: {}  is offline now", username);
 
