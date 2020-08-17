@@ -10,9 +10,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7a278a0a-1d98-4e4b-ae88-c41edfa41781" name="Default Changelist" comment="">
+    <list default="true" id="7a278a0a-1d98-4e4b-ae88-c41edfa41781" name="Default Changelist" comment="提交本地部署readme">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal-back/src/main/java/com/example/portalback/sys/controller/SysController.java" beforeDir="false" afterPath="$PROJECT_DIR$/portal-back/src/main/java/com/example/portalback/sys/controller/SysController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,8 +83,16 @@
       <workItem from="1596790963170" duration="239000" />
       <workItem from="1596791298868" duration="594000" />
       <workItem from="1597019812359" duration="21000" />
-      <workItem from="1597020532858" duration="303000" />
+      <workItem from="1597020532858" duration="1104000" />
     </task>
+    <task id="LOCAL-00001" summary="提交本地部署readme">
+      <created>1597021005253</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1597021005253</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -102,6 +110,10 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="提交本地部署readme" />
+    <option name="LAST_COMMIT_MESSAGE" value="提交本地部署readme" />
+  </component>
   <component name="WindowStateProjectService">
     <state x="542" y="202" key="FileChooserDialogImpl" timestamp="1596097352988">
       <screen x="0" y="30" width="1536" height="834" />
@@ -115,5 +127,9 @@
       <screen x="-1920" y="30" width="1536" height="834" />
     </state>
     <state x="-1671" y="30" key="SettingsEditor/0.30.1536.834/-1920.30.1536.834@-1920.30.1536.834" timestamp="1596791166338" />
+    <state x="361" y="180" key="Vcs.Push.Dialog.v2" timestamp="1597021007735">
+      <screen x="0" y="30" width="1536" height="834" />
+    </state>
+    <state x="361" y="180" key="Vcs.Push.Dialog.v2/0.30.1536.834/-1920.30.1536.834@0.30.1536.834" timestamp="1597021007735" />
   </component>
 </project>
