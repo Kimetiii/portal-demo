@@ -9,4 +9,5 @@ public interface RolePermissionRepository extends JpaRepository<SysRolePermissio
 
     List<SysRolePermission> findAllByRoleIdIn(List<String> roleIds);
 
+
 }

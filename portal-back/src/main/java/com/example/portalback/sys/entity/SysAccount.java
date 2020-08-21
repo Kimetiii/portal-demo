@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 /**
  * 账号表
  *
- * @author LIN
+ * @author SONG
  */
 @Entity
 @Data
@@ -29,7 +29,7 @@ public class SysAccount {
     private String username;
 
 	@Basic
-	@Column(name = "mail_address", length = 32)
+	@Column(name = "mail_address", length = 200)
 	private String mailAddress;
 
 	@Basic

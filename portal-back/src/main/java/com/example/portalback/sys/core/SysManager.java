@@ -2,28 +2,69 @@ package com.example.portalback.sys.core;
 
 import com.example.portalback.base.model.PageModel;
 import com.example.portalback.sys.bean.AccountBean;
+import com.example.portalback.sys.bean.PermissionBean;
+import com.example.portalback.sys.bean.RoleBean;
+import com.example.portalback.sys.entity.SysInterfaceInfo;
 import com.example.portalback.sys.model.AccountModel;
+import com.example.portalback.sys.model.PermissionModel;
+import com.example.portalback.sys.model.RoleModel;
 import com.example.portalback.sys.service.SysAccountService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.portalback.sys.service.SysPermissionService;
+import com.example.portalback.sys.service.SysRoleService;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class SysManager {
 
-    @Autowired
-    private SysAccountService sysAccountService;
+	@Resource
+	private SysAccountService sysAccountService;
 
-    public Page<AccountBean> pageAccount(PageModel model) {
-        return sysAccountService.pageAccount(model);
-    }
+	@Resource
+	private SysPermissionService sysPermissionService;
 
-    public void loginSuccess(String userId) {
-        sysAccountService.loginSuccess(userId);
-    }
+	@Resource
+	private SysRoleService sysRoleService;
 
-    public void addAccount(AccountModel model) {
-        AccountBean bean = AccountModel.formatBean(model);
-        sysAccountService.addAccount(bean);
-    }
+	public Page<AccountBean> pageAccount(PageModel model) {
+		return sysAccountService.pageAccount(model);
+	}
+
+	public void loginSuccess(String userId) {
+		sysAccountService.loginSuccess(userId);
+	}
+
+	public void addAccount(AccountModel model) {
+		AccountBean bean = AccountModel.formatBean(model);
+		sysAccountService.addAccount(bean);
+	}
+
+	/**
+	 * 添加权限
+	 *
+	 * @param model model
+	 */
+	public void addPermission(PermissionModel model) {
+		PermissionBean permissionBean = PermissionModel.formatBean(model);
+		sysPermissionService.addPermission(permissionBean);
+	}
+
+	/**
+	 * 添加角色
+	 *
+	 * @param model model
+	 */
+	public void addRole(RoleModel model) {
+		RoleBean roleBean = RoleModel.formatBean(model);
+		List<String> list = new ArrayList<>();
+		sysRoleService.addRole(roleBean, list);
+	}
+
+	public void addInterface4Permission(SysInterfaceInfo sysInterfaceInfo) {
+		sysPermissionService.addInterface4Permission(sysInterfaceInfo);
+	}
 }

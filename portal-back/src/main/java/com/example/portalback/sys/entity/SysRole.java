@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 /**
  * 角色表
  *
- * @author LIN
+ * @author SONG
  */
 @Entity
 @Data

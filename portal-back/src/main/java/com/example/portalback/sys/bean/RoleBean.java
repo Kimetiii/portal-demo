@@ -44,6 +44,12 @@ public class RoleBean implements GrantedAuthority {
         return bean;
     }
 
+    public static SysRole formatEntity(RoleBean bean){
+    	SysRole entity=new SysRole();
+		BeanUtils.copyProperties(bean,entity);
+		return entity;
+	}
+
     public static String getAuthority(SysRole entity) {
         return "ROLE_" + entity.getName();
     }

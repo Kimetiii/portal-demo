@@ -7,7 +7,8 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 /**
- * @author LIN
+ * 用户角色关联表
+ * @author SONG
  */
 @Entity
 @Data
