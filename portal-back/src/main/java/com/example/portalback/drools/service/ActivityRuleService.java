@@ -42,10 +42,12 @@ public class ActivityRuleService {
 	 */
 	public void loadRule() {
 		try {
+			// 从数据库里面取规则
 			List<RuleDTO> ruleDTOs = getActivityRuleList();
 			log.info("{}条加入规则引擎", ruleDTOs.size());
 			if (!ruleDTOs.isEmpty()) {
 				RuleGenerator generator = new RuleGenerator();
+				// 根据入参 生成规则
 				generator.generateRules(ruleDTOs);
 			}
 		} catch (Exception e) {
@@ -54,9 +56,13 @@ public class ActivityRuleService {
 	}
 
 	/**
-	 * 触发规则
+	 * 触发规则 两条入参均为数据库里面存储的 rule_value 规则值
+	 *
+	 * @param userId 用户id
+	 * @param phone  手机号码
 	 */
 	public void useRule(String userId, String phone) {
+		// 构建BaseFact
 		BaseFact fact = buildBaseFact(userId);
 		/**
 		 * 因为是uuid所以修改了的规则，重载加载是新的drl，故从数据库动态加载之时，is_delete属性要注意
@@ -102,7 +108,8 @@ public class ActivityRuleService {
 	public RuleExecutorResult beforeExecute(String orderId, BaseFact fact, RegisterMqDTO domain) {
 		RegisterFact registerFact = buildRegisterFact(domain);
 		CopyUtil.copyPropertiesCglib(fact, registerFact);
-		log.info("RuleService|beforeExecute|{}事件的orderId={}, RegisterMqDTO={}", registerFact.getClass().getAnnotation(Fact.class).value(), orderId, domain);
+		log.info("RuleService|beforeExecute|{}事件的orderId={}, RegisterMqDTO={}",
+				registerFact.getClass().getAnnotation(Fact.class).value(), orderId, domain);
 		return RuleExecutor.execute(registerFact, orderId);
 	}
 

@@ -156,6 +156,13 @@
         </dependency>
 
         <!--Drools规则引擎-->
+
+        <dependency>
+            <groupId>com.github.hongwen1993</groupId>
+            <artifactId>fast-drools-spring-boot-starter</artifactId>
+            <version>7.37.0.Final</version>
+        </dependency>
+
         <dependency>
             <groupId>org.drools</groupId>
             <artifactId>drools-core</artifactId>

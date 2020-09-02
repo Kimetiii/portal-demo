@@ -3,16 +3,17 @@ package com.example.portalback.common.controller;
 import com.example.portalback.common.entity.AppConfig;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author songsenior
@@ -23,7 +24,7 @@ import java.util.List;
 @RequestMapping("/upload")
 public class UploadController {
     //这个注入配置文件，主要是因为本地的路径和服务器url路径需要动态配置，可以自己写死，也可以动态获取
-    @Autowired
+    @Resource
     private AppConfig appConfig;
 
     @RequestMapping("/editor")
@@ -35,7 +36,7 @@ public class UploadController {
             if (file.getSize() > (1048576 * 5)) {
                 return new WangEditorResponse("1", "文件太大，请上传小于5MB的");
             }
-            String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+            String suffix = Objects.requireNonNull(file.getOriginalFilename()).substring(file.getOriginalFilename().lastIndexOf("."));
             if (StringUtils.isBlank(suffix)) {
                 return new WangEditorResponse("1", "上传文件没有后缀，无法识别");
             }

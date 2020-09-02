@@ -10,9 +10,7 @@ public enum ActivityEvent {
      */
 
     BASE("基础", "base", (byte) 0),
-    REGISTER("注册", "regist", (byte) 1),
-
-    ;
+    REGISTER("注册", "regist", (byte) 1);
 
     private String text;
 

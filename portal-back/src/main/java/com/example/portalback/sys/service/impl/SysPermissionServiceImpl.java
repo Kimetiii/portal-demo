@@ -54,7 +54,6 @@ public class SysPermissionServiceImpl implements SysPermissionService {
 		boolean flag = false;
 
 		// 获取调用接口信息 开发人员写是固定的接口 无需动态增删改
-
 		String targetUrl = targetObject.toString(); // 当前接口的接口url路径
 
 		String permission = targetPermission.toString(); // 当前接口所需要的权限名称
@@ -71,7 +70,7 @@ public class SysPermissionServiceImpl implements SysPermissionService {
 	 * 判断用户是否具有传入的权限
 	 *
 	 * @param flag        布尔回参
-	 * @param variable  验证权限
+	 * @param variable    验证权限
 	 * @param accountBean 验证用户
 	 * @return boolean
 	 */

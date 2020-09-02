@@ -4,9 +4,10 @@ import com.example.portalback.common.entity.ResponseObj;
 import com.example.portalback.people.bean.PeopleBean;
 import com.example.portalback.people.core.PeopleManager;
 import com.example.portalback.people.model.PeopleModel;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 
 /**
  * @author LIN
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class PeopleController {
 
-    @Autowired
+    @Resource
     private PeopleManager peopleManager;
 
     /**

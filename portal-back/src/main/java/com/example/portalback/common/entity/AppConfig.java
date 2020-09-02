@@ -15,4 +15,5 @@ import org.springframework.stereotype.Component;
 public class AppConfig {
     public String filePath;
     public String urlPath;
+    public String rulePath;
 }

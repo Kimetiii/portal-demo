@@ -22,29 +22,34 @@ import java.util.Map;
 @RequestMapping(value = "/ruleLoadAndUse")
 public class RuleController {
 
-
-    @Resource
+	@Resource
 	ActivityRuleService activityRuleService;
 
-    @RequestMapping("/loadRule")
-    public String loadRule(Map<String, Object> map) {
+	/**
+	 * 这里是一个加载规则的接口
+	 *
+	 * @param map map
+	 * @return index
+	 */
+	@RequestMapping("/loadRule")
+	public String loadRule(Map<String, Object> map) {
 		activityRuleService.loadRule();
-        map.put("hello", " loadRule");
-        return "/index";
+		map.put("hello", " loadRule");
+		return "/index";
 
-    }
+	}
 
-    @RequestMapping("/useRule")
-    public String useRule(Map<String, Object> map) {
-        activityRuleService.useRule("123456", "13712750166");
-        map.put("hello", " useRule");
-        return "/index";
-    }
+	@RequestMapping("/useRule")
+	public String useRule(Map<String, Object> map) {
+		activityRuleService.useRule("123456", "13712750166");
+		map.put("hello", " useRule");
+		return "/index";
+	}
 
-    @RequestMapping("/useRule2")
-    public String useRule2(Map<String, Object> map) {
-        activityRuleService.useRule("123456", "13712750156");
-        map.put("hello", " useRule2");
-        return "/index";
-    }
+	@RequestMapping("/useRule2")
+	public String useRule2(Map<String, Object> map) {
+		activityRuleService.useRule("123456", "13712750156");
+		map.put("hello", " useRule2");
+		return "/index";
+	}
 }

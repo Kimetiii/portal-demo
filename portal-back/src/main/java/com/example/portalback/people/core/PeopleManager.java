@@ -4,23 +4,23 @@ import com.example.portalback.people.bean.PeopleBean;
 import com.example.portalback.people.service.PeopleService;
 import com.example.portalback.people.service.RelationshipService;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
+import javax.annotation.Resource;
+
 @Component
 public class PeopleManager {
 
-    @Autowired
+    @Resource
     private PeopleService peopleService;
 
-    @Autowired
+    @Resource
     private RelationshipService relationshipService;
 
     public PeopleBean editPeople(PeopleBean bean) {
         Assert.isTrue(StringUtils.isNotBlank(bean.getId()), "peopleId must not null");
-
         PeopleBean peopleBean = peopleService.editPeople(bean);
         return peopleBean;
     }

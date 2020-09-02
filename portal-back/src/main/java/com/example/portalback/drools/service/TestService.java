@@ -33,7 +33,7 @@ public class TestService {
 		return list;
     }
 
-    public ActivityRule select1() {
+    public ActivityRuleEntity select1() {
         return activityRuleRepository.selectByPrimaryKey(1);
     }
 

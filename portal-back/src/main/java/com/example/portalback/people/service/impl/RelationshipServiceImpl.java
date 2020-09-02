@@ -6,19 +6,19 @@ import com.example.portalback.people.dao.RelationshipRepository;
 import com.example.portalback.people.entity.Relationship;
 import com.example.portalback.people.entity.RelationshipInfo;
 import com.example.portalback.people.service.RelationshipService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class RelationshipServiceImpl implements RelationshipService {
 
-    @Autowired
+    @Resource
     private RelationshipRepository relationshipRepository;
 
-    @Autowired
+    @Resource
     private RelationshipInfoRepository relationshipInfoRepository;
 
 

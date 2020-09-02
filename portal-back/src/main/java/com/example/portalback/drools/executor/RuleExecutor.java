@@ -60,6 +60,7 @@ public class RuleExecutor {
      */
     public static RuleExecutorResult execute(BaseFact fact, String orderId) {
         LOGGER.info("RuleExecutor|execute|fact={}", JSON.toJSON(fact));
+
         StatelessKieSession statelessKieSession = getKieBase().newStatelessKieSession();
         RuleExecuteGlobal global = new RuleExecuteGlobal();
         global.setUserId(fact.getUserId());

@@ -16,11 +16,13 @@ import java.util.Date;
 public class RegisterFact extends BaseFact {
 
     @NotNull
-    @FactProperty(desc = "用户ID", format = "例：userId == &quot;08b52da9-8e63-48bd-8250-63a04ee9e701&quot;", optionalValue = {"用户ID"})
+    @FactProperty(desc = "用户ID", format = "例：userId == &quot;08b52da9-8e63-48bd-8250-63a04ee9e701&quot;",
+			optionalValue = {"用户ID"})
     private String userId;
 
     @NotNull
-    @FactProperty(desc = "手机号", format = "例：telephone == &quot;13313313322&quot;", optionalValue = {"手机号"})
+    @FactProperty(desc = "手机号", format = "例：telephone == &quot;13313313322&quot;",
+			optionalValue = {"手机号"})
     private String telephone;
 
     /*format yyyy-MM-dd hh:mm:ss

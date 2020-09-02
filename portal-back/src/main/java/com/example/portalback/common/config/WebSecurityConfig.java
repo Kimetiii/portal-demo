@@ -50,7 +50,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.logout()
 				.addLogoutHandler(new CustomLogoutHandler())
 				.logoutSuccessHandler(new CustomLogoutSuccessHandler());
-
 	}
 
 }

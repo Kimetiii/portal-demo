@@ -75,17 +75,24 @@ public class RuleGenerator {
     /**
      * 根据String格式的Drl生成Maven结构的规则
      *
-     * @param rules
+     * @param rules 规则文件格式字符串集合
      */
     private void createOrRefreshDrlInMemory(List<String> rules) {
-        KieServices kieServices = KieServices.Factory.get();
+
+		/**
+		 * KieServices：kie整体的入口,可以用来创建Container,resource,fileSystem等
+		 * KieFileSystem：一个完整的文件系统,包括资源和组织结构
+		 */
+
+
+		KieServices kieServices = KieServices.Factory.get();
         KieFileSystem kieFileSystem = kieServices.newKieFileSystem();
         kieFileSystem.generateAndWritePomXML(RuleExecutor.getReleaseId());
+
         for (String str : rules) {
         	String temPath="D:\\test/" + UUID.randomUUID() + ".drl";
-            kieFileSystem.write(temPath, str);
-            log.info("str={}", str);
-			System.out.println(temPath);
+			kieFileSystem.write(temPath, str);
+			log.info("str={}", str);
         }
         KieBuilder kb = kieServices.newKieBuilder(kieFileSystem).buildAll();
         if (kb.getResults().hasMessages(Message.Level.ERROR)) {
@@ -99,6 +106,7 @@ public class RuleGenerator {
      * 生成完毕后的清理工作，目前主要用于debug模式测试完毕后，从内存中清理掉规则文件。
      */
     protected void doAfterGenerate(KieServices kieServices) {
+
 
     }
 
