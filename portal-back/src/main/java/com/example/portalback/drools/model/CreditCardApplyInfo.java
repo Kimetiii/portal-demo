@@ -15,24 +15,26 @@ public class CreditCardApplyInfo {
 	public static final String EDUCATION_3 = "本科";
 	public static final String EDUCATION_4 = "本科以上";
 
-	private String name;
+	private String name; // 姓名
 
-	private String sex;
+	private String sex; // 性别
 
-	private String education;
+	private String education; // 学历
 
-	private String telephone;
+	private String telephone; // 电话
 
-	private double monthlyIncome = 0;
+	private double monthlyIncome = 0; // 月收入
 
-	private String address;
+	private String address; // 住址
 
-	private boolean hasHouse = false;
-	private boolean hasCar = false;
+	private boolean hasHouse = false; // 是否有房
+	private boolean hasCar = false; // 是否有车
 	private int hasCreditCardCount = 0; // 持有信用卡的数量
 
 	private boolean checkResult = true; // 是否审核通过
 	private double quota = 0; // 额度
+	private int score = 0; // 模型分数
+	private String modelName; // 模型名称
 
 	@Override
 	public String toString() {

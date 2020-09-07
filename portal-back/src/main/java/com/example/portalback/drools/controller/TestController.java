@@ -1,14 +1,9 @@
 package com.example.portalback.drools.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.drools.core.KieTemplate;
 import com.example.portalback.drools.domain.ActivityRule;
 import com.example.portalback.drools.entity.ActivityRuleEntity;
 import com.example.portalback.drools.service.TestService;
-import com.example.portalback.sys.bean.PermissionBean;
-import org.drools.core.event.DefaultRuleRuntimeEventListener;
-import org.kie.api.event.rule.ObjectInsertedEvent;
-import org.kie.api.runtime.KieSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,26 +27,11 @@ public class TestController {
 	@Resource
 	TestService testService;
 
-	@Resource
-	KieTemplate kieTemplate;
 
 	@PostMapping("/testKieTemplate")
 	public void testKieTemplate(String param) throws InterruptedException {
 		Thread.sleep(1000);
-		KieSession kieSession = kieTemplate.getKieSession("rules.drl");
-		kieSession.addEventListener(new DefaultRuleRuntimeEventListener() {
-			@Override
-			public void objectInserted(ObjectInsertedEvent event) {
-				System.err.println("监听到插入数据");
-				System.err.println("Object:" + event.getObject());
-				System.err.println("Fact:" + event.getFactHandle());
-
-			}
-		});
-		PermissionBean permissionBean = new PermissionBean();
-		permissionBean.setName("狗");
-		kieSession.insert(permissionBean);
-		kieSession.fireAllRules();
+		testService.creditCardApply(null,null);
 	}
 
 	@RequestMapping("/select1")
