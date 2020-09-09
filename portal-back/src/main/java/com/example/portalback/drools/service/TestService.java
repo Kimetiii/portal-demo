@@ -5,8 +5,6 @@ import com.example.portalback.drools.dao.ActivityRuleRepository;
 import com.example.portalback.drools.domain.ActivityRule;
 import com.example.portalback.drools.entity.ActivityRuleEntity;
 import com.example.portalback.drools.model.CreditCardApplyInfo;
-import org.kie.api.event.rule.DefaultRuleRuntimeEventListener;
-import org.kie.api.event.rule.ObjectInsertedEvent;
 import org.kie.api.runtime.KieSession;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -52,12 +50,12 @@ public class TestService {
 	 */
 	public void creditCardApply(String client, String ruleName) {
 		KieSession kieSession = kieTemplate.getKieSession("rules.drl");
-		kieSession.addEventListener(new DefaultRuleRuntimeEventListener() {
+/*		kieSession.addEventListener(new DefaultRuleRuntimeEventListener() {
 			@Override
 			public void objectInserted(ObjectInsertedEvent event) {
 				System.err.println("监听到插入数据");
 			}
-		});
+		});*/
 		CreditCardApplyInfo creditCardApplyInfo = new CreditCardApplyInfo();
 		creditCardApplyInfo.setName("徐小德");
 		creditCardApplyInfo.setSex("男");
