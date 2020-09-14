@@ -155,19 +155,46 @@
                   </template>
                 </el-table-column>
                 <el-table-column
+                  prop="physicalCondition"
                   label="健康状况"
                   align="center"
                   width="100">
+                  <template slot-scope="scope">
+                    <el-form-item v-if="scope.row.edit" :prop="'tableData.' + scope.$index + '.physicalCondition'" :rules='rules.physicalCondition'>
+                      <el-input v-model="scope.row.physicalCondition" placeholder="健康状况"></el-input>
+                    </el-form-item>
+                    <span v-else>{{scope.row.physicalCondition}}</span>
+                  </template>
                 </el-table-column>
                 <el-table-column
+                  prop="tele"
                   label="手机号码"
                   align="center"
                   width="180">
+                  <template slot-scope="scope">
+                    <el-form-item v-if="scope.row.edit" :prop="'tableData.' + scope.$index + '.tele'" :rules='rules.tele'>
+                      <el-input v-model="scope.row.tele" placeholder="手机号码"></el-input>
+                    </el-form-item>
+                    <span v-else>{{scope.row.tele}}</span>
+                  </template>
                 </el-table-column>
                 <el-table-column
                   label="操作"
                   align="center"
                   width="58">
+                  <template slot-scope="scope">
+                    <el-button v-if="scope.row.edit" type="text" size="medium" @click="confirmAdd(scope.row,'tableData')">
+                      <i class="el-icon-check" aria-hidden="true"></i>
+                    </el-button>
+                    <div v-else>
+                      <el-button type="text" size="medium" @click="editData(scope.row)">
+                        <i class="el-icon-edit" aria-hidden="true"></i>
+                      </el-button>
+                      <el-button type="text" size="medium" @click="deleteData(scope.row,scope.$index)">
+                        <i class="el-icon-delete" aria-hidden="true"></i>
+                      </el-button>
+                    </div>
+                  </template>
                 </el-table-column>
               </el-table>
               <el-button type="success" @click="addFamilyMenbers" size="mini">添加家庭成员</el-button>
@@ -442,22 +469,61 @@ export default {
       },
 
       rules: {
-      }
+        name: {
+          required: true,
+          message: '请输入'
+        },
+        relationship: {
+          required: true,
+          message: '请选择关系'
+        },
+        occupation: {
+          required: true,
+          message: '请选择职业'
+        },
+        physicalCondition: {
+          required: true,
+          message: '请输入'
+        },
+        tele: {
+          required: true,
+          message: '请输入'
+        }
+
+    }
     }
   },
   methods: {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert('submit!');
+          alert('submit!')
         } else {
           console.log('error submit!!');
-          return false;
+          return false
         }
       });
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();
+    },
+    addFamilyMenbers() {
+      this.familyInfo.tableData.push({
+        edit: true
+      })
+    },
+    confirmAdd(row, formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          row.edit = false;
+        }
+      })
+    },
+    editData(row) {
+      row.edit = true
+    },
+    deleteData(row, index) {
+      this.familyInfo.tableData.splice(index, 1)
     }
   }
 }
