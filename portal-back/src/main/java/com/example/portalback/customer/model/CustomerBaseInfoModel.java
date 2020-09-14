@@ -1,6 +1,8 @@
 package com.example.portalback.customer.model;
 
+import com.example.portalback.customer.entity.CustomerBaseInfo;
 import lombok.Data;
+import org.springframework.beans.BeanUtils;
 
 /**
  * @author SONG
@@ -120,5 +122,11 @@ public class CustomerBaseInfoModel {
 	private String judicialRecords; // 公安司法的不良记录
 
 	private String creditScore; // 个人信用度评分
+
+	public static CustomerBaseInfo formatEntity(CustomerBaseInfoModel customerBaseInfoModel) {
+		CustomerBaseInfo customerBaseInfo = new CustomerBaseInfo();
+		BeanUtils.copyProperties(customerBaseInfoModel, customerBaseInfo);
+		return customerBaseInfo;
+	}
 
 }
