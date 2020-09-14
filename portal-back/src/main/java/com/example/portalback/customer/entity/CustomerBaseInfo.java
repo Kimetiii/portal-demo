@@ -13,7 +13,7 @@ import javax.persistence.*;
  */
 @Entity
 @Data
-@Table(name = "CUSTOMER_BASE_INFO")
+@Table(name = "T_CUSTOMER_BASE_INFO")
 @DynamicUpdate
 public class CustomerBaseInfo {
 
@@ -23,77 +23,153 @@ public class CustomerBaseInfo {
 	@Column(name = "id", length = 32)
 	private String id;
 
-	@Basic
-	@Column(name = "channel_source", length = 32)
-	private String channelSource;
-
-	/**
-	 * 基本信息
-	 */
-
+	@Column(name = "name", length = 32)
 	private String name;
 
-	private String formerName;
+	@Column(name = "channel_source", length = 32)
+	private String channelSource; // 渠道来源
 
-	private String idNumber;
+	@Column(name = "former_name", length = 32)
+	private String formerName; // 曾用名
 
-	private String sex;
+	@Column(name = "id_number", length = 32)
+	private String idNumber; // 身份证号
 
-	private String phone;
+	@Column(name = "sex", length = 32)
+	private String sex; // 性别
 
-	private String educational;
+	@Column(name = "phone", length = 32)
+	private String phone; // 手机号
 
-	private String residenceAddress;
+	@Column(name = "educational", length = 32)
+	private String educational; // 学历情况
 
-	private String healthStatus;
+	@Column(name = "residence_address", length = 32)
+	private String residenceAddress; // 户籍地址
 
-	private String accountNature;
+	@Column(name = "health_status", length = 32)
+	private String healthStatus; // 健康状态
 
-	private String customerLabel;
+	@Column(name = "account_nature", length = 32)
+	private String accountNature; // 户口性质
+
+	@Column(name = "customer_label", length = 32)
+	private String customerLabel; // 客户标签
 
 	/**
 	 * 家庭信息
 	 */
 
-	private String maritalStatus;
+	@Column(name = "marital_status", length = 32)
+	private String maritalStatus; // 婚姻状况
 
-	private String familySize;
+	@Column(name = "family_size", length = 32)
+	private String familySize; // 家庭人数
 
-	private String summaryOfFamilyStatus;
+	@Column(name = "family_status", length = 32)
+	private String familyStatus; // 家庭状况概况
 
 	/**
 	 * 居住信息
 	 */
 
-	private String residentialAddress;
+	@Column(name = "residential_address", length = 32)
+	private String residentialAddress; // 居住地址
 
-	private String address;
+	@Column(name = "address", length = 32)
+	private String address; // 详细地址
 
-	private String residenceStatus;
+	@Column(name = "residence_status", length = 32)
+	private String residenceStatus; // 居住状态
 
-	private String lengthOfResidence;
+	@Column(length = 32)
+	private String lengthOfResidence; // 居住年限
 
 	/**
 	 * 就业信息
 	 */
 
-	private String companyName;
+	@Column(length = 32)
+	private String companyName; // 单位名称
 
-	private String workPhone;
+	@Column(length = 32)
+	private String workPhone; // 单位电话
 
-	private String unitAddress;
+	@Column(length = 32)
+	private String unitAddress; // 单位地址
 
-	private String unitDetailAddress;
+	@Column(length = 32)
+	private String unitDetailAddress; // 详细地址
 
-	private String industryType;
+	@Column(length = 32)
+	private String industryType; // 行业类型
 
-	private String profession;
+	@Column(length = 32)
+	private String profession; // 职业
 
-	private String position;
+	@Column(length = 32)
+	private String position; // 职务
 
-	private String workingYears;
+	@Column(length = 32)
+	private String workingYears; // 工作年限
 
-	private String annualSalary;
+	@Column(length = 32)
+	private String annualSalary; // 年薪
 
+	/**
+	 * 经济状况
+	 */
+
+	@Column(length = 32)
+	private String familyMonthlyIncome; // 家庭月收入
+
+	@Column(length = 32)
+	private String numberOfDependents; // 抚养人数
+
+	@Column(length = 32)
+	private String assetsToLiabilitiesRatio; // 资产与负债比
+
+	@Column(length = 32)
+	private String LoanToIncomeRatio; // 收入还贷比
+
+	@Column(length = 32)
+	private String averagePersonalIncome; // 个人年平均收入
+
+	@Column(length = 32)
+	private String repaymentToIncomeRatio; // 月还款额与月可支配收入比值
+
+	@Column(length = 32)
+	private String familyPropertyAssessment; // 家庭财产评估值
+
+	@Column(length = 32)
+	private String debtCoverageRatio; // 债务覆盖率
+
+	/**
+	 * 信用状况
+	 */
+
+	@Column(length = 32)
+	private String repaymentRecord; // 还款记录
+
+	@Column(length = 32)
+	private String recordsAndYears; // 个人贷款或信用卡记录和年限
+
+	@Column(length = 32)
+	private String breachOfContract; // 违约情况
+
+	@Column(length = 32)
+	private String overdraftSituation; // 信用卡透支情况等方面的详细调查
+
+	@Column(length = 32)
+	private String bankCardSituation; // 银行卡持有情况及银行账户情况
+
+	@Column(length = 32)
+	private String creditCardDefault; // 个人贷款或信用卡违约情况
+
+	@Column(length = 32)
+	private String judicialRecords; // 公安司法的不良记录
+
+	@Column(length = 32)
+	private String creditScore; // 个人信用度评分
 
 }

@@ -81,4 +81,44 @@ public class CustomerBaseInfoModel {
 	private String workingYears; // 工作年限
 
 	private String annualSalary; // 年薪
+
+	/**
+	 * 经济状况
+	 */
+	private String familyMonthlyIncome; // 家庭月收入
+
+	private String numberOfDependents; // 抚养人数
+
+	private String assetsToLiabilitiesRatio; // 资产与负债比
+
+	private String LoanToIncomeRatio; // 收入还贷比
+
+	private String averagePersonalIncome; // 个人年平均收入
+
+	private String repaymentToIncomeRatio; // 月还款额与月可支配收入比值
+
+	private String familyPropertyAssessment; // 家庭财产评估值
+
+	private String debtCoverageRatio; // 债务覆盖率
+
+	/**
+	 * 信用状况
+	 */
+
+	private String repaymentRecord; // 还款记录
+
+	private String recordsAndYears; // 个人贷款或信用卡记录和年限
+
+	private String breachOfContract; // 违约情况
+
+	private String overdraftSituation; // 信用卡透支情况等方面的详细调查
+
+	private String bankCardSituation; // 银行卡持有情况及银行账户情况
+
+	private String creditCardDefault; // 个人贷款或信用卡违约情况
+
+	private String judicialRecords; // 公安司法的不良记录
+
+	private String creditScore; // 个人信用度评分
+
 }
