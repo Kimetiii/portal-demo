@@ -81,35 +81,44 @@
 </template>
 
 <script>
-  import {pagePeople} from '@/api/people'
+import {pagePeople} from '@/api/people'
 
-  const sexTypeOptions = [
-    {key: '男', display_name: '男'},
-    {key: '女', display_name: '女'}
-  ]
+const sexTypeOptions = [
+  {key: '男', display_name: '男'},
+  {key: '女', display_name: '女'}
+]
 
-  export default {
-    name: 'people.vue',
+export default {
+  name: 'people.vue',
 
-    data() {
-      return {
-        options: [{
-          value: '选项1',
-          label: '黄金糕'
-        }, {
-          value: '选项2',
-          label: '双皮奶'
-        }, {
-          value: '选项3',
-          label: '蚵仔煎'
-        }, {
-          value: '选项4',
-          label: '龙须面'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
-        }],
-        humanInfoData: [{
+  data() {
+    return {
+      options: [{
+        value: '选项1',
+        label: '黄金糕'
+      }, {
+        value: '选项2',
+        label: '双皮奶'
+      }, {
+        value: '选项3',
+        label: '蚵仔煎'
+      }, {
+        value: '选项4',
+        label: '龙须面'
+      }, {
+        value: '选项5',
+        label: '北京烤鸭'
+      }],
+      humanInfoData: [{
+        num: 'FTRM20200804111416VG0C8AONMTSVIC',
+        name: '王二麻',
+        cardId: '210282199508072132',
+        group: '汇丰银行',
+        model: 'HSBC抵押纯企业决策',
+        principal: '张三',
+        project: '汇丰抵贷'
+      }
+        , {
           num: 'FTRM20200804111416VG0C8AONMTSVIC',
           name: '王二麻',
           cardId: '210282199508072132',
@@ -118,123 +127,114 @@
           principal: '张三',
           project: '汇丰抵贷'
         }
-          , {
-            num: 'FTRM20200804111416VG0C8AONMTSVIC',
-            name: '王二麻',
-            cardId: '210282199508072132',
-            group: '汇丰银行',
-            model: 'HSBC抵押纯企业决策',
-            principal: '张三',
-            project: '汇丰抵贷'
-          }
-          , {
-            num: 'FTRM20200804111416VG0C8AONMTSVIC',
-            name: '王二麻',
-            cardId: '210282199508072132',
-            group: '汇丰银行',
-            model: 'HSBC抵押纯企业决策',
-            principal: '张三',
-            project: '汇丰抵贷'
-          }
-          , {
-            num: 'FTRM20200804111416VG0C8AONMTSVIC',
-            name: '王二麻',
-            cardId: '210282199508072132',
-            group: '汇丰银行',
-            model: 'HSBC抵押纯企业决策',
-            principal: '张三',
-            project: '汇丰抵贷'
-          }
-          , {
-            num: 'FTRM20200804111416VG0C8AONMTSVIC',
-            name: '王二麻',
-            cardId: '210282199508072132',
-            group: '汇丰银行',
-            model: 'HSBC抵押纯企业决策',
-            principal: '张三',
-            project: '汇丰抵贷'
-          }
-          , {
-            num: 'FTRM20200804111416VG0C8AONMTSVIC',
-            name: '王二麻',
-            cardId: '210282199508072132',
-            group: '汇丰银行',
-            model: 'HSBC抵押纯企业决策',
-            principal: '张三',
-            project: '汇丰抵贷'
-          }
-          , {
-            num: 'FTRM20200804111416VG0C8AONMTSVIC',
-            name: '王二麻',
-            cardId: '210282199508072132',
-            group: '汇丰银行',
-            model: 'HSBC抵押纯企业决策',
-            principal: '张三',
-            project: '汇丰抵贷'
-          }
-          , {
-            num: 'FTRM20200804111416VG0C8AONMTSVIC',
-            name: '王二麻',
-            cardId: '210282199508072132',
-            group: '汇丰银行',
-            model: 'HSBC抵押纯企业决策',
-            principal: '张三',
-            project: '汇丰抵贷'
-          }
-
-        ],
-        sizeForm: {},
-        humanInfo: {
-          name: '',
-          age: '',
-        },
-        list: [],
-        listLoading: true,
-        dialogFormVisible: false,
-        sexTypeOptions,
-        dialogStatus: '',
-        textMap: {
-          update: 'Edit',
-          create: 'Create'
-        },
-        temp: {
-          id: '',
-          username: '',
-          age: 18,
-          sex: '男',
-          avatar: ''
-        },
-        pageQuery: {
-          pageNo: 0,
-          pageSize: 5,
-          sortKey: 'age',
-          selectKey: undefined,
-          selectValue: undefined
+        , {
+          num: 'FTRM20200804111416VG0C8AONMTSVIC',
+          name: '王二麻',
+          cardId: '210282199508072132',
+          group: '汇丰银行',
+          model: 'HSBC抵押纯企业决策',
+          principal: '张三',
+          project: '汇丰抵贷'
         }
-      }
-    },
-    created() {
-      this.fetchData()
-    },
-    methods: {
-      fetchData() {
-        this.listLoading = true
-        pagePeople(this.pageQuery).then(response => {
-          this.list = response.data.data.content
-          this.listLoading = false
-        })
-      },
-      handleFilter() {
-        this.pageQuery.pageNo = 0
-        this.fetchData()
+        , {
+          num: 'FTRM20200804111416VG0C8AONMTSVIC',
+          name: '王二麻',
+          cardId: '210282199508072132',
+          group: '汇丰银行',
+          model: 'HSBC抵押纯企业决策',
+          principal: '张三',
+          project: '汇丰抵贷'
+        }
+        , {
+          num: 'FTRM20200804111416VG0C8AONMTSVIC',
+          name: '王二麻',
+          cardId: '210282199508072132',
+          group: '汇丰银行',
+          model: 'HSBC抵押纯企业决策',
+          principal: '张三',
+          project: '汇丰抵贷'
+        }
+        , {
+          num: 'FTRM20200804111416VG0C8AONMTSVIC',
+          name: '王二麻',
+          cardId: '210282199508072132',
+          group: '汇丰银行',
+          model: 'HSBC抵押纯企业决策',
+          principal: '张三',
+          project: '汇丰抵贷'
+        }
+        , {
+          num: 'FTRM20200804111416VG0C8AONMTSVIC',
+          name: '王二麻',
+          cardId: '210282199508072132',
+          group: '汇丰银行',
+          model: 'HSBC抵押纯企业决策',
+          principal: '张三',
+          project: '汇丰抵贷'
+        }
+        , {
+          num: 'FTRM20200804111416VG0C8AONMTSVIC',
+          name: '王二麻',
+          cardId: '210282199508072132',
+          group: '汇丰银行',
+          model: 'HSBC抵押纯企业决策',
+          principal: '张三',
+          project: '汇丰抵贷'
+        }
 
+      ],
+      sizeForm: {},
+      humanInfo: {
+        name: '',
+        age: '',
       },
-      handleCreate() {
-        this.dialogStatus = 'create'
-        this.dialogFormVisible = true
+      list: [],
+      listLoading: true,
+      dialogFormVisible: false,
+      sexTypeOptions,
+      dialogStatus: '',
+      textMap: {
+        update: 'Edit',
+        create: 'Create'
+      },
+      temp: {
+        id: '',
+        username: '',
+        age: 18,
+        sex: '男',
+        avatar: ''
+      },
+      pageQuery: {
+        pageNo: 0,
+        pageSize: 5,
+        sortKey: 'age',
+        selectKey: undefined,
+        selectValue: undefined
       }
     }
+  },
+  created() {
+    this.fetchData()
+  },
+  methods: {
+    fetchData() {
+      this.listLoading = true
+      pagePeople(this.pageQuery).then(response => {
+        this.list = response.data.data.content
+        this.listLoading = false
+      })
+    },
+    handleFilter() {
+      this.pageQuery.pageNo = 0
+      this.fetchData()
+
+    },
+    handleCreate() {
+      this.dialogStatus = 'create'
+      this.dialogFormVisible = true
+    }
   }
+}
 </script>
 
 <style scoped>

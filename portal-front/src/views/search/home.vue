@@ -18,24 +18,23 @@
 </template>
 
 <script>
-  export default {
-    name: 'home.vue',
-
-    data() {
-      return {
-        todayCount:'3',
-        weekendCount:'7',
-        halfMonthCount:'23',
-      }
-    },
-    mounted() {
-    },
-    created() {
-    },
-    methods: {
-
+export default {
+  name: 'home.vue',
+  data() {
+    return {
+      todayCount: '3',
+      weekendCount: '7',
+      halfMonthCount: '23'
     }
+  },
+  mounted() {
+  },
+  created() {
+  },
+  methods: {
+
   }
+}
 </script>
 
 <style scoped>

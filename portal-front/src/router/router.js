@@ -144,8 +144,13 @@ export const constantRoutes = [
         name: 'listConfig',
         component: () => import('@/views/listmanagement/listConfig'),
         meta: {title: '名单配置'} //页面名称
+      },
+      {
+        path: '/ListManagement/clientAdd',
+        name: 'clientAdd',
+        component: () => import('@/views/listmanagement/clientAdd'),
+        meta: {title: '新增客户'}
       }
-
     ]
   },
 
