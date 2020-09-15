@@ -56,7 +56,7 @@ public class CustomerBaseInfoModel {
 
 	private String residentialAddress; // 居住地址
 
-	private String address; // 详细地址
+	private String detailedAddress; // 详细地址
 
 	private String residenceStatus; // 居住状态
 

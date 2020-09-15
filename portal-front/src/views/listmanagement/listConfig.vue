@@ -54,10 +54,10 @@
         </el-form-item>
       </el-form>
       <el-table
-        :data="tableData"
-        height="550"
+        :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
+        height="500px"
         border
-        style="width: 100%;margin-left: 20px;margin-bottom: 20px;margin-right: 20px;">
+        style="width: 1600px;margin-left: 20px;margin-bottom: 20px;margin-right: 20px;">
         <el-table-column
           prop="clientSource"
           label="客戶來源"
@@ -71,7 +71,7 @@
         <el-table-column
           prop="clientID"
           label="证件号码"
-          width="400">
+          width="300">
         </el-table-column>
         <el-table-column
           prop="teleNumber"
@@ -86,18 +86,27 @@
         <el-table-column
           prop="control"
           label="操作"
-          width="350">
+          width="300">
           <template slot-scope="scope">
             <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
             <el-button type="text" size="small">编辑</el-button>
+            <el-button
+              size="mini"
+              type="danger"
+              @click="handleDelete(scope.$index, scope.row)">删除
+            </el-button>
           </template>
         </el-table-column>
       </el-table>
-      <el-pagination
-        background
-        layout="prev, pager, next"
-        :total="1000">
-      </el-pagination>
+      <div class="block" style="margin-top:15px;">
+        <el-pagination align='center' @size-change="handleSizeChange" @current-change="handleCurrentChange"
+           :current-page="currentPage"
+           :page-sizes="[1,5,10,20]"
+           :page-size="pageSize"
+           layout="total, sizes, prev, pager, next, jumper"
+           :total="tableData.length">
+        </el-pagination>
+      </div>
     </div>
   </div>
 </template>
@@ -243,10 +252,22 @@ export default {
         teleNumber: '15622234456',
         setingTime: '2010-03-13'
       }
-      ]
+      ],
+      currentPage: 1, // 当前页码
+      total: 20, // 总条数
+      pageSize: 8 // 每页的数据条数
     }
   },
   methods: {
+    handleSizeChange(val) {
+      console.log(`每页 ${val} 条`);
+      this.currentPage = 1;
+      this.pageSize = val;
+    },
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`);
+      this.currentPage = val;
+    },
     onSubmit() {
       console.log('submit!')
     },
@@ -264,8 +285,8 @@ export default {
         }
       })
     },
-    flodchange(){
-      if ( this.foldCode == 0 ) {
+    flodchange() {
+      if (this.foldCode == 0) {
         this.foldCode = 1
         this.foldStatus = '收起'
       } else {
@@ -281,6 +302,9 @@ export default {
       this.listConfig.clientID = ''
       this.listConfig.settingTime = ''
       this.listConfig.Manager = ''
+    },
+    handleDelete() {
+      this.tableData.splice(index, 1)
     }
   }
 }
