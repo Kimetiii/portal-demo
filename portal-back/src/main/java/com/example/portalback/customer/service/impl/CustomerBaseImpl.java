@@ -1,9 +1,11 @@
 package com.example.portalback.customer.service.impl;
 
+import com.drools.core.KieTemplate;
 import com.example.portalback.customer.dao.CustomerBaseRepository;
 import com.example.portalback.customer.entity.CustomerBaseInfo;
 import com.example.portalback.customer.model.CustomerBaseInfoModel;
 import com.example.portalback.customer.service.CustomerBaseService;
+import org.kie.api.runtime.KieSession;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -17,6 +19,9 @@ import javax.annotation.Resource;
 public class CustomerBaseImpl implements CustomerBaseService {
 
 	@Resource
+	KieTemplate kieTemplate;
+
+	@Resource
 	private CustomerBaseRepository customerBaseRepository;
 
 	@Override
@@ -25,4 +30,14 @@ public class CustomerBaseImpl implements CustomerBaseService {
 		CustomerBaseInfo save = customerBaseRepository.save(customerBaseInfo);
 		return save;
 	}
+
+	@Override
+	public CustomerBaseInfoModel enforceRules(String ruleName, CustomerBaseInfoModel model) {
+		KieSession kieSession = kieTemplate.getKieSession("demo.drl");
+		kieSession.insert(model);
+		kieSession.fireAllRules();
+		System.err.println(model.getCreditScore());
+		return model;
+	}
+
 }

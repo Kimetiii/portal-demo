@@ -30,4 +30,13 @@ public class CustomerBaseController {
 			return ResponseObj.failure(e);
 		}
 	}
+
+	@PostMapping("enforceRules")
+	public ResponseObj enforceRules(@RequestBody CustomerBaseInfoModel model) {
+		try {
+			return ResponseObj.success(customerBaseService.enforceRules(null, model), "insert success");
+		} catch (Exception e) {
+			return ResponseObj.failure(e);
+		}
+	}
 }

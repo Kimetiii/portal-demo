@@ -12,4 +12,6 @@ import com.example.portalback.customer.model.CustomerBaseInfoModel;
 public interface CustomerBaseService {
 
 	CustomerBaseInfo save(CustomerBaseInfoModel customerBaseInfoModel);
+
+	CustomerBaseInfoModel enforceRules(String ruleName,CustomerBaseInfoModel model);
 }
