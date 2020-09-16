@@ -15,5 +15,7 @@ public interface CustomerBaseRepository extends JpaRepository<CustomerBaseInfo, 
 
 	List<CustomerBaseInfo> findAll();
 
+	CustomerBaseInfo queryAllById(String id);
+
 
 }

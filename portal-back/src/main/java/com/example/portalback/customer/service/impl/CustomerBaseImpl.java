@@ -9,6 +9,7 @@ import org.kie.api.runtime.KieSession;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author songsenior
@@ -29,6 +30,16 @@ public class CustomerBaseImpl implements CustomerBaseService {
 		CustomerBaseInfo customerBaseInfo = CustomerBaseInfoModel.formatEntity(customerBaseInfoModel);
 		CustomerBaseInfo save = customerBaseRepository.save(customerBaseInfo);
 		return save;
+	}
+
+	@Override
+	public List<CustomerBaseInfo> findAllCustomerBase() {
+		return customerBaseRepository.findAll();
+	}
+
+	@Override
+	public CustomerBaseInfo getInfoById(String id) {
+		return customerBaseRepository.queryAllById(id);
 	}
 
 	@Override
