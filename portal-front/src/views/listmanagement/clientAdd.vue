@@ -20,7 +20,7 @@
               <el-input v-model="basicInfo.name"></el-input>
             </el-form-item>
             <el-form-item label="曾用名" prop="fomerName">
-              <el-input v-model="basicInfo.formerName"></el-input>
+              <el-input v-model="basicInfo.formerName" placeholder="默认为：无"></el-input>
             </el-form-item>
             <el-form-item label="身份证号" prop="idNumber">
               <el-input v-model="basicInfo.idNumber"></el-input>
@@ -51,7 +51,9 @@
               <v-distpicker province="" city="" area="" v-model="basicInfo.residenceAddress"></v-distpicker>
             </el-form-item>
             <el-form-item label="健康状况" prop="healthStatus">
-              <el-input v-model="basicInfo.healthStatus"></el-input>
+              <el-select v-model="basicInfo.healthStatus">
+                <el-option label="良好" value="good"></el-option>
+              </el-select>
             </el-form-item>
             <el-form-item label="户口性质" prop="accountNature">
               <el-select v-model="basicInfo.accountNature" placeholder="请选择">
@@ -469,7 +471,7 @@ export default {
         id: '',
         name: '',
         channelSource: '',
-        formerName: '',
+        formerName: '无',
         idNumber: '',
         sex: '',
         phone: [],
@@ -531,6 +533,14 @@ export default {
           required: true,
           message: '请输入'
         },
+        idNumber: [
+          { required: true, message: '请填写证件号码', trigger: 'blur' },
+          {
+            pattern: /(^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$)|(^[1-9]\d{5}\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{2}$)/,
+            message: '证件号码格式有误！',
+            trigger: 'blur'
+          }
+        ],
         relationship: {
           required: true,
           message: '请选择关系'
@@ -543,10 +553,18 @@ export default {
           required: true,
           message: '请输入'
         },
-        tele: {
-          required: true,
-          message: '请输入'
-        }
+        phone: [
+          {
+            required: true,
+            message: '请输入手机号',
+            trigger: 'blur'
+          },
+          {
+            pattern: /^1[3|4|5|7|8][0-9]{9}$/,
+            message: '手机号格式不对',
+            trigger: 'blur'
+          }
+        ]
       }
     }
   },
@@ -564,21 +582,21 @@ export default {
     resetForm(formName) {
       this.$refs[formName].resetFields();
     },
-    addFamilyMembers() {
-      this.familyInfo.tableData.push({
-        edit: true
-      })
-    },
-    addEmployContact() {
-      this.employInfo.tableData.push({
-        edit: true
-      })
-    },
-    addShareholder() {
-      this.company.tableData.push({
-        edit: true
-      })
-    },
+    // addFamilyMembers() {
+    //   this.familyInfo.tableData.push({
+    //     edit: true
+    //   })
+    // },
+    // addEmployContact() {
+    //   this.employInfo.tableData.push({
+    //     edit: true
+    //   })
+    // },
+    // addShareholder() {
+    //   this.company.tableData.push({
+    //     edit: true
+    //   })
+    // },
     // confirmAdd(row, formName) {
     //   this.$refs[formName].validate((valid) => {
     //     if (valid) {
@@ -589,15 +607,15 @@ export default {
     // editData(row) {
     //   row.edit = true
     // },
-    deleteFamilyMemberData(row, index) {
-      this.familyInfo.tableData.splice(index, 1)
-    },
-    deleteEmployContactData(row, index) {
-      this.employInfo.tableData.splice(index, 1)
-    },
-    deleteShareholderData(row, index) {
-      this.company.tableData.splice(index, 1)
-},
+    //     deleteFamilyMemberData(row, index) {
+    //       this.familyInfo.tableData.splice(index, 1)
+    //     },
+    //     deleteEmployContactData(row, index) {
+    //       this.employInfo.tableData.splice(index, 1)
+    //     },
+    //     deleteShareholderData(row, index) {
+    //       this.company.tableData.splice(index, 1)
+    // },
     next() {
       if (this.active++ > 2) this.active = 0
     }
@@ -605,36 +623,4 @@ export default {
 }
 </script>
 <style scoped>
-.el-row {
-  margin-bottom: 20px;
-  &:last-child {
-   margin-bottom: 0;
- }
-}
-.el-col {
-  border-radius: 4px;
-}
-.bg-purple-dark {
-  background: #99a9bf;
-}
-.bg-purple {
-  background: #d3dce6;
-}
-.bg-purple-light {
-  background: #e5e9f2;
-}
-.bg-white{
-  background: white;
-}
-.grid-content {
-  border-radius: 4px;
-  min-height: 36px;
-}
-.row-bg {
-  padding: 10px 0;
-  background-color: #f9fafc;
-}
-.box-card {
-  width: 480px;
-}
 </style>
