@@ -1,13 +1,6 @@
 server:
   port: 8890
 spring:
-  drools:
-    # 指定规则文件文件夹，会自动扫描该目录下所有规则文件，决策表，以及CSV文件
-    path: D:\\_Temp\
-    # 也可以指定全局的mode,选择stream或者cloud
-    mode: stream
-    # 指定规则文件自动更新的周期，单位秒，默认30秒扫描一次
-    update: 5
   datasource:
     druid:
       initial-size: 5

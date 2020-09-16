@@ -12,6 +12,9 @@ import org.springframework.beans.BeanUtils;
 @Data
 public class CustomerBaseInfoModel {
 
+	private boolean isBlackList;
+
+	private boolean isWhiteList;
 	/**
 	 * 基本信息
 	 */
@@ -44,7 +47,7 @@ public class CustomerBaseInfoModel {
 	 * 家庭信息
 	 */
 
-	private String maritalStatus; // 婚姻状况
+	private String maritalStatus; // 婚姻状况 0 未婚 1 已婚
 
 	private String familySize; // 家庭人数
 
