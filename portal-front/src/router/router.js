@@ -148,7 +148,7 @@ export const constantRoutes = [
       {
         path: '/ListManagement/clientAdd',
         name: 'clientAdd',
-        component: () => import('@/views/listmanagement/clientAdd'),
+        component: () => import('@/views/listmanagement/addCustomer'),
         // meta: {title: '新增客户'}
       }
     ]

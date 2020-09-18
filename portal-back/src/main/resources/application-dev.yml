@@ -8,9 +8,11 @@ spring:
     update: 5
   datasource:
     druid:
-      url:  jdbc:mysql://150.158.116.155:3306/portal@song?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+#   url: jdbc:mysql://150.158.116.155:3306/portal@song?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+      url:  jdbc:mysql://localhost:3306/portal@song?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
       username: root
-      password: D48kl&xjRrzp
+#      password: D48kl&xjRrzp
+      password: 123456
       driver-class-name: com.mysql.jdbc.Driver
   jpa:
     hibernate:

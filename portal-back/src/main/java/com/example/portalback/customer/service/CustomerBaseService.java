@@ -20,4 +20,5 @@ public interface CustomerBaseService {
 	CustomerBaseInfo getInfoById(String id);
 
 	CustomerBaseInfoModel enforceRules(String ruleName,CustomerBaseInfoModel model);
+
 }

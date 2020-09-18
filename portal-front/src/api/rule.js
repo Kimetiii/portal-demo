@@ -7,6 +7,5 @@ export function getRules(params) {
     method: 'post',
     data: params
   })
-
 }
 

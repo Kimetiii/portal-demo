@@ -1,15 +1,15 @@
 <template>
-  <div id="clientAdd">
+  <div id="addCustomer">
     <div id="container" style="width:1600px;margin-left: 50px;margin-top: 40px;box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)">
-      <el-tabs :tab-position="left" style="margin-left: 20px;margin-top: 40px">
+      <el-tabs style="margin-left: 20px;margin-top: 40px">
         <el-tab-pane label="借款人基本信息>>" >
           <span>借款人基本信息</span>
-          <el-form :model="basicInfo" :rules="rules" ref="ruleForm" label-position="top" style="width:800px;height:1500px;margin-left: 100px;padding-top: 10px" label-width="100px" class="demo-ruleForm" lable="借款人基本信息">
+          <el-form :model="allInfo" :rules="rules" ref="ruleForm" label-position="top" style="width:800px;height:1500px;margin-left: 100px;padding-top: 10px" label-width="100px" class="demo-ruleForm" lable="借款人基本信息">
             <el-form-item label="客户编号" prop="id">
-              <el-input v-model="basicInfo.id"></el-input>
+              <el-input v-model="allInfo.id" placeholder="请输入"></el-input>
             </el-form-item>
             <el-form-item label="渠道来源" prop="channelSource">
-              <el-select v-model="basicInfo.channelSource" placeholder="请选择">
+              <el-select v-model="allInfo.channelSource" placeholder="请选择">
                 <el-option label="渠道" value="channel"></el-option>
                 <el-option label="客户经理" value="Manager"></el-option>
                 <el-option label="本人" value="self"></el-option>
@@ -17,25 +17,25 @@
               </el-select>
             </el-form-item>
             <el-form-item label="姓名" prop="name">
-              <el-input v-model="basicInfo.name"></el-input>
+              <el-input v-model="allInfo.name" placeholder="请输入"></el-input>
             </el-form-item>
             <el-form-item label="曾用名" prop="fomerName">
-              <el-input v-model="basicInfo.formerName" placeholder="默认为：无"></el-input>
+              <el-input v-model="allInfo.formerName" placeholder="默认为：无"></el-input>
             </el-form-item>
             <el-form-item label="身份证号" prop="idNumber">
-              <el-input v-model="basicInfo.idNumber"></el-input>
+              <el-input v-model="allInfo.idNumber" placeholder="请输入"></el-input>
             </el-form-item>
             <el-form-item label="性别" prop="sex">
-              <el-select v-model="basicInfo.sex" placeholder="请选择">
+              <el-select v-model="allInfo.sex" placeholder="请选择">
                 <el-option label="男" value="male"></el-option>
                 <el-option label="女" value="female"></el-option>
               </el-select>
             </el-form-item>
             <el-form-item label="手机号" prop="phone">
-              <el-input v-model="basicInfo.phone"></el-input>
+              <el-input v-model="allInfo.phone" placeholder="请输入"></el-input>
             </el-form-item>
             <el-form-item label="学历情况" prop="educational">
-              <el-select v-model="basicInfo.educational" placeholder="请选择">
+              <el-select v-model="allInfo.educational" placeholder="请选择">
                 <el-option label="博士研究生毕业" value="doctoral"></el-option>
                 <el-option label="硕士研究生毕业" value="master"></el-option>
                 <el-option label="大学本科生毕业" value="bachelor"></el-option>
@@ -48,21 +48,21 @@
               </el-select>
             </el-form-item>
             <el-form-item label="户籍地址" prop="residenceAddress">
-              <v-distpicker province="" city="" area="" v-model="basicInfo.residenceAddress"></v-distpicker>
+              <v-distpicker province="" city="" area="" v-model="allInfo.residenceAddress" placeholder="请输入"></v-distpicker>
             </el-form-item>
             <el-form-item label="健康状况" prop="healthStatus">
-              <el-select v-model="basicInfo.healthStatus">
+              <el-select v-model="allInfo.healthStatus">
                 <el-option label="良好" value="good"></el-option>
               </el-select>
             </el-form-item>
             <el-form-item label="户口性质" prop="accountNature">
-              <el-select v-model="basicInfo.accountNature" placeholder="请选择">
+              <el-select v-model="allInfo.accountNature" placeholder="请选择">
                 <el-option label="农户" value="rural"></el-option>
                 <el-option label="非农户" value="NOrural"></el-option>
               </el-select>
             </el-form-item>
             <el-form-item label="客户标签" prop="customerLabel">
-              <el-select v-model="basicInfo.customerLabel" placeholder="请选择">
+              <el-select v-model="allInfo.customerLabel" placeholder="请选择">
                 <el-option label="资源户" value="resource"></el-option>
                 <el-option label="非资源户" value="NOresource"></el-option>
               </el-select>
@@ -71,9 +71,9 @@
         </el-tab-pane>
         <el-tab-pane label="家庭信息>>">
           <span>家庭信息</span>
-          <el-form :model="familyInfo" :rules="rules" ref="ruleForm" label-position="top" style="width:800px;height:800px;margin-left: 100px;padding-top: 10px" label-width="100px" class="demo-ruleForm" lable="家庭信息">
+          <el-form :model="allInfo" :rules="rules" ref="ruleForm" label-position="top" style="width:800px;height:800px;margin-left: 100px;padding-top: 10px" label-width="100px" class="demo-ruleForm" lable="家庭信息">
             <el-form-item label="婚姻状况">
-              <el-radio-group v-model="familyInfo.maritalStatus">
+              <el-radio-group v-model="allInfo.maritalStatus">
                 <el-radio label="未婚"></el-radio>
                 <el-radio label="已婚"></el-radio>
                 <el-radio label="离异"></el-radio>
@@ -81,14 +81,14 @@
               </el-radio-group>
             </el-form-item>
             <el-form-item label="家庭人数" prop="familySize">
-              <el-input v-model="familyInfo.familySize" placeholder="请输入"></el-input>
+              <el-input v-model="allInfo.familySize" placeholder="请输入"></el-input>
             </el-form-item>
             <el-form-item label="家庭情况概况" prop="summaryOfFamilyStatus">
-              <el-input type="textarea" v-model="familyInfo.summaryOfFamilyStatus" placeholder="请简要描述家庭情况"></el-input>
+              <el-input type="textarea" v-model="allInfo.summaryOfFamilyStatus" placeholder="请简要描述家庭情况"></el-input>
             </el-form-item>
             <!--            <el-form-item label="家庭成员" prop="familyMembers" style="width: 800px">-->
             <!--              <el-table-->
-            <!--                :data="familyInfo.tableData"-->
+            <!--                :data="allInfo.tableData"-->
             <!--                border-->
             <!--                style="width: 100%;margin-bottom: 20px;margin-right: 20px;">-->
             <!--                <el-table-column-->
@@ -211,15 +211,15 @@
         </el-tab-pane>
         <el-tab-pane label="居住信息>>">
           <span>居住信息</span>
-          <el-form :model="residenceInfo" :rules="rules" ref="ruleForm" label-position="top" style="width:800px;height:800px;margin-left: 100px;padding-top: 10px" label-width="100px" class="demo-ruleForm" lable="居住信息">
+          <el-form :model="allInfo" :rules="rules" ref="ruleForm" label-position="top" style="width:800px;height:800px;margin-left: 100px;padding-top: 10px" label-width="100px" class="demo-ruleForm" lable="居住信息">
             <el-form-item label="居住地址" prop="residentialAddress">
-              <v-distpicker province="" city="" area="" v-model="residenceInfo.residentialAddress"></v-distpicker>
+              <v-distpicker province="" city="" area="" v-model="allInfo.residentialAddress"></v-distpicker>
             </el-form-item>
-            <el-form-item label="详细地址" prop="detailedAddress">
-              <el-input v-model="residenceInfo.detailedAddress" placeholder="请具体到街道小区/村组"></el-input>
+            <el-form-item label="详细地址" prop="address">
+              <el-input v-model="allInfo.address" placeholder="请具体到街道小区/村组"></el-input>
             </el-form-item>
             <el-form-item label="居住状态" prop="residentialStatus">
-              <el-select v-model="residenceInfo.residentialStatus" placeholder="请选择">
+              <el-select v-model="allInfo.residentialStatus" placeholder="请选择">
                 <el-option label="自购无贷" value="Noloan"></el-option>
                 <el-option label="自购按揭" value="mortgage"></el-option>
                 <el-option label="集体宿舍" value="dormitory"></el-option>
@@ -227,27 +227,27 @@
               </el-select>
             </el-form-item>
             <el-form-item label="居住年限" prop="lengthOfResidence">
-              <el-input-number v-model="residenceInfo.lengthOfResidence" controls-position="right" @change="handleChange" :min="1"></el-input-number>
+              <el-input-number v-model="allInfo.lengthOfResidence" controls-position="right" :min="1"></el-input-number>
             </el-form-item>
           </el-form>
         </el-tab-pane>
         <el-tab-pane label="就业信息>>">
           <span>就业信息</span>
-          <el-form :model="employInfo" :rules="rules" ref="ruleForm" label-position="top" style="width:800px;height:2000px;margin-left: 100px;padding-top: 10px" label-width="100px" class="demo-ruleForm" lable="就业信息">
+          <el-form :model="allInfo" :rules="rules" ref="ruleForm" label-position="top" style="width:800px;height:2000px;margin-left: 100px;padding-top: 10px" label-width="100px" class="demo-ruleForm" lable="就业信息">
             <el-form-item label="单位名称" prop="companyName">
-              <el-input v-model="employInfo.companyName" placeholder="请输入"></el-input>
+              <el-input v-model="allInfo.companyName" placeholder="请输入"></el-input>
             </el-form-item>
             <el-form-item label="单位电话" prop="workPhone">
-              <el-input v-model="employInfo.workPhone" placeholder="请输入"></el-input>
+              <el-input v-model="allInfo.workPhone" placeholder="请输入"></el-input>
             </el-form-item>
             <el-form-item label="单位地址" prop="unitAddress">
-              <v-distpicker province="" city="" area="" v-model="employInfo.unitAddress"></v-distpicker>
+              <v-distpicker province="" city="" area="" v-model="allInfo.unitAddress"></v-distpicker>
             </el-form-item>
             <el-form-item label="详细地址" prop="unitDetailAddress">
-              <el-input v-model="employInfo.unitDetailAddress" placeholder="请输入"></el-input>
+              <el-input v-model="allInfo.unitDetailAddress" placeholder="请输入"></el-input>
             </el-form-item>
             <el-form-item label="行业类型" prop="industryType" size="120px">
-              <el-select v-model="employInfo.industryType" placeholder="请选择" >
+              <el-select v-model="allInfo.industryType" placeholder="请选择" >
                 <el-option label="农、林、牧、渔业" value="agriculture"></el-option>
                 <el-option label="采矿业" value="mining"></el-option>
                 <el-option label="制造业" value="manufacturing"></el-option>
@@ -268,7 +268,7 @@
               </el-select>
             </el-form-item>
             <el-form-item label="职业" prop="profession" >
-              <el-select v-model="employInfo.profession" placeholder="请选择">
+              <el-select v-model="allInfo.profession" placeholder="请选择">
                 <el-option label="办事人员和有关人员" value="handler"></el-option>
                 <el-option label="社会生产服务和生活服务人员" value="serviceStaff"></el-option>
                 <el-option label="军人" value="soldier"></el-option>
@@ -280,7 +280,7 @@
               </el-select>
             </el-form-item>
             <el-form-item label="职务" prop="position" >
-              <el-select v-model="employInfo.position" placeholder="请选择">
+              <el-select v-model="allInfo.position" placeholder="请选择">
                 <el-option label="一般员工" value="generalStaff"></el-option>
                 <el-option label="中层领导" value="middleLeaders"></el-option>
                 <el-option label="高层领导" value="senioreaders"></el-option>
@@ -288,16 +288,16 @@
               </el-select>
             </el-form-item>
             <el-form-item label="工作年限" prop="workingYears">
-              <el-input-number v-model="employInfo.workingYears" controls-position="right" :min="0"></el-input-number>
+              <el-input-number v-model="allInfo.workingYears" controls-position="right" :min="0"></el-input-number>
             </el-form-item>
             <el-form-item label="年薪" prop="annualSalary">
-              <el-input v-model="employInfo.annualSalary" placeholder="请输入">
+              <el-input v-model="allInfo.annualSalary" placeholder="请输入">
                 <i slot="suffix" style="font-style:normal;margin-right: 20px;">万元</i>
               </el-input>
             </el-form-item>
             <!--            <el-form-item label="联系人" prop="contact" style="width: 800px">-->
             <!--              <el-table-->
-            <!--                :data="employInfo.tableData"-->
+            <!--                :data="allInfo.tableData"-->
             <!--                border-->
             <!--                style="width: 100%;margin-bottom: 20px;margin-right: 20px;">-->
             <!--                <el-table-column-->
@@ -397,62 +397,62 @@
         </el-tab-pane>
         <el-tab-pane label="经济状况>>">
           <span>经济状况</span>
-          <el-form :model="economicSituation" :rules="rules" ref="ruleForm" label-position="top" style="width:800px;height:1800px;margin-left: 100px;padding-top: 10px" label-width="140px" class="demo-ruleForm" lable="经济状况">
+          <el-form :model="allInfo" :rules="rules" ref="ruleForm" label-position="top" style="width:800px;height:1800px;margin-left: 100px;padding-top: 10px" label-width="140px" class="demo-ruleForm" lable="经济状况">
             <el-form-item label="家庭月收入" prop="familyMonthlyIncome">
-              <el-input v-model="economicSituation.familyMonthlyIncome" placeholder="请输入"></el-input>
+              <el-input v-model="allInfo.familyMonthlyIncome" placeholder="请输入"></el-input>
             </el-form-item>
             <el-form-item label="抚养人数" prop="numberOfDependents">
-              <el-input v-model="economicSituation.numberOfDependents" placeholder="请输入"></el-input>
+              <el-input v-model="allInfo.numberOfDependents" placeholder="请输入"></el-input>
             </el-form-item>
             <el-form-item label="资产与负债比" prop="assetsToLiabilitiesRatio">
-              <el-input v-model="economicSituation.assetsToLiabilitiesRatio" placeholder="请输入"></el-input>
+              <el-input v-model="allInfo.assetsToLiabilitiesRatio" placeholder="请输入"></el-input>
             </el-form-item>
             <el-form-item label="收入还贷比" prop="LoanToIncomeRatio">
-              <el-input v-model="economicSituation.LoanToIncomeRatio" placeholder="请输入"></el-input>
+              <el-input v-model="allInfo.LoanToIncomeRatio" placeholder="请输入"></el-input>
             </el-form-item>
             <el-form-item label="个人年平均收入" prop="averagePersonalIncome">
-              <el-input v-model="economicSituation.familyMonthlyIncome" placeholder="请输入"></el-input>
+              <el-input v-model="allInfo.familyMonthlyIncome" placeholder="请输入"></el-input>
             </el-form-item>
             <el-form-item label="月还款额与月可支配收入比值" prop="repaymentToIncomeRatio">
-              <el-input v-model="economicSituation.repaymentToIncomeRatio" placeholder="请输入"></el-input>
+              <el-input v-model="allInfo.repaymentToIncomeRatio" placeholder="请输入"></el-input>
             </el-form-item>
             <el-form-item label="家庭财产评估值" prop="familyPropertyAssessment">
-              <el-input v-model="economicSituation.familyPropertyAssessment" placeholder="请输入"></el-input>
+              <el-input v-model="allInfo.familyPropertyAssessment" placeholder="请输入"></el-input>
             </el-form-item>
             <el-form-item label="债务覆盖率" prop="debtCoverageRatio">
-              <el-input v-model="economicSituation.debtCoverageRatio" placeholder="请输入"></el-input>
+              <el-input v-model="allInfo.debtCoverageRatio" placeholder="请输入"></el-input>
             </el-form-item>
           </el-form>
         </el-tab-pane>
         <el-tab-pane label="信用状况">
           <span>信用状况</span>
-          <el-form :model="reditcStatus" :rules="rules" ref="ruleForm" label-position="top" style="width:800px;height:1800px;margin-left: 100px;padding-top: 10px" label-width="140px" class="demo-ruleForm" lable="信用状况">
+          <el-form :model="allInfo" :rules="rules" ref="ruleForm" label-position="top" style="width:800px;height:1800px;margin-left: 100px;padding-top: 10px" label-width="140px" class="demo-ruleForm" lable="信用状况">
             <el-form-item label="还款记录" prop="repaymentRecord">
-              <el-input v-model="reditcStatus.repaymentRecord" placeholder="请输入"></el-input>
+              <el-input v-model="allInfo.repaymentRecord" placeholder="请输入"></el-input>
             </el-form-item>
             <el-form-item label="个人贷款或信用卡记录和年限" prop="recordsAndYears">
-              <el-input v-model="reditcStatus.recordsAndYears" placeholder="请输入"></el-input>
+              <el-input v-model="allInfo.recordsAndYears" placeholder="请输入"></el-input>
             </el-form-item>
             <el-form-item label="违约情况" prop="breachOfContract">
-              <el-input v-model="reditcStatus.breachOfContract" placeholder="请输入"></el-input>
+              <el-input v-model="allInfo.breachOfContract" placeholder="请输入"></el-input>
             </el-form-item>
             <el-form-item label="信用卡透支情况等方面的详细调查" prop="overdraftSituation">
-              <el-input v-model="reditcStatus.overdraftSituation" placeholder="请输入"></el-input>
+              <el-input v-model="allInfo.overdraftSituation" placeholder="请输入"></el-input>
             </el-form-item>
             <el-form-item label="银行卡持有情况及银行账户情况" prop="bankCardSituation" >
-              <el-input v-model="reditcStatus.bankCardSituation" placeholder="请输入"></el-input>
+              <el-input v-model="allInfo.bankCardSituation" placeholder="请输入"></el-input>
             </el-form-item>
             <el-form-item label="个人贷款或信用卡违约情况" prop="creditCardDefault">
-              <el-input v-model="reditcStatus.creditCardDefault" placeholder="请输入"></el-input>
+              <el-input v-model="allInfo.creditCardDefault" placeholder="请输入"></el-input>
             </el-form-item>
             <el-form-item label="公安司法的不良记录" prop="judicialRecords">
-              <el-input v-model="reditcStatus.judicialRecords" placeholder="请输入"></el-input>
+              <el-input v-model="allInfo.judicialRecords" placeholder="请输入"></el-input>
             </el-form-item>
             <el-form-item label="个人信用度评分" prop="creditScore">
-              <el-input v-model="reditcStatus.creditScore" placeholder="请输入"></el-input>
+              <el-input v-model="allInfo.creditScore" placeholder="请输入"></el-input>
             </el-form-item>
             <el-divider></el-divider>
-            <el-button type="primary" round style="margin-left: 380px"  @click="submitForm('formData')">提交客户信息</el-button>
+            <el-button type="primary" round style="margin-left: 380px"  @click="addNew(allInfo)">提交客户信息</el-button>
           </el-form>
         </el-tab-pane>
       </el-tabs>
@@ -461,71 +461,62 @@
 </template>
 
 <script>
-import VDistpicker from 'v-distpicker'
-export default {
+ import VDistpicker from 'v-distpicker';
+import { addCostomer } from "@/api/customer";
+
+ export default {
   components: { VDistpicker },
-  name: 'clientAdd',
   data() {
     return {
-      basicInfo: {
-        id: '',
-        name: '',
-        channelSource: '',
-        formerName: '无',
-        idNumber: '',
-        sex: '',
-        phone: [],
-        educational: '',
-        residenceAddress: '',
-        healthStatus: '',
-        accountNature: '',
-        customerLabel: ''
-      },
-      familyInfo: {
-        maritalStatus: '',
-        familySize: '',
-        summaryOfFamilyStatus: ''
-        // familyMembers: '',
-        // tableData: []
-      },
-      residenceInfo: {
-        residentialAddress: '',
-        detailedAddress: '',
-        residentialStatus: '',
-        lengthOfResidence: '1'
-      },
-      employInfo: {
-        companyName: '',
-        workPhone: '',
-        unitAddress: '',
-        unitDetailAddress: '',
-        industryType: '',
-        profession: '',
-        position: '',
-        workingYears: '',
-        annualSalary: ''
-        // contact: '',
-        // tableData: []
-      },
-      economicSituation: {
-        familyMonthlyIncome: '',
-        numberOfDependents: '',
-        assetsToLiabilitiesRatio: '',
-        LoanToIncomeRatio: '',
-        averagePersonalIncome: '',
-        repaymentToIncomeRatio: '',
-        familyPropertyAssessment: '',
-        debtCoverageRatio: ''
-      },
-      reditcStatus: {
-        repaymentRecord: '',
-        recordsAndYears: '',
-        breachOfContract: '',
-        overdraftSituation: '',
-        bankCardSituation: '',
-        creditCardDefault: '',
-        judicialRecords: '',
-        creditScore: ''
+      allInfo:{
+          id: '',
+          name: '',
+          channelSource: '',
+          formerName: '无',
+          idNumber: '',
+          sex: '',
+          phone: '',
+          educational: '',
+          residenceAddress: '',
+          healthStatus: '',
+          accountNature: '',
+          customerLabel: '',
+          maritalStatus: '',
+          familySize: '',
+          summaryOfFamilyStatus: '',
+          // familyMembers: '',
+          // tableData: [],
+          residentialAddress: '',
+          address: '',
+          residentialStatus: '',
+          lengthOfResidence: '1',
+          companyName: '',
+          workPhone: '',
+          unitAddress: '',
+          unitDetailAddress: '',
+          industryType: '',
+          profession: '',
+          position: '',
+          workingYears: '',
+          annualSalary: '',
+          // contact: '',
+          // tableData: [],
+          familyMonthlyIncome: '',
+          numberOfDependents: '',
+          assetsToLiabilitiesRatio: '',
+          LoanToIncomeRatio: '',
+          averagePersonalIncome: '',
+          repaymentToIncomeRatio: '',
+          familyPropertyAssessment: '',
+          debtCoverageRatio: '',
+          repaymentRecord: '',
+          recordsAndYears: '',
+          breachOfContract: '',
+          overdraftSituation: '',
+          bankCardSituation: '',
+          creditCardDefault: '',
+          judicialRecords: '',
+          creditScore: ''
       },
       active: '0',
       rules: {
@@ -569,26 +560,19 @@ export default {
     }
   },
   methods: {
-    submitForm(formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          alert('submit!')
-        } else {
-          console.log('error submit!!');
-          return false
-        }
-      });
+    addNew: function (data){
+      addCostomer(data).then()
     },
     resetForm(formName) {
-      this.$refs[formName].resetFields();
+      this.$refs[formName].resetFields()
     },
     // addFamilyMembers() {
-    //   this.familyInfo.tableData.push({
+    //   this.allInfo .tableData.push({
     //     edit: true
     //   })
     // },
     // addEmployContact() {
-    //   this.employInfo.tableData.push({
+    //   this.allInfo.tableData.push({
     //     edit: true
     //   })
     // },
@@ -608,10 +592,10 @@ export default {
     //   row.edit = true
     // },
     //     deleteFamilyMemberData(row, index) {
-    //       this.familyInfo.tableData.splice(index, 1)
+    //       this.allInfo .tableData.splice(index, 1)
     //     },
     //     deleteEmployContactData(row, index) {
-    //       this.employInfo.tableData.splice(index, 1)
+    //       this.allInfo.tableData.splice(index, 1)
     //     },
     //     deleteShareholderData(row, index) {
     //       this.company.tableData.splice(index, 1)

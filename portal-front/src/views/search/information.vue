@@ -80,7 +80,6 @@
 
 <script>
   import { pagePeople } from '@/api/people'
-
   const sexTypeOptions = [
     { key: '男', display_name: '男' },
     { key: '女', display_name: '女' }

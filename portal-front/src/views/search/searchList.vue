@@ -5,7 +5,7 @@
         <el-input v-model="humanInfo.name" style="width: 200px"></el-input>
       </el-form-item>
       <el-form-item label="身份证号：" style="margin-left:200px;width: 100px;display: inline-block">
-        <el-input v-model="humanInfo.name" style="width: 200px"></el-input>
+        <el-input v-model="humanInfo.id" style="width: 200px"></el-input>
       </el-form-item>
       <el-form-item label="所属模型：" style="margin-left:200px;width: 100px;display: inline-block">
         <el-select v-model="value" placeholder="请选择" style="width: 200px">
@@ -120,7 +120,7 @@ export default {
       }
         , {
           num: 'FTRM20200804111416VG0C8AONMTSVIC',
-          name: '王二麻',
+          name: '王三麻',
           cardId: '210282199508072132',
           group: '汇丰银行',
           model: 'HSBC抵押纯企业决策',
@@ -219,7 +219,7 @@ export default {
   methods: {
     fetchData() {
       this.listLoading = true
-      pagePeople(this.pageQuery).then(response => {
+        pagePeople(this.pageQuery).then(response => {
         this.list = response.data.data.content
         this.listLoading = false
       })

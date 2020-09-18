@@ -2,8 +2,8 @@
   <div>
     <div id="container" style="width:100%;height:850px;margin-left: 20px;margin-top: 40px;box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)">
       <el-form :inline="true" :model="listConfig" class="demo-form-inline" style="width:1500px;margin-left: 10px;padding-top: 10px">
-        <el-form-item style="margin-left: 20px" label="客户来源">
-          <el-select v-model="listConfig.clientResouces" placeholder="活动区域">
+        <el-form-item style="margin-left: 10px" label="客户来源">
+          <el-select v-model="listConfig.clientResources" placeholder="活动区域">
             <el-option label="渠道" value="channel"></el-option>
             <el-option label="客户经理" value="Manager"></el-option>
             <el-option label="本人" value="self"></el-option>
@@ -13,28 +13,13 @@
         <el-form-item label="客户姓名">
           <el-input v-model="listConfig.clientName" placeholder="请输入"></el-input>
         </el-form-item>
-        <el-form-item label="证件号码" v-if="foldCode==1">
-          <el-input v-model="listConfig.clientID" placeholder="请输入" style="width: 150px"></el-input>
-        </el-form-item>
         <el-button type="text" @click="flodchange">{{foldStatus}}</el-button>
         <el-form :inline="true" :model="listConfig" v-if="foldCode==1"  class="demo-form-inline" style="margin-left: 10px;padding-top: 10px">
+          <el-form-item label="证件号码">
+            <el-input v-model="listConfig.clientID" placeholder="请输入" style="width: 150px"></el-input>
+          </el-form-item>
           <el-form-item style="margin-left: 20px" label="客户号">
             <el-input v-model="listConfig.clientNumber" placeholder="请输入"></el-input>
-          </el-form-item>
-          <el-form-item label="起止时间">
-            <div class="block">
-              <!--<span class="demonstration">起止时间</span>-->
-              <el-date-picker
-                v-model="listConfig.settingTime"
-                type="daterange"
-                align="right"
-                unlink-panels
-                range-separator="~"
-                start-placeholder="startime"
-                end-placeholder="endtime"
-                :picker-options="pickerOptions">
-              </el-date-picker>
-            </div>
           </el-form-item>
           <el-form-item label="经办客户经理">
             <el-select v-model="listConfig.Manager" placeholder="请选择">
@@ -48,43 +33,37 @@
         <el-form-item class="margin">
           <el-button type="primary" @click="onSubmit" style="margin-left: 20px">查询</el-button>
           <el-button class="button" @click="resetForm">重置</el-button>
-          <el-button type="success">
-            <span onclick="location='http://dut.portal.com:8080/#/ListManagement/clientAdd'">新增</span>
-          </el-button>
+          <el-button type="success" onclick="location='http://dut.portal.com:8080/#/ListManagement/clientAdd'">新增</el-button>
         </el-form-item>
       </el-form>
       <el-table
         :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
         height="510px"
         border
-        style="width: 1600px;margin-left: 20px;margin-bottom: 20px;margin-right: 20px;">
-        <el-table-column
-          prop="clientSource"
-          label="客戶來源"
-          width="200">
+        style="width: 1400px;margin-left: 20px;margin-bottom: 20px;margin-right: 20px;">
+        <el-table-column prop="channelSource" align="center" label="客戶來源" width="200">
+          <template slot-scope="scope">
+            {{ scope.row.channelSource }}
+          </template>
         </el-table-column>
-        <el-table-column
-          prop="clientName"
-          label="姓名"
-          width="200">
+        <el-table-column align="center" prop="name" label="姓名" width="200">
+          <template slot-scope="scope">
+            {{ scope.row.name }}
+          </template>
         </el-table-column>
-        <el-table-column
-          prop="clientID"
-          label="证件号码"
-          width="300">
+        <el-table-column align="center" prop="idNumber" label="证件号码" width="398">
+          <template slot-scope="scope">
+            {{ scope.row.idNumber }}
+          </template>
         </el-table-column>
-        <el-table-column
-          prop="teleNumber"
-          label="手机号"
-          width="300">
-        </el-table-column>
-        <el-table-column
-          prop="setingTime"
-          label="创建时间"
-          width="250">
+        <el-table-column prop="phone" align="center" label="手机号" width="300">
+          <template slot-scope="scope">
+            {{ scope.row.phone }}
+          </template>
         </el-table-column>
         <el-table-column
           prop="control"
+          align="center"
           label="操作"
           width="300">
           <template slot-scope="scope">
@@ -99,23 +78,26 @@
         </el-table-column>
       </el-table>
       <div class="block" style="margin-top:15px;">
-        <el-pagination align='center' @size-change="handleSizeChange" @current-change="handleCurrentChange"
-           :current-page="currentPage"
-           :page-sizes="[1,5,10,20]"
-           :page-size="pageSize"
-           layout="total, sizes, prev, pager, next, jumper"
-           :total="tableData.length">
+        <el-pagination  @size-change="handleSizeChange" @current-change="handleCurrentChange"
+             :current-page="currentPage"
+             :page-sizes="[1,5,10,20]"
+             :page-size="pageSize"
+             layout="total, sizes, prev, pager, next, jumper"
+             :total="tableData.length"
+             style="margin-left: 500px">
         </el-pagination>
       </div>
     </div>
   </div>
 </template>
 <script>
-export default {
+  import {findAll} from "@/api/customer";
+
+  export default {
   data() {
     return {
       listConfig: {
-        clientResouces: '',
+        clientResources: '',
         client: '',
         clientName: '',
         clientNumber: '',
@@ -154,137 +136,51 @@ export default {
       },
       value1: '',
       value2: '',
-      tableData: [{
-        clientSource: '本人',
-        clientName: '张三',
-        clientID: '421123195002135221',
-        teleNumber: '13345642251',
-        setingTime: '2020-01-02'
-      },
-      {
-        clientSource: '渠道',
-        clientName: '李四',
-        clientID: '421123195002135321',
-        teleNumber: '15622234456',
-        setingTime: '2010-03-13'
-      },
-      {
-        clientSource: '渠道',
-        clientName: '李四',
-        clientID: '421123195002135321',
-        teleNumber: '15622234456',
-        setingTime: '2010-03-13'
-      },
-      {
-        clientSource: '渠道',
-        clientName: '李四',
-        clientID: '421123195002135321',
-        teleNumber: '15622234456',
-        setingTime: '2010-03-13'
-      },
-      {
-        clientSource: '渠道',
-        clientName: '李四',
-        clientID: '421123195002135321',
-        teleNumber: '15622234456',
-        setingTime: '2010-03-13'
-      },
-      {
-        clientSource: '渠道',
-        clientName: '李四',
-        clientID: '421123195002135321',
-        teleNumber: '15622234456',
-        setingTime: '2010-03-13'
-      },
-      {
-        clientSource: '渠道',
-        clientName: '李四',
-        clientID: '421123195002135321',
-        teleNumber: '15622234456',
-        setingTime: '2010-03-13'
-      },
-      {
-        clientSource: '渠道',
-        clientName: '李四',
-        clientID: '421123195002135321',
-        teleNumber: '15622234456',
-        setingTime: '2010-03-13'
-      },
-      {
-        clientSource: '渠道',
-        clientName: '李四',
-        clientID: '421123195002135321',
-        teleNumber: '15622234456',
-        setingTime: '2010-03-13'
-      },
-      {
-        clientSource: '渠道',
-        clientName: '李四',
-        clientID: '421123195002135321',
-        teleNumber: '15622234456',
-        setingTime: '2010-03-13'
-      },
-      {
-        clientSource: '渠道',
-        clientName: '李四',
-        clientID: '421123195002135321',
-        teleNumber: '15622234456',
-        setingTime: '2010-03-13'
-      },
-      {
-        clientSource: '渠道',
-        clientName: '李四',
-        clientID: '421123195002135321',
-        teleNumber: '15622234456',
-        setingTime: '2010-03-13'
-      },
-      {
-        clientSource: '渠道',
-        clientName: '李四',
-        clientID: '421123195002135321',
-        teleNumber: '15622234456',
-        setingTime: '2010-03-13'
-      },
-      {
-        clientSource: '渠道',
-        clientName: '李四',
-        clientID: '421123195002135321',
-        teleNumber: '15622234456',
-        setingTime: '2010-03-13'
-      }
-      ],
+      tableData: [],
       currentPage: 1, // 当前页码
-      total: '10', // 总条数
-      pageSize: '8' // 每页的数据条数
+      total: 10, // 总条数
+      pageSize: 8 // 每页的数据条数
     }
   },
-  methods: {
+    mounted() {
+      this.fetchData()
+    },
+    methods: {
+      fetchData() {
+        this.listLoading = true
+        findAll()
+          .then(res => {
+          // console.log(res.data.data)
+          this.tableData = res.data.data
+          this.listLoading = false
+        })
+      },
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
-      this.currentPage = 1;
-      this.pageSize = val;
+      console.log(`每页 ${val} 条`)
+      this.currentPage = 1
+      this.pageSize = val
     },
     handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
-      this.currentPage = val;
+      console.log(`当前页: ${val}`)
+      this.currentPage = val
     },
     onSubmit() {
       console.log('submit!')
     },
     handleChange(val) {
-      console.log(val);
+      console.log(val)
     },
-    open() {
-      this.$alert('借款人基本信息', {
-        confirmButtonText: '确定',
-        callback: action => {
-          this.$message({
-            type: 'info',
-            message: `action: ${ action }`
-          })
-        }
-      })
-    },
+    // open() {
+    //   this.$alert('借款人基本信息', {
+    //     confirmButtonText: '确定',
+    //     callback: action => {
+    //       this.$message({
+    //         type: 'info',
+    //         message: `action: ${ action }`
+    //       })
+    //     }
+    //   })
+    // },
     flodchange() {
       if (this.foldCode == 0) {
         this.foldCode = 1

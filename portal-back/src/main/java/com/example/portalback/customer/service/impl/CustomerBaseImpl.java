@@ -37,6 +37,7 @@ public class CustomerBaseImpl implements CustomerBaseService {
 		return customerBaseRepository.findAll();
 	}
 
+
 	@Override
 	public CustomerBaseInfo getInfoById(String id) {
 		return customerBaseRepository.queryAllById(id);
