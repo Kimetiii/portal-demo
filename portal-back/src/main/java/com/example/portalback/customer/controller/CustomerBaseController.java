@@ -3,6 +3,7 @@ package com.example.portalback.customer.controller;
 import com.example.portalback.common.entity.ResponseObj;
 import com.example.portalback.customer.entity.CustomerBaseInfo;
 import com.example.portalback.customer.model.CustomerBaseInfoModel;
+import com.example.portalback.customer.model.SearchModel;
 import com.example.portalback.customer.service.CustomerBaseService;
 import org.springframework.web.bind.annotation.*;
 
@@ -54,6 +55,16 @@ public class CustomerBaseController {
 	public ResponseObj enforceRules(@RequestBody CustomerBaseInfoModel model) {
 		try {
 			return ResponseObj.success(customerBaseService.enforceRules(null, model), "insert success");
+		} catch (Exception e) {
+			return ResponseObj.failure(e);
+		}
+	}
+
+	@RequestMapping("searchCustomerList")
+	public ResponseObj searchCustomerList(@RequestBody SearchModel searchModel) {
+		try {
+			List<CustomerBaseInfo> customerBaseInfos = customerBaseService.searchCustomerList(searchModel);
+			return ResponseObj.success(customerBaseInfos);
 		} catch (Exception e) {
 			return ResponseObj.failure(e);
 		}

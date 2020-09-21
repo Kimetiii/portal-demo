@@ -2,6 +2,7 @@ package com.example.portalback.customer.service;
 
 import com.example.portalback.customer.entity.CustomerBaseInfo;
 import com.example.portalback.customer.model.CustomerBaseInfoModel;
+import com.example.portalback.customer.model.SearchModel;
 
 import java.util.List;
 
@@ -20,5 +21,7 @@ public interface CustomerBaseService {
 	CustomerBaseInfo getInfoById(String id);
 
 	CustomerBaseInfoModel enforceRules(String ruleName,CustomerBaseInfoModel model);
+
+	List<CustomerBaseInfo> searchCustomerList(SearchModel searchModel);
 
 }

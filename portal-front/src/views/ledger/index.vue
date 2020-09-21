@@ -44,17 +44,17 @@
       <el-table-column :reserve-selection="true" align="center" type="selection"/>
       <el-table-column align="center" label="No" width="60" type="index">
         <template slot-scope="scope">
-          <span>{{(pageQuery.pageNo - 1) * pageQuery.pageSize + scope.$index + 1}}</span>
+          <span>{{ (pageQuery.pageNo - 1) * pageQuery.pageSize + scope.$index + 1 }}</span>
         </template>
       </el-table-column>
       <el-table-column align="center" label="Id" width="300">
         <template slot-scope="scope">
-          <span>{{scope.row.id}}</span>
+          <span>{{ scope.row.id }}</span>
         </template>
       </el-table-column>
       <el-table-column align="center" label="Content" width="500">
         <template slot-scope="scope">
-          <span>{{scope.row.content}}</span>
+          <span>{{ scope.row.content }}</span>
         </template>
       </el-table-column>
       <el-table-column
@@ -62,24 +62,24 @@
         :filter-method="filterSubjectType"
         align="center" label="Subject" width="90">
         <template slot-scope="scope">
-          <span>{{scope.row.subject}}</span>
+          <span>{{ scope.row.subject }}</span>
         </template>
       </el-table-column>
       <el-table-column align="center" label="Amount" width="90">
         <template slot-scope="scope">
-          <span>{{scope.row.amount}}</span>
+          <span>{{ scope.row.amount }}</span>
         </template>
       </el-table-column>
       <el-table-column align="center" label="RecordTime" width="120">
         <template slot-scope="scope">
           <i class="el-icon-time"/>
-          <span>{{scope.row.recordTime}}</span>
+          <span>{{ scope.row.recordTime }}</span>
         </template>
       </el-table-column>
       <el-table-column align="center" label="EditTime" width="120">
         <template slot-scope="scope">
           <i class="el-icon-time"/>
-          <span>{{getLastTime(scope.row)}}</span>
+          <span>{{ getLastTime(scope.row) }}</span>
         </template>
       </el-table-column>
       <el-table-column label="Actions" align="center" width="230" class-name="small-padding fixed-width">
@@ -120,23 +120,23 @@
         >
           <el-table-column align="center" label="Content" width="400">
             <template slot-scope="scope">
-              <span>{{scope.row.content}}</span>
+              <span>{{ scope.row.content }}</span>
             </template>
           </el-table-column>
           <el-table-column align="center" label="Subject" width="80">
             <template slot-scope="scope">
-              <span>{{scope.row.subject}}</span>
+              <span>{{ scope.row.subject }}</span>
             </template>
           </el-table-column>
           <el-table-column align="center" label="Amount" width="80">
             <template slot-scope="scope">
-              <span>{{scope.row.amount}}</span>
+              <span>{{ scope.row.amount }}</span>
             </template>
           </el-table-column>
           <el-table-column align="center" label="RecordTime" width="120">
             <template slot-scope="scope">
               <i class="el-icon-time"/>
-              <span>{{scope.row.recordTime}}</span>
+              <span>{{ scope.row.recordTime }}</span>
             </template>
           </el-table-column>
           <el-table-column label="Actions" align="center" width="100" class-name="small-padding fixed-width">
@@ -201,33 +201,33 @@
         style="width: 100%">
         <el-table-column align="center" label="No" width="60" type="index">
           <template slot-scope="scope">
-            <span>{{(pageQuery.pageNo - 1) * pageQuery.pageSize + scope.$index + 1}}</span>
+            <span>{{ (pageQuery.pageNo - 1) * pageQuery.pageSize + scope.$index + 1 }}</span>
           </template>
         </el-table-column>
         <el-table-column align="center" label="Id" width="300">
           <template slot-scope="scope">
-            <span>{{scope.row.id}}</span>
+            <span>{{ scope.row.id }}</span>
           </template>
         </el-table-column>
         <el-table-column align="center" label="Content" width="400">
           <template slot-scope="scope">
-            <span>{{scope.row.content}}</span>
+            <span>{{ scope.row.content }}</span>
           </template>
         </el-table-column>
         <el-table-column align="center" label="Subject" width="80">
           <template slot-scope="scope">
-            <span>{{scope.row.subject}}</span>
+            <span>{{ scope.row.subject }}</span>
           </template>
         </el-table-column>
         <el-table-column align="center" label="Amount" width="80">
           <template slot-scope="scope">
-            <span>{{scope.row.amount}}</span>
+            <span>{{ scope.row.amount }}</span>
           </template>
         </el-table-column>
         <el-table-column align="center" label="RecordTime" width="120">
           <template slot-scope="scope">
             <i class="el-icon-time"/>
-            <span>{{scope.row.recordTime}}</span>
+            <span>{{ scope.row.recordTime }}</span>
           </template>
         </el-table-column>
       </el-table>
@@ -236,200 +236,201 @@
 </template>
 
 <script>
-  import {
-    getLedgersByGroupId,
-    create4SameGroup,
-    deleteOne,
-    deleteSelect,
-    download,
-    downloadSelect,
-    edit,
-    page,
-    upload,
-    bindingGroupIds,
-    unbindingGroupId
-  } from '@/api/ledger'
-  import Pagination from '@/components/Pagination/pagination' // secondary package based on el-pagination
-  import waves from '@/directive/waves' // waves directive
-  import { downloadUrl } from '@/utils/download'
-  import { parseTime } from '@/utils/index'
+import {
+  getLedgersByGroupId,
+  create4SameGroup,
+  deleteOne,
+  deleteSelect,
+  download,
+  downloadSelect,
+  edit,
+  page,
+  upload,
+  bindingGroupIds,
+  unbindingGroupId
+} from '@/api/ledger'
+import Pagination from '@/components/Pagination/pagination' // secondary package based on el-pagination
+import waves from '@/directive/waves' // waves directive
+import {downloadUrl} from '@/utils/download'
+import {parseTime} from '@/utils/index'
 
-  const subjectTypeOptions = [
-    { text: '福利', value: '福利' },
-    { text: '后勤', value: '后勤' },
-    { text: '工资', value: '工资' },
-    { text: '其他', value: '其他' },
-    { text: '通讯', value: '通讯' },
-    { text: '住房', value: '住房' }
+const subjectTypeOptions = [
+  {text: '福利', value: '福利'},
+  {text: '后勤', value: '后勤'},
+  {text: '工资', value: '工资'},
+  {text: '其他', value: '其他'},
+  {text: '通讯', value: '通讯'},
+  {text: '住房', value: '住房'}
 
-  ]
+]
 
-  export default {
-    name: 'index',
-    components: { Pagination },
-    directives: { waves },
+export default {
+  name: 'index',
+  components: {Pagination},
+  directives: {waves},
 
-    data() {
-      return {
-        pageKey: 0,
-        pageTotal: 0,
-        pageList: [],
-        fileList: [],
-        groupList: [],
-        multipleSelection: [],
-        pageListLoading: true,
-        dialogFormVisible: false,
-        dialogImportVisible: false,
-        dialogGroupsVisible: false,
-        subjectTypeOptions,
-        dialogFormStatus: '',
-        textMap: {
-          update: 'update',
-          create: 'create'
-        },
-        temp: {
-          id: undefined,
-          content: '',
-          subject: '其他',
-          amount: '',
-          recordTime: ''
-        },
-        tempList: [],
-        pageQuery: {
-          pageNo: 1,
-          pageSize: 10,
-          filters: [
-            {
-              name: 'content',
-              value: ''
-            }
-          ],
-          sorts: [
-            {
-              name: 'content',
-              value: 'DESC'
-            }
-          ]
-        }
+  data() {
+    return {
+      pageKey: 0,
+      pageTotal: 0,
+      pageList: [],
+      fileList: [],
+      groupList: [],
+      multipleSelection: [],
+      pageListLoading: true,
+      dialogFormVisible: false,
+      dialogImportVisible: false,
+      dialogGroupsVisible: false,
+      subjectTypeOptions,
+      dialogFormStatus: '',
+      textMap: {
+        update: 'update',
+        create: 'create'
+      },
+      temp: {
+        id: undefined,
+        content: '',
+        subject: '其他',
+        amount: '',
+        recordTime: ''
+      },
+      tempList: [],
+      pageQuery: {
+        pageNo: 1,
+        pageSize: 10,
+        filters: [
+          {
+            name: 'content',
+            value: ''
+          }
+        ],
+        sorts: [
+          {
+            name: 'content',
+            value: 'DESC'
+          }
+        ]
+      }
+    }
+  },
+  created() {
+    this.fetchData()
+  },
+  methods: {
+    resetTemp() {
+      this.temp = {
+        id: undefined,
+        content: '',
+        subject: '其他',
+        amount: '',
+        recordTime: ''
       }
     },
-    created() {
-      this.fetchData()
-    },
-    methods: {
-      resetTemp() {
-        this.temp = {
-          id: undefined,
-          content: '',
-          subject: '其他',
-          amount: '',
-          recordTime: ''
-        }
-      },
-      fetchData() {
-        this.pageListLoading = true
-        page(this.pageQuery)
-          .then(response => {
+    fetchData() {
+      this.pageListLoading = true
+      page(this.pageQuery)
+        .then(response => {
           this.pageList = response.data.data.content
           this.pageTotal = response.data.data.totalElements
           this.pageListLoading = false
         })
-      },
-      dialogUpdate(scope) {
-        this.temp = Object.assign({}, scope) // copy obj
-        this.dialogFormStatus = this.textMap.update
-        this.dialogFormVisible = true
-      },
-      handleDelete(scope, index) {
-        deleteOne(scope.id).then(res => {
-          this.pageList.splice(index, 1)
+    },
+    dialogUpdate(scope) {
+      this.temp = Object.assign({}, scope) // copy obj
+      this.dialogFormStatus = this.textMap.update
+      this.dialogFormVisible = true
+    },
+    handleDelete(scope, index) {
+      deleteOne(scope.id).then(res => {
+        this.pageList.splice(index, 1)
+        this.$notify({
+          title: 'Success',
+          message: 'Delete Successfully',
+          type: 'success',
+          duration: 2000
+        })
+      })
+    },
+    pageFilter() {
+      this.pageQuery.pageNo = 1
+      this.fetchData()
+    },
+    dialogCreate() {
+      this.resetTemp()
+      this.tempList = []
+      this.dialogFormStatus = this.textMap.create
+      this.dialogFormVisible = true
+    },
+    handleDeleteSelect() {
+      let idSelection = this.multipleSelection.flatMap(selection => selection.id)
+      if (idSelection.length > 0) {
+        let formData = new FormData()
+        formData.append('ids', idSelection)
+        deleteSelect(formData).then(res => {
           this.$notify({
             title: 'Success',
             message: 'Delete Successfully',
             type: 'success',
             duration: 2000
           })
+          this.fetchData()
         })
-      },
-      pageFilter() {
-        this.pageQuery.pageNo = 1
-        this.fetchData()
-      },
-      dialogCreate() {
-        this.resetTemp()
-        this.tempList = []
-        this.dialogFormStatus = this.textMap.create
-        this.dialogFormVisible = true
-      },
-      handleDeleteSelect() {
-        let idSelection = this.multipleSelection.flatMap(selection => selection.id)
-        if (idSelection.length > 0) {
-          let formData = new FormData()
-          formData.append('ids', idSelection)
-          deleteSelect(formData).then(res => {
-            this.$notify({
-              title: 'Success',
-              message: 'Delete Successfully',
-              type: 'success',
-              duration: 2000
-            })
-            this.fetchData()
-          })
-        }
-      },
-      bindingGroup() {
-        let idSelection = this.multipleSelection.flatMap(selection => selection.id)
-        if (idSelection.length > 0 && idSelection.length < 4) {
-          let formData = new FormData()
-          formData.append('ids', idSelection)
-          bindingGroupIds(formData).then(res => {
-            this.$notify({
-              title: 'Success',
-              message: 'binding Successfully',
-              type: 'success',
-              duration: 2000
-            })
-            this.fetchData()
-          })
-        } else {
-          this.$notify({
-            title: 'Error',
-            message: '请选择1~3之间',
-            type: 'error',
-            duration: 3000
-          })
-        }
-      },
-      unbindingGroup(item) {
-        unbindingGroupId(item.id).then(res => {
-          this.pageList.filter(e => e.id === item.id).forEach(item => {
-            item.groupId = null
-          })
-        })
-      },
-      dialogUpload() {
-        this.dialogImportVisible = true
-      },
-      submitUpload() {
-        this.$refs.upload.submit()
-      },
-      uploadFile(item) {
+      }
+    },
+    bindingGroup() {
+      let idSelection = this.multipleSelection.flatMap(selection => selection.id)
+      if (idSelection.length > 0 && idSelection.length < 4) {
         let formData = new FormData()
-        formData.append('file', item.file)
-        upload(formData).then(res => {
-          this.dialogImportVisible = false
+        formData.append('ids', idSelection)
+        bindingGroupIds(formData).then(res => {
           this.$notify({
             title: 'Success',
-            message: item.file.name + 'Import Successfully',
+            message: 'binding Successfully',
             type: 'success',
             duration: 2000
           })
           this.fetchData()
         })
-      },
-      createLedger() {
-        if (this.tempList.length > 0 && this.tempList.length < 3) {
-          create4SameGroup(this.tempList).then(res => {
+      } else {
+        this.$notify({
+          title: 'Error',
+          message: '请选择1~3之间',
+          type: 'error',
+          duration: 3000
+        })
+      }
+    },
+    unbindingGroup(item) {
+      unbindingGroupId(item.id).then(res => {
+        this.pageList.filter(e => e.id === item.id).forEach(item => {
+          item.groupId = null
+        })
+      })
+    },
+    dialogUpload() {
+      this.dialogImportVisible = true
+    },
+    submitUpload() {
+      this.$refs.upload.submit()
+    },
+    uploadFile(item) {
+      let formData = new FormData()
+      formData.append('file', item.file)
+      upload(formData).then(res => {
+        this.dialogImportVisible = false
+        this.$notify({
+          title: 'Success',
+          message: item.file.name + 'Import Successfully',
+          type: 'success',
+          duration: 2000
+        })
+        this.fetchData()
+      })
+    },
+    createLedger() {
+      if (this.tempList.length > 0 && this.tempList.length < 3) {
+        create4SameGroup(this.tempList)
+          .then(res => {
             this.dialogFormVisible = false
             this.tempList = []
             this.$notify({
@@ -440,87 +441,87 @@
             })
             this.fetchData()
           })
-        } else {
-          this.$notify({
-            title: 'Error',
-            message: '不能为空or不能大于3',
-            type: 'error',
-            duration: 2000
-          })
-        }
-      },
-      updateLedger() {
-        edit(this.temp).then(res => {
-          this.temp = Object.assign({}, res.data.data) // copy obj
-          this.$notify({
-            title: 'Success',
-            message: 'Upload Successfully',
-            type: 'success',
-            duration: 2000
-          })
-          this.fetchData()
+      } else {
+        this.$notify({
+          title: 'Error',
+          message: '不能为空or不能大于3',
+          type: 'error',
+          duration: 2000
         })
-      },
-      handleSelectionChange(val) {
-        this.multipleSelection = val
-      },
-      handleDownloadSelect() {
-        if (this.multipleSelection.length) {
-          if (this.multipleSelection.length === 1) {
-            let selection = this.multipleSelection.pop()
-            download(selection.id).then(res => {
-              downloadUrl(res.data, selection.id + '.xlsx', 'application/vnd.ms-excel')
-            })
-          } else {
-            let ids = this.multipleSelection.flatMap(selection => selection.id)
-            let formData = new FormData()
-            formData.append('ids', ids)
-            downloadSelect(formData).then(res => {
-              downloadUrl(res.data, 'receipt.xlsx', 'application/vnd.ms-excel')
-            })
-          }
-        }
-      },
-      getLastTime(row) {
-        let time
-        if (row.updateTime !== null) {
-          time = row.updateTime
-        } else {
-          time = row.createTime
-        }
-        return parseTime(time, null)
-      },
-      addRowInCreated() {
-        let hasSameOne = this.tempList.filter(temp => temp.content === this.temp.content)
-        if (hasSameOne.length > 0) {
-          this.$notify({
-            title: 'Error',
-            message: '不允许存在相同的Content',
-            type: 'error',
-            duration: 2000
-          })
-        } else {
-          this.tempList.push(this.temp)
-          this.resetTemp()
-        }
-      },
-      deleteInCreated(index) {
-        this.tempList.splice(index, 1)
-      },
-      editInCreated(scope) {
-        this.temp = Object.assign({}, scope) // copy obj
-      },
-      dialogGroup(groupId) {
-        this.dialogGroupsVisible = true
-        getLedgersByGroupId(groupId).then(res => {
-          this.groupList = res.data.data
-        })
-      },
-      filterSubjectType(value, row) {
-        return row.subject === value
       }
+    },
+    updateLedger() {
+      edit(this.temp).then(res => {
+        this.temp = Object.assign({}, res.data.data) // copy obj
+        this.$notify({
+          title: 'Success',
+          message: 'Upload Successfully',
+          type: 'success',
+          duration: 2000
+        })
+        this.fetchData()
+      })
+    },
+    handleSelectionChange(val) {
+      this.multipleSelection = val
+    },
+    handleDownloadSelect() {
+      if (this.multipleSelection.length) {
+        if (this.multipleSelection.length === 1) {
+          let selection = this.multipleSelection.pop()
+          download(selection.id).then(res => {
+            downloadUrl(res.data, selection.id + '.xlsx', 'application/vnd.ms-excel')
+          })
+        } else {
+          let ids = this.multipleSelection.flatMap(selection => selection.id)
+          let formData = new FormData()
+          formData.append('ids', ids)
+          downloadSelect(formData).then(res => {
+            downloadUrl(res.data, 'receipt.xlsx', 'application/vnd.ms-excel')
+          })
+        }
+      }
+    },
+    getLastTime(row) {
+      let time
+      if (row.updateTime !== null) {
+        time = row.updateTime
+      } else {
+        time = row.createTime
+      }
+      return parseTime(time, null)
+    },
+    addRowInCreated() {
+      let hasSameOne = this.tempList.filter(temp => temp.content === this.temp.content)
+      if (hasSameOne.length > 0) {
+        this.$notify({
+          title: 'Error',
+          message: '不允许存在相同的Content',
+          type: 'error',
+          duration: 2000
+        })
+      } else {
+        this.tempList.push(this.temp)
+        this.resetTemp()
+      }
+    },
+    deleteInCreated(index) {
+      this.tempList.splice(index, 1)
+    },
+    editInCreated(scope) {
+      this.temp = Object.assign({}, scope) // copy obj
+    },
+    dialogGroup(groupId) {
+      this.dialogGroupsVisible = true
+      getLedgersByGroupId(groupId).then(res => {
+        this.groupList = res.data.data
+      })
+    },
+    filterSubjectType(value, row) {
+      return row.subject === value
     }
   }
+}
 </script>
 
 <style scoped>

@@ -4,6 +4,7 @@ import com.drools.core.KieTemplate;
 import com.example.portalback.customer.dao.CustomerBaseRepository;
 import com.example.portalback.customer.entity.CustomerBaseInfo;
 import com.example.portalback.customer.model.CustomerBaseInfoModel;
+import com.example.portalback.customer.model.SearchModel;
 import com.example.portalback.customer.service.CustomerBaseService;
 import org.kie.api.runtime.KieSession;
 import org.springframework.stereotype.Service;
@@ -37,7 +38,6 @@ public class CustomerBaseImpl implements CustomerBaseService {
 		return customerBaseRepository.findAll();
 	}
 
-
 	@Override
 	public CustomerBaseInfo getInfoById(String id) {
 		return customerBaseRepository.queryAllById(id);
@@ -50,6 +50,25 @@ public class CustomerBaseImpl implements CustomerBaseService {
 		kieSession.fireAllRules();
 		System.err.println(model.getCreditScore());
 		return model;
+	}
+
+	/**
+	 * 按需 模糊搜索
+	 *
+	 * @param searchModel searchModel
+	 * @return list
+	 */
+	@Override
+	public List<CustomerBaseInfo> searchCustomerList(SearchModel searchModel) {
+		String channelSource = searchModel.getChannelSource();
+		String customerId = searchModel.getCustomerId();
+		String customerName;
+		customerName = searchModel.getCustomerName();
+		String idNumber = searchModel.getIdNumber();
+		String responsible = searchModel.getResponsible();
+
+		List<CustomerBaseInfo> customerBaseInfos = customerBaseRepository.searchCustomerList(channelSource, customerId, customerName, idNumber, responsible);
+		return customerBaseInfos;
 	}
 
 }

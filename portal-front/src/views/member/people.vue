@@ -122,7 +122,8 @@
     methods: {
       fetchData() {
         this.listLoading = true
-        pagePeople(this.pageQuery).then(response => {
+        pagePeople(this.pageQuery)
+          .then(response => {
           this.list = response.data.data.content
           this.listLoading = false
         })

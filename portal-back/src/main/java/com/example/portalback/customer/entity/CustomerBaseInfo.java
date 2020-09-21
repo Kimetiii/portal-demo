@@ -27,7 +27,7 @@ public class CustomerBaseInfo {
 	private String name;
 
 	@Column(name = "channel_source", length = 32)
-	private String channelSource; // 渠道来源
+	private String channelSource; // 渠道来源 *客户经理 *本人 * 客户转介
 
 	@Column(name = "former_name", length = 32)
 	private String formerName; // 曾用名
@@ -36,7 +36,7 @@ public class CustomerBaseInfo {
 	private String idNumber; // 身份证号
 
 	@Column(name = "sex", length = 32)
-	private String sex; // 性别
+	private String sex; // 性别 男 女
 
 	@Column(name = "phone", length = 32)
 	private String phone; // 手机号
@@ -79,6 +79,14 @@ public class CustomerBaseInfo {
 	@Column(name = "address", length = 32)
 	private String address; // 详细地址
 
+	/**
+	 * 个人出租房屋（租房）；
+	 * 个人自购（自建）房屋；
+	 * 直系亲属自购（自建）房屋；
+	 * 亲友自购（自建）房屋；
+	 * 单位、学校宿舍或单位、学校自购（自建）房屋；
+	 * 单位、学校租赁的出租房屋。
+	 */
 	@Column(name = "residence_status", length = 32)
 	private String residenceStatus; // 居住状态
 
