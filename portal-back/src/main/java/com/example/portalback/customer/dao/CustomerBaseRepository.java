@@ -24,7 +24,7 @@ public interface CustomerBaseRepository extends JpaRepository<CustomerBaseInfo, 
 			"from t_customer_base_info\n" +
 			"where channel_source = ?1\n" +
 			"   or id = ?2\n" +
-			"   or name = ?3", nativeQuery = true)
+			"   or name = ?3 or responsible=?4", nativeQuery = true)
 	List<CustomerBaseInfo> searchCustomerList(String channelSource, String customerId, String customerName, String idNumber, String responsible);
 
 }

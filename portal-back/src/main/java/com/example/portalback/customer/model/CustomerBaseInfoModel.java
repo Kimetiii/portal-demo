@@ -25,6 +25,8 @@ public class CustomerBaseInfoModel {
 
 	private String channelSource; // 渠道来源
 
+	private String responsible; // 经办客户经理
+
 	private String formerName; // 曾用名
 
 	private String idNumber; // 身份证号

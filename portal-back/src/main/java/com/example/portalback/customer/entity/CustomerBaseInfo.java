@@ -29,6 +29,8 @@ public class CustomerBaseInfo {
 	@Column(name = "channel_source", length = 32)
 	private String channelSource; // 渠道来源 *客户经理 *本人 * 客户转介
 
+	private String responsible; // 经办客户经理
+
 	@Column(name = "former_name", length = 32)
 	private String formerName; // 曾用名
 

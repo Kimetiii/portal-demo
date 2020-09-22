@@ -224,24 +224,24 @@
         this.listLoading = true
         findAll()
           .then(res => {
-           console.log(res.data.data)
           this.partOfData = res.data.data
           this.listLoading = false
         })
       },
       searchCustomerList(para){
         console.log(para)
-     getCustomerById(para).then((res)=>
+     getCustomerById(para)
+       .then(res=>
         {
           console.log(res.data)
         })
       },
-      queryByID:function (params) {
-        console.log(params)
-        // this.dialogFormVisible=true
-        getCustomerById(params).then((res)=>{
-          console.log(res.data)
-        })
+      queryByID(params) {
+        getCustomerById(params)
+          .then(res=>
+          {
+            console.log(res.data)
+          })
       },
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`)

@@ -18,9 +18,8 @@ export function addCustomer(params) {
 
 export function getCustomerById(params) {
   return request({
-    url: '/customerBase/getCustomerById',
+    url: '/customerBase/getCustomerById?id='+params,
     method: 'post',
-    data: params
   })
 }
 

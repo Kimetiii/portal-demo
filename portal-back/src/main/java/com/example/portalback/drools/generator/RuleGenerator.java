@@ -65,10 +65,10 @@ public class RuleGenerator {
         data.put("eventType", FactManager.getFactClassByEvent(rule.getEvent()).getName());
         data.put("rule", rule.getRuleValue());
         data.put("awardeeType", rule.getAwardeeType());
-//        data.put("ruleId", rule.getId());
-//        data.put("joinChannels", ruleDTO.getJoinChannel());
-//        data.put("priority", rule.getPriority());
-//        log.info("data={}", JSON.toJSON(data));
+//      data.put("ruleId", rule.getId());
+//      data.put("joinChannels", ruleDTO.getJoinChannel());
+//      data.put("priority", rule.getPriority());
+//      log.info("data={}", JSON.toJSON(data));
         return data;
     }
 
