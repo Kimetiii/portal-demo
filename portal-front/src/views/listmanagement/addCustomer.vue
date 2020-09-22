@@ -5,7 +5,7 @@
         <el-tab-pane label="借款人基本信息>>" >
           <span>借款人基本信息</span>
           <el-form :model="allInfo" :rules="rules" ref="ruleForm" label-position="top" style="width:800px;height:1500px;margin-left: 100px;padding-top: 10px" label-width="100px" class="demo-ruleForm" lable="借款人基本信息">
-            <el-form-item label="客户编号" prop="id">
+            <el-form-item label="客户号" prop="id">
               <el-input v-model="allInfo.id" placeholder="请输入"></el-input>
             </el-form-item>
             <el-form-item label="渠道来源" prop="channelSource">
@@ -462,7 +462,7 @@
 
 <script>
  import VDistpicker from 'v-distpicker';
-import { addCostomer } from "@/api/customer";
+import { addCustomer } from "@/api/customer";
 
  export default {
   components: { VDistpicker },
@@ -561,11 +561,14 @@ import { addCostomer } from "@/api/customer";
   },
   methods: {
     addNew: function (data){
-      addCostomer(data).then()
+      console.log(data)
+      addCustomer(data).then((res)=>{
+        console.log(res.data)
+      })
     },
-    resetForm(formName) {
-      this.$refs[formName].resetFields()
-    },
+    next() {
+      if (this.active++ > 2) this.active = 0
+    }
     // addFamilyMembers() {
     //   this.allInfo .tableData.push({
     //     edit: true
@@ -600,9 +603,6 @@ import { addCostomer } from "@/api/customer";
     //     deleteShareholderData(row, index) {
     //       this.company.tableData.splice(index, 1)
     // },
-    next() {
-      if (this.active++ > 2) this.active = 0
-    }
   }
 }
 </script>

@@ -5,6 +5,7 @@ import com.example.portalback.customer.entity.CustomerBaseInfo;
 import com.example.portalback.customer.model.CustomerBaseInfoModel;
 import com.example.portalback.customer.model.SearchModel;
 import com.example.portalback.customer.service.CustomerBaseService;
+import com.example.portalback.customer.service.impl.CustomerBaseImpl;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -41,11 +42,12 @@ public class CustomerBaseController {
 		}
 	}
 
-	@GetMapping("getCustomerById")
-	public ResponseObj getCustomerById(@RequestParam("id") String id) {
+	@PostMapping("getCustomerById")
+	public ResponseObj getCustomerById(@RequestBody String id) {
 		try {
 			CustomerBaseInfo infoById = customerBaseService.getInfoById(id);
-			return ResponseObj.success(infoById);
+			System.out.println("infoById:"+infoById);
+			return ResponseObj.success(infoById,"id导入成功"+id);
 		} catch (Exception e) {
 			return ResponseObj.failure(e);
 		}

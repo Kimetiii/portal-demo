@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="container" style="width:100%;height:850px;margin-left: 20px;margin-top: 40px;box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)">
+    <div id="container" style="width:95%;margin-left: 20px;margin-top: 40px;box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)">
       <el-form :inline="true" :model="listConfig" class="demo-form-inline" style="width:1500px;margin-left: 10px;padding-top: 10px">
         <el-form-item style="margin-left: 10px" label="客户来源">
           <el-select v-model="listConfig.clientResources" placeholder="活动区域">
@@ -13,7 +13,7 @@
         <el-form-item label="客户姓名">
           <el-input v-model="listConfig.clientName" placeholder="请输入"></el-input>
         </el-form-item>
-        <el-button type="text" @click="flodchange">{{foldStatus}}</el-button>
+        <el-button type="text" @click="flodChange">{{foldStatus}}</el-button>
         <el-form :inline="true" :model="listConfig" v-if="foldCode==1"  class="demo-form-inline" style="margin-left: 10px;padding-top: 10px">
           <el-form-item label="证件号码">
             <el-input v-model="listConfig.clientID" placeholder="请输入" style="width: 150px"></el-input>
@@ -31,19 +31,42 @@
           </el-form-item>
         </el-form>
         <el-form-item class="margin">
-          <el-button type="primary" @click="onSubmit" style="margin-left: 20px">查询</el-button>
+          <el-button type="primary"  @click="searchCustomerList()" style="margin-left: 20px">查询</el-button>
           <el-button class="button" @click="resetForm">重置</el-button>
           <el-button type="success" onclick="location='http://dut.portal.com:8080/#/ListManagement/clientAdd'">新增</el-button>
         </el-form-item>
       </el-form>
+      <div>
+<!--        <el-dialog title="编辑" :visible.sync="dialogFormVisible" width="30%" :before-close="handleClose" append-to-body="true">-->
+        <el-dialog title="编辑" :visible.sync="dialogFormVisible" width="80%" >
+          <p>这是一个弹出框</p>
+          <el-form :model="customerInfo" >
+            <el-form-item label="客户号" style="width: 500px">
+              <el-input v-model="customerInfo.id" autocomplete="off"></el-input>
+            </el-form-item>
+
+          </el-form>
+
+          <div>
+<!--            <el-button type="primary" @click.native.prevent="editSubForm" :loading="addLoading">确定</el-button>-->
+            <el-button type="primary" >保存</el-button>
+            <el-button @click.native.prevent="dialogFormVisible=false">退出</el-button>
+          </div>
+        </el-dialog>
+      </div>
       <el-table
-        :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
-        height="510px"
+        :data="partOfData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
+        height="620px"
         border
-        style="width: 1400px;margin-left: 20px;margin-bottom: 20px;margin-right: 20px;">
+        style="width: 1400px;height:640px;margin-left: 20px;margin-bottom: 20px;margin-right: 20px;">
         <el-table-column prop="channelSource" align="center" label="客戶來源" width="200">
           <template slot-scope="scope">
             {{ scope.row.channelSource }}
+          </template>
+        </el-table-column>
+        <el-table-column prop="id" align="center" label="客戶号" width="200">
+          <template slot-scope="scope">
+            {{ scope.row.id }}
           </template>
         </el-table-column>
         <el-table-column align="center" prop="name" label="姓名" width="200">
@@ -51,7 +74,7 @@
             {{ scope.row.name }}
           </template>
         </el-table-column>
-        <el-table-column align="center" prop="idNumber" label="证件号码" width="398">
+        <el-table-column align="center" prop="idNumber" label="证件号码" width="200">
           <template slot-scope="scope">
             {{ scope.row.idNumber }}
           </template>
@@ -65,14 +88,14 @@
           prop="control"
           align="center"
           label="操作"
-          width="300">
+          width="290">
           <template slot-scope="scope">
-            <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
+            <el-button @click.native.prevent="queryByID(scope.row.id)" type="text" size="small">查看</el-button>
             <el-button type="text" size="small">编辑</el-button>
             <el-button
               size="mini"
               type="danger"
-              @click="handleDelete(scope.$index, scope.row)">删除
+              @click="">删除
             </el-button>
           </template>
         </el-table-column>
@@ -80,10 +103,10 @@
       <div class="block" style="margin-top:15px;">
         <el-pagination  @size-change="handleSizeChange" @current-change="handleCurrentChange"
              :current-page="currentPage"
-             :page-sizes="[1,5,10,20]"
+             :page-sizes="[10,15,20]"
              :page-size="pageSize"
              layout="total, sizes, prev, pager, next, jumper"
-             :total="tableData.length"
+             :total="partOfData.length"
              style="margin-left: 500px">
         </el-pagination>
       </div>
@@ -92,6 +115,8 @@
 </template>
 <script>
   import {findAll} from "@/api/customer";
+  import {getCustomerById} from "@/api/customer";
+  import {searchCustomerList} from "@/api/customer";
 
   export default {
   data() {
@@ -105,10 +130,61 @@
         settingTime: '',
         Manager: ''
       },
+      customerInfo:{
+        id: '',
+        name: '',
+        channelSource: '',
+        formerName: '无',
+        idNumber: '',
+        sex: '',
+        phone: '',
+        educational: '',
+        residenceAddress: '',
+        healthStatus: '',
+        accountNature: '',
+        customerLabel: '',
+        maritalStatus: '',
+        familySize: '',
+        summaryOfFamilyStatus: '',
+        // familyMembers: '',
+        // partOfData: [],
+        residentialAddress: '',
+        address: '',
+        residentialStatus: '',
+        lengthOfResidence: '1',
+        companyName: '',
+        workPhone: '',
+        unitAddress: '',
+        unitDetailAddress: '',
+        industryType: '',
+        profession: '',
+        position: '',
+        workingYears: '',
+        annualSalary: '',
+        // contact: '',
+        // partOfData: [],
+        familyMonthlyIncome: '',
+        numberOfDependents: '',
+        assetsToLiabilitiesRatio: '',
+        LoanToIncomeRatio: '',
+        averagePersonalIncome: '',
+        repaymentToIncomeRatio: '',
+        familyPropertyAssessment: '',
+        debtCoverageRatio: '',
+        repaymentRecord: '',
+        recordsAndYears: '',
+        breachOfContract: '',
+        overdraftSituation: '',
+        bankCardSituation: '',
+        creditCardDefault: '',
+        judicialRecords: '',
+        creditScore: ''
+      },
       fold: '',
       foldCode: '0',
       foldStatus: '展开',
       activeNames: ['1'],
+      dialogFormVisible: false,
       pickerOptions: {
         disabledDate(time) {
           return time.getTime() > Date.now();
@@ -134,12 +210,10 @@
           }
         }]
       },
-      value1: '',
-      value2: '',
-      tableData: [],
+      partOfData: [],
       currentPage: 1, // 当前页码
-      total: 10, // 总条数
-      pageSize: 8 // 每页的数据条数
+      total: '', // 总条数
+      pageSize: 10 // 每页的数据条数
     }
   },
     mounted() {
@@ -150,9 +224,23 @@
         this.listLoading = true
         findAll()
           .then(res => {
-          // console.log(res.data.data)
-          this.tableData = res.data.data
+           console.log(res.data.data)
+          this.partOfData = res.data.data
           this.listLoading = false
+        })
+      },
+      searchCustomerList(para){
+        console.log(para)
+     getCustomerById(para).then((res)=>
+        {
+          console.log(res.data)
+        })
+      },
+      queryByID:function (params) {
+        console.log(params)
+        // this.dialogFormVisible=true
+        getCustomerById(params).then((res)=>{
+          console.log(res.data)
         })
       },
     handleSizeChange(val) {
@@ -170,18 +258,7 @@
     handleChange(val) {
       console.log(val)
     },
-    // open() {
-    //   this.$alert('借款人基本信息', {
-    //     confirmButtonText: '确定',
-    //     callback: action => {
-    //       this.$message({
-    //         type: 'info',
-    //         message: `action: ${ action }`
-    //       })
-    //     }
-    //   })
-    // },
-    flodchange() {
+    flodChange() {
       if (this.foldCode == 0) {
         this.foldCode = 1
         this.foldStatus = '收起'
@@ -200,7 +277,7 @@
       this.listConfig.Manager = ''
     },
     handleDelete() {
-      this.tableData.splice(index, 1)
+      this.partOfData.splice(index, 1)
     }
   }
 }
