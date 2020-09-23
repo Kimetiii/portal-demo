@@ -45,7 +45,7 @@ public class CustomerBaseController {
 	public ResponseObj getCustomerById(@RequestParam String id) {
 		try {
 			CustomerBaseInfo infoById = customerBaseService.getInfoById(id);
-			return ResponseObj.success(infoById,"id导入成功"+id);
+			return ResponseObj.success(infoById,"success");
 		} catch (Exception e) {
 			return ResponseObj.failure(e);
 		}

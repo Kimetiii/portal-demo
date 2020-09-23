@@ -13,7 +13,7 @@
         <el-form-item label="客户姓名">
           <el-input v-model="listConfig.clientName" placeholder="请输入"></el-input>
         </el-form-item>
-        <el-button type="text" @click="flodChange">{{foldStatus}}</el-button>
+        <el-button type="text" @click="foldChange">{{foldStatus}}</el-button>
         <el-form :inline="true" :model="listConfig" v-if="foldCode==1"  class="demo-form-inline" style="margin-left: 10px;padding-top: 10px">
           <el-form-item label="证件号码">
             <el-input v-model="listConfig.clientID" placeholder="请输入" style="width: 150px"></el-input>
@@ -37,20 +37,170 @@
         </el-form-item>
       </el-form>
       <div>
-<!--        <el-dialog title="编辑" :visible.sync="dialogFormVisible" width="30%" :before-close="handleClose" append-to-body="true">-->
-        <el-dialog title="编辑" :visible.sync="dialogFormVisible" width="80%" >
-          <p>这是一个弹出框</p>
-          <el-form :model="customerInfo" >
-            <el-form-item label="客户号" style="width: 500px">
-              <el-input v-model="customerInfo.id" autocomplete="off"></el-input>
-            </el-form-item>
-
+        <el-dialog :visible.sync="dialogFormVisible" width="60%">
+          <div style="font-size: 16px;color: cornflowerblue;margin: 0 auto" >{{this.customerInfo.name}}的信息</div>
+          <el-form :model="customerInfo" :disabled="true" >
+            <el-tabs style="margin-left: 20px;margin-top: 40px">
+              <el-tab-pane label="基本信息">
+                <h2 style="font-size: 16px;color: cornflowerblue">基本信息</h2>
+                <el-form-item label="客户号" prop="id" >
+                  <el-input v-model="customerInfo.id" autocomplete="off" ></el-input>
+                </el-form-item>
+                <el-form-item label="渠道来源" prop="channelSource">
+                  <el-input v-model="customerInfo.channelSource" autocomplete="off" ></el-input>
+                </el-form-item>
+                <el-form-item label="姓名" prop="name">
+                  <el-input v-model="customerInfo.name" ></el-input>
+                </el-form-item>
+                <el-form-item label="曾用名" prop="fomerName">
+                  <el-input v-model="customerInfo.formerName" ></el-input>
+                </el-form-item>
+                <el-form-item label="身份证号" prop="idNumber">
+                  <el-input v-model="customerInfo.idNumber" ></el-input>
+                </el-form-item>
+                <el-form-item label="性别" prop="sex">
+                  <el-input v-model="customerInfo.sex" ></el-input>
+                </el-form-item>
+                <el-form-item label="手机号" prop="phone">
+                  <el-input v-model="customerInfo.phone" ></el-input>
+                </el-form-item>
+                <el-form-item label="学历情况" prop="educational">
+                  <el-input v-model="customerInfo.educational" placeholder="请选择"></el-input>
+                </el-form-item>
+                <el-form-item label="户籍地址" prop="residenceAddress">
+                  <el-input v-model="customerInfo.residenceAddress"></el-input>
+                </el-form-item>
+                <el-form-item label="健康状况" prop="healthStatus">
+                  <el-input v-model="customerInfo.healthStatus"></el-input>
+                </el-form-item>
+                <el-form-item label="户口性质" prop="accountNature">
+                  <el-input v-model="customerInfo.accountNature" ></el-input>
+                </el-form-item>
+                <el-form-item label="客户标签" prop="customerLabel">
+                  <el-input v-model="customerInfo.customerLabel">
+                  </el-input>
+                </el-form-item>
+              </el-tab-pane>
+              <el-tab-pane label="家庭信息">
+                <h2 style="font-size: 16px;color: cornflowerblue">家庭信息</h2>
+                <el-form-item label="婚姻状况">
+                  <el-radio-group v-model="customerInfo.maritalStatus">
+                    <el-radio label="未婚"></el-radio>
+                    <el-radio label="已婚"></el-radio>
+                    <el-radio label="离异"></el-radio>
+                    <el-radio label="丧偶"></el-radio>
+                  </el-radio-group>
+                </el-form-item>
+                <el-form-item label="家庭人数" prop="familySize">
+                  <el-input v-model="customerInfo.familySize" ></el-input>
+                </el-form-item>
+                <el-form-item label="家庭情况概况" prop="summaryOfFamilyStatus">
+                  <el-input type="textarea" v-model="customerInfo.summaryOfFamilyStatus"></el-input>
+                </el-form-item>
+              </el-tab-pane>
+              <el-tab-pane label="居住信息">
+                <h2 style="font-size: 16px;color: cornflowerblue">居住信息</h2>
+                <el-form-item label="居住地址" prop="residentialAddress">
+                  <el-input v-model="customerInfo.residentialAddress"></el-input>
+                </el-form-item>
+                <el-form-item label="详细地址" prop="address">
+                  <el-input v-model="customerInfo.address" ></el-input>
+                </el-form-item>
+                <el-form-item label="居住状态" prop="residentialStatus">
+                  <el-input v-model="customerInfo.residentialStatus" ></el-input>
+                </el-form-item>
+                <el-form-item label="居住年限" prop="lengthOfResidence">
+                  <el-input-number v-model="customerInfo.lengthOfResidence" controls-position="right" :min="1"></el-input-number>
+                </el-form-item>
+              </el-tab-pane>
+              <el-tab-pane label="就业信息">
+                <h2 style="font-size: 16px;color: cornflowerblue">就业信息</h2>
+                <el-form-item label="单位名称" prop="companyName">
+                  <el-input v-model="customerInfo.companyName" ></el-input>
+                </el-form-item>
+                <el-form-item label="单位电话" prop="workPhone">
+                  <el-input v-model="customerInfo.workPhone" ></el-input>
+                </el-form-item>
+                <el-form-item label="单位地址" prop="unitAddress">
+                  <el-input v-model="customerInfo.unitAddress"></el-input>
+                </el-form-item>
+                <el-form-item label="详细地址" prop="unitDetailAddress">
+                  <el-input v-model="customerInfo.unitDetailAddress" ></el-input>
+                </el-form-item>
+                <el-form-item label="行业类型" prop="industryType" size="120px">
+                  <el-input v-model="customerInfo.industryType"  ></el-input>
+                </el-form-item>
+                <el-form-item label="职业" prop="profession" >
+                  <el-input v-model="customerInfo.profession" ></el-input>
+                </el-form-item>
+                <el-form-item label="职务" prop="position" >
+                  <el-input v-model="customerInfo.position"></el-input>
+                </el-form-item>
+                <el-form-item label="工作年限" prop="workingYears">
+                  <el-input-number v-model="customerInfo.workingYears" controls-position="right" :min="0"></el-input-number>
+                </el-form-item>
+                <el-form-item label="年薪" prop="annualSalary">
+                  <el-input v-model="customerInfo.annualSalary">
+                    <i slot="suffix" style="font-style:normal;margin-right: 20px;">万元</i>
+                  </el-input>
+                </el-form-item>
+              </el-tab-pane>
+              <el-tab-pane label="经济状况">
+                <h2 style="font-size: 16px;color: cornflowerblue">经济状况</h2>
+                <el-form-item label="家庭月收入" prop="familyMonthlyIncome">
+                  <el-input v-model="customerInfo.familyMonthlyIncome" ></el-input>
+                </el-form-item>
+                <el-form-item label="抚养人数" prop="numberOfDependents">
+                  <el-input v-model="customerInfo.numberOfDependents" ></el-input>
+                </el-form-item>
+                <el-form-item label="资产与负债比" prop="assetsToLiabilitiesRatio">
+                  <el-input v-model="customerInfo.assetsToLiabilitiesRatio" ></el-input>
+                </el-form-item>
+                <el-form-item label="收入还贷比" prop="LoanToIncomeRatio">
+                  <el-input v-model="customerInfo.LoanToIncomeRatio" ></el-input>
+                </el-form-item>
+                <el-form-item label="个人年平均收入" prop="averagePersonalIncome">
+                  <el-input v-model="customerInfo.familyMonthlyIncome" ></el-input>
+                </el-form-item>
+                <el-form-item label="月还款额与月可支配收入比值" prop="repaymentToIncomeRatio">
+                  <el-input v-model="customerInfo.repaymentToIncomeRatio" ></el-input>
+                </el-form-item>
+                <el-form-item label="家庭财产评估值" prop="familyPropertyAssessment">
+                  <el-input v-model="customerInfo.familyPropertyAssessment" ></el-input>
+                </el-form-item>
+                <el-form-item label="债务覆盖率" prop="debtCoverageRatio">
+                  <el-input v-model="customerInfo.debtCoverageRatio" ></el-input>
+                </el-form-item>
+                <h2 style="font-size: 16px;color: cornflowerblue">信用状况</h2>
+                <el-form-item label="还款记录" prop="repaymentRecord">
+                  <el-input v-model="customerInfo.repaymentRecord" ></el-input>
+                </el-form-item>
+                <el-form-item label="个人贷款或信用卡记录和年限" prop="recordsAndYears">
+                  <el-input v-model="customerInfo.recordsAndYears" ></el-input>
+                </el-form-item>
+                <el-form-item label="违约情况" prop="breachOfContract">
+                  <el-input v-model="customerInfo.breachOfContract" ></el-input>
+                </el-form-item>
+                <el-form-item label="信用卡透支情况等方面的详细调查" prop="overdraftSituation">
+                  <el-input v-model="customerInfo.overdraftSituation" ></el-input>
+                </el-form-item>
+                <el-form-item label="银行卡持有情况及银行账户情况" prop="bankCardSituation" >
+                  <el-input v-model="customerInfo.bankCardSituation"></el-input>
+                </el-form-item>
+                <el-form-item label="个人贷款或信用卡违约情况" prop="creditCardDefault">
+                  <el-input v-model="customerInfo.creditCardDefault" ></el-input>
+                </el-form-item>
+                <el-form-item label="公安司法的不良记录" prop="judicialRecords">
+                  <el-input v-model="customerInfo.judicialRecords" ></el-input>
+                </el-form-item>
+                <el-form-item label="个人信用度评分" prop="creditScore">
+                  <el-input v-model="customerInfo.creditScore" ></el-input>
+                </el-form-item>
+              </el-tab-pane>
+            </el-tabs>
           </el-form>
-
           <div>
-<!--            <el-button type="primary" @click.native.prevent="editSubForm" :loading="addLoading">确定</el-button>-->
-            <el-button type="primary" >保存</el-button>
-            <el-button @click.native.prevent="dialogFormVisible=false">退出</el-button>
+            <el-button type="danger"  style="margin-left: 950px" @click.native.prevent="dialogFormVisible=false">退出</el-button>
           </div>
         </el-dialog>
       </div>
@@ -90,8 +240,9 @@
           label="操作"
           width="290">
           <template slot-scope="scope">
-            <el-button @click.native.prevent="queryByID(scope.row.id)" type="text" size="small">查看</el-button>
-            <el-button type="text" size="small">编辑</el-button>
+            <el-button @click.native.prevent="check(scope.row.id)" type="text" size="small">查看</el-button>
+<!--            <el-button type="text" size="small" @click.native.prevent="queryByID(scope.row.id)" onclick="location='http://dut.portal.com:8080/#/ListManagement/clientEdit'">编辑</el-button>-->
+            <el-button type="text" size="small" @click.native="$router.push({name:'clientEdit',params:{'id':scope.row.id}})">编辑</el-button>
             <el-button
               size="mini"
               type="danger"
@@ -114,11 +265,14 @@
   </div>
 </template>
 <script>
+  import VDistpicker from 'v-distpicker';
   import {findAll} from "@/api/customer";
   import {getCustomerById} from "@/api/customer";
   import {searchCustomerList} from "@/api/customer";
+  import clientEdit from "@/views/listmanagement/clientEdit";
 
   export default {
+    components: { VDistpicker },
   data() {
     return {
       listConfig: {
@@ -180,8 +334,21 @@
         judicialRecords: '',
         creditScore: ''
       },
+      // watch:{
+      //   "route":{
+      //     handler(router){
+      //       const that=this
+      //       console.log(this)
+      //       if(router.name === clientEdit ){
+      //         that.init()
+      //       }
+      //     },
+      //     deep:true
+      //   }
+      // },
       fold: '',
       foldCode: '0',
+      editCode: '0',
       foldStatus: '展开',
       activeNames: ['1'],
       dialogFormVisible: false,
@@ -224,24 +391,25 @@
         this.listLoading = true
         findAll()
           .then(res => {
+           console.log(res.data.data)
           this.partOfData = res.data.data
           this.listLoading = false
         })
       },
-      searchCustomerList(para){
-        console.log(para)
-     getCustomerById(para)
-       .then(res=>
-        {
-          console.log(res.data)
+     //  searchCustomerList(para){
+     //    console.log(para)
+     // getCustomerById(para).then((res)=>
+     //    {
+     //      console.log(res.data)
+     //    })
+     //  },
+      check:function (params) {
+        // console.log(params)
+         this.dialogFormVisible=true
+        getCustomerById(params).then((res)=>{
+          // console.log(res.data)
+          this.customerInfo = res.data.data
         })
-      },
-      queryByID(params) {
-        getCustomerById(params)
-          .then(res=>
-          {
-            console.log(res.data)
-          })
       },
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`)
@@ -258,7 +426,7 @@
     handleChange(val) {
       console.log(val)
     },
-    flodChange() {
+    foldChange() {
       if (this.foldCode == 0) {
         this.foldCode = 1
         this.foldStatus = '收起'
@@ -266,6 +434,8 @@
         this.foldCode = 0
         this.foldStatus = '展开'
       }
+    },
+    editChange(){
     },
     resetForm() {
       this.listConfig.clientResouces = ''
