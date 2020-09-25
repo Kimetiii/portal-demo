@@ -67,6 +67,15 @@
                 <el-option label="非资源户" value="NOresource"></el-option>
               </el-select>
             </el-form-item>
+            <el-form-item label="经办客户经理" prop="responsible">
+              <el-select v-model="allInfo.responsible"  placeholder="请选择">
+                <el-option label="张三" value="张三"></el-option>
+                <el-option label="李四" value="李四"></el-option>
+                <el-option label="王五" value="王五"></el-option>
+                <el-option label="赵六" value="赵六"></el-option>
+              </el-select>
+            </el-form-item>
+
           </el-form>
         </el-tab-pane>
         <el-tab-pane label="家庭信息>>">
@@ -411,7 +420,7 @@
               <el-input v-model="allInfo.LoanToIncomeRatio" placeholder="请输入"></el-input>
             </el-form-item>
             <el-form-item label="个人年平均收入" prop="averagePersonalIncome">
-              <el-input v-model="allInfo.familyMonthlyIncome" placeholder="请输入"></el-input>
+              <el-input v-model="allInfo.averagePersonalIncome" placeholder="请输入"></el-input>
             </el-form-item>
             <el-form-item label="月还款额与月可支配收入比值" prop="repaymentToIncomeRatio">
               <el-input v-model="allInfo.repaymentToIncomeRatio" placeholder="请输入"></el-input>
@@ -481,6 +490,7 @@ import { addCustomer } from "@/api/customer";
           healthStatus: '',
           accountNature: '',
           customerLabel: '',
+        responsible: '',
           maritalStatus: '',
           familySize: '',
           summaryOfFamilyStatus: '',

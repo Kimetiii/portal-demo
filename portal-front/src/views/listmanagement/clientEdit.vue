@@ -1,12 +1,12 @@
 <template>
 <div id="editCustomerInfo">
-  <div id="container" style="width:1600px;margin-left: 50px;margin-top: 40px;box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)">
+  <div id="container" style="width:1600px;margin-left: 50px;margin-top: 40px;border-radius: 0px">
     <el-tabs style="margin-left: 20px;margin-top: 40px">
-      <el-tab-pane label="借款人基本信息>>" >
-        <span>借款人基本信息</span>
-        <el-form :model="customerInfo" :rules="rules" ref="ruleForm" label-position="top" style="width:800px;height:1500px;margin-left: 100px;padding-top: 10px" label-width="100px" class="demo-ruleForm" lable="借款人基本信息">
-          <el-form-item label="客户号" prop="id">
-            <el-input v-model="customerInfo.id" placeholder="请输入"></el-input>
+      <el-tab-pane label="基本信息>>" >
+        <span>{{this.customerInfo.name}}: 基本信息</span>
+        <el-form :model="customerInfo" :rules="rules" ref="ruleForm" label-position="top" style="width:800px;margin-left: 100px;padding-top: 10px" label-width="100px" class="demo-ruleForm" lable="借款人基本信息">
+          <el-form-item label="客户号" prop="id" >
+            <el-input v-model="customerInfo.id" placeholder="请输入" v-bind:disabled="disabled"></el-input>
           </el-form-item>
           <el-form-item label="渠道来源" prop="channelSource">
             <el-select v-model="customerInfo.channelSource" placeholder="请选择">
@@ -67,11 +67,19 @@
               <el-option label="非资源户" value="NOresource"></el-option>
             </el-select>
           </el-form-item>
+          <el-form-item label="经办客户经理" prop="responsible">
+            <el-select v-model="customerInfo.responsible" placeholder="请选择">
+              <el-option label="张三" value="张三"></el-option>
+              <el-option label="李四" value="李四"></el-option>
+              <el-option label="王五" value="王五"></el-option>
+              <el-option label="赵六" value="赵六"></el-option>
+            </el-select>
+          </el-form-item>
         </el-form>
       </el-tab-pane>
       <el-tab-pane label="家庭信息>>">
-        <span>家庭信息</span>
-        <el-form :model="customerInfo" :rules="rules" ref="ruleForm" label-position="top" style="width:800px;height:800px;margin-left: 100px;padding-top: 10px" label-width="100px" class="demo-ruleForm" lable="家庭信息">
+        <span>{{this.customerInfo.name}}: 家庭信息</span>
+        <el-form :model="customerInfo" :rules="rules" ref="ruleForm" label-position="top" style="width:800px;margin-left: 100px;padding-top: 10px" label-width="100px" class="demo-ruleForm" lable="家庭信息">
           <el-form-item label="婚姻状况">
             <el-radio-group v-model="customerInfo.maritalStatus">
               <el-radio label="未婚"></el-radio>
@@ -89,8 +97,8 @@
         </el-form>
       </el-tab-pane>
       <el-tab-pane label="居住信息>>">
-        <span>居住信息</span>
-        <el-form :model="customerInfo" :rules="rules" ref="ruleForm" label-position="top" style="width:800px;height:800px;margin-left: 100px;padding-top: 10px" label-width="100px" class="demo-ruleForm" lable="居住信息">
+        <span>{{this.customerInfo.name}}: 居住信息</span>
+        <el-form :model="customerInfo" :rules="rules" ref="ruleForm" label-position="top" style="width:800px;margin-left: 100px;padding-top: 10px" label-width="100px" class="demo-ruleForm" lable="居住信息">
           <el-form-item label="居住地址" prop="residentialAddress">
             <el-input v-model="customerInfo.residentialAddress"></el-input>
           </el-form-item>
@@ -111,8 +119,8 @@
         </el-form>
       </el-tab-pane>
       <el-tab-pane label="就业信息>>">
-        <span>就业信息</span>
-        <el-form :model="customerInfo" :rules="rules" ref="ruleForm" label-position="top" style="width:800px;height:2000px;margin-left: 100px;padding-top: 10px" label-width="100px" class="demo-ruleForm" lable="就业信息">
+        <span>{{this.customerInfo.name}}: 就业信息</span>
+        <el-form :model="customerInfo" :rules="rules" ref="ruleForm" label-position="top" style="width:800px;margin-left: 100px;padding-top: 10px" label-width="100px" class="demo-ruleForm" lable="就业信息">
           <el-form-item label="单位名称" prop="companyName">
             <el-input v-model="customerInfo.companyName" placeholder="请输入"></el-input>
           </el-form-item>
@@ -275,8 +283,8 @@
         </el-form>
       </el-tab-pane>
       <el-tab-pane label="经济状况>>">
-        <span>经济状况</span>
-        <el-form :model="customerInfo" :rules="rules" ref="ruleForm" label-position="top" style="width:800px;height:1800px;margin-left: 100px;padding-top: 10px" label-width="140px" class="demo-ruleForm" lable="经济状况">
+        <span>{{this.customerInfo.name}}: 经济状况</span>
+        <el-form :model="customerInfo" :rules="rules" ref="ruleForm" label-position="top" style="width:800px;margin-left: 100px;padding-top: 10px" label-width="140px" class="demo-ruleForm" lable="经济状况">
           <el-form-item label="家庭月收入" prop="familyMonthlyIncome">
             <el-input v-model="customerInfo.familyMonthlyIncome" placeholder="请输入"></el-input>
           </el-form-item>
@@ -290,7 +298,7 @@
             <el-input v-model="customerInfo.LoanToIncomeRatio" placeholder="请输入"></el-input>
           </el-form-item>
           <el-form-item label="个人年平均收入" prop="averagePersonalIncome">
-            <el-input v-model="customerInfo.familyMonthlyIncome" placeholder="请输入"></el-input>
+            <el-input v-model="customerInfo.averagePersonalIncome" placeholder="请输入"></el-input>
           </el-form-item>
           <el-form-item label="月还款额与月可支配收入比值" prop="repaymentToIncomeRatio">
             <el-input v-model="customerInfo.repaymentToIncomeRatio" placeholder="请输入"></el-input>
@@ -304,8 +312,8 @@
         </el-form>
       </el-tab-pane>
       <el-tab-pane label="信用状况">
-        <span>信用状况</span>
-        <el-form :model="customerInfo" :rules="rules" ref="ruleForm" label-position="top" style="width:800px;height:1800px;margin-left: 100px;padding-top: 10px" label-width="140px" class="demo-ruleForm" lable="信用状况">
+        <span>{{this.customerInfo.name}}: 信用状况</span>
+        <el-form :model="customerInfo" :rules="rules" ref="ruleForm" label-position="top" style="width:800px;margin-left: 100px;padding-top: 10px" label-width="140px" class="demo-ruleForm" lable="信用状况">
           <el-form-item label="还款记录" prop="repaymentRecord">
             <el-input v-model="customerInfo.repaymentRecord" placeholder="请输入"></el-input>
           </el-form-item>
@@ -330,19 +338,21 @@
           <el-form-item label="个人信用度评分" prop="creditScore">
             <el-input v-model="customerInfo.creditScore" placeholder="请输入"></el-input>
           </el-form-item>
-          <el-divider></el-divider>
-          <el-button type="primary" round style="margin-left: 300px"  @click="">保存</el-button>
-          <el-button type="info" round @click="returnBack">恢复</el-button>
-          <el-button type="danger" round @click="backHistory">取消编辑</el-button>
         </el-form>
       </el-tab-pane>
     </el-tabs>
+    <div style="margin-top: 20px ;margin-bottom: 50px;margin-left: 500px">
+      <el-button type="primary" round @click="update(customerInfo)">保存修改</el-button>
+      <el-button type="success" round @click="returnBack">恢复</el-button>
+      <el-button type="info" round @click="backHistory">取消</el-button>
+    </div>
   </div>
 </div>
 </template>
 
 <script>
-import {getCustomerById} from "@/api/customer";
+import {getCustomerById} from "@/api/customer";0
+import { addCustomer } from "@/api/customer";
 export default {
   name: "clientEdit",
   data() {
@@ -360,6 +370,7 @@ export default {
         healthStatus: '',
         accountNature: '',
         customerLabel: '',
+        responsible: '',
         maritalStatus: '',
         familySize: '',
         summaryOfFamilyStatus: '',
@@ -434,20 +445,18 @@ export default {
             trigger: 'blur'
           }
         ]
-      }
+      },
+      disabled:true
     }
   },
   mounted() {
-       // console.log(this.$route.params.id)
       getCustomerById(this.customerInfo.id).then((res)=>{
-        // console.log(res.data)
         this.customerInfo = res.data.data
       })
     },
   methods:{
     returnBack:function () {
-      // var that=this
-      //  console.log(param)
+     alert("您确认取消修改吗？")
       getCustomerById(this.customerInfo.id).then((res)=>{
         console.log(res.data)
         this.customerInfo = res.data.data
@@ -455,7 +464,13 @@ export default {
     },
     backHistory(){
       this.$router.go(-1);//返回上一层
-    }
+    },
+    update: function (data){
+      alert("你确定修改并保存借款人信息吗？")
+      addCustomer(data).then((res)=>{
+        this.$router.go(-1);
+      })
+    },
   }
 }
 </script>
