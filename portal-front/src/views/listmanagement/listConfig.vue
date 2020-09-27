@@ -221,7 +221,7 @@
         v-loading.fullscreen.lock="fullscreenLoading"
         element-loading-text="拼命加载中"
         element-loading-spinner="el-icon-loading"
-        style="margin-left:100px;margin-top: 20px;width: 1200px">
+        style="margin-left:100px;margin-top: 20px;width: 1300px">
         <el-table-column prop="channelSource" align="center" label="客戶來源" width="200px">
           <template slot-scope="scope">
             {{ scope.row.channelSource }}
@@ -232,7 +232,7 @@
             {{ scope.row.name }}
           </template>
         </el-table-column>
-        <el-table-column align="center" prop="idNumber" label="证件号码" width="200px">
+        <el-table-column align="center" prop="idNumber" label="证件号码" width="300px">
           <template slot-scope="scope">
             {{ scope.row.idNumber }}
           </template>
@@ -250,11 +250,7 @@
           <template slot-scope="scope">
             <el-button type="primary" size="small" @click.native="$router.push({name:'clientEdit',params:{'id':scope.row.id}})">编辑</el-button>
             <el-button @click.native.prevent="check(scope.row.id)" type="success" size="small">查看</el-button>
-            <el-button
-              size="mini"
-              type="danger"
-              @click="">删除
-            </el-button>
+            <el-button  @click.native.prevent="delete1(scope.row.id)" size="mini" type="danger">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -272,9 +268,10 @@
 </template>
 <script>
   import VDistpicker from 'v-distpicker';
-  import {findAll} from "@/api/customer";
+  import {findAll,findAllCustomerByDeleteStatus} from "@/api/customer";
   import {getCustomerById} from "@/api/customer";
   import {searchCustomerList} from "@/api/customer";
+  import {softDeleteById} from "@/api/customer";
 
   export default {
     components: { VDistpicker },
@@ -383,11 +380,12 @@
     methods: {
       fetchData() {
         this.listLoading = true
-        findAll()
+        findAllCustomerByDeleteStatus()
           .then(res => {
+            console.log(res.data.data)
           this.partOfData = res.data.data
           this.listLoading = false
-            this.fullscreenLoading = false
+          this.fullscreenLoading = false
         })
       },
       search:function() {
@@ -405,13 +403,19 @@
           else {
             this.partOfData = res.data.data
           }
-
         })
       },
+      //查看的方法体
       check:function (params) {
          this.dialogFormVisible=true
         getCustomerById(params).then((res)=>{
           this.customerInfo = res.data.data
+        })
+      },
+      delete1:function (params){
+        alert("您确定要删除该用户信息吗？")
+        softDeleteById(params).then((res)=>{
+          this.$router.go(0)
         })
       },
     // handleSizeChange(val) {
@@ -437,8 +441,6 @@
         this.foldCode = 0
         this.foldStatus = '展开'
       }
-    },
-    editChange(){
     },
     resetForm() {
       this.listConfig.clientResouces = ''

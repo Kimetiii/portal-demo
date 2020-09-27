@@ -182,4 +182,6 @@ public class CustomerBaseInfo {
 	@Column(length = 32)
 	private String creditScore; // 个人信用度评分
 
+	@Column(name = "delete_status", length = 32)
+	private String deleteStatus; // 删除状态
 }

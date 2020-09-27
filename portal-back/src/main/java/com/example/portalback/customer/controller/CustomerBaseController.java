@@ -40,6 +40,16 @@ public class CustomerBaseController {
 			return ResponseObj.failure(e);
 		}
 	}
+	@GetMapping("findAllCustomerByDeleteStatus")
+	public ResponseObj findAllCustomerByDeleteStatus() {
+		try {
+			List<CustomerBaseInfo> allCustomerBase = customerBaseService.findAllCustomerBaseByDeleteStatus();
+			return ResponseObj.success(allCustomerBase);
+		} catch (Exception e) {
+			return ResponseObj.failure(e);
+		}
+	}
+
 
 	@PostMapping("getCustomerById")
 	public ResponseObj getCustomerById(@RequestParam String id) {
@@ -66,6 +76,17 @@ public class CustomerBaseController {
 			List<CustomerBaseInfo> customerBaseInfos = customerBaseService.searchCustomerList(searchModel);
 			return ResponseObj.success(customerBaseInfos);
 		} catch (Exception e) {
+			return ResponseObj.failure(e);
+		}
+	}
+
+	@PostMapping("softDeleteById")
+	public ResponseObj deleteById(@RequestParam String id){
+		try {
+			customerBaseService.softDeleteById(id);
+			return ResponseObj.success("success");
+		} catch (Exception e) {
+			e.printStackTrace();
 			return ResponseObj.failure(e);
 		}
 	}

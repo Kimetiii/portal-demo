@@ -7,6 +7,14 @@ export function findAll(params) {
     data: params
   })
 }
+export function findAllCustomerByDeleteStatus(params) {
+  return request({
+    url: '/customerBase/findAllCustomerByDeleteStatus',
+    method: 'get',
+    data: params
+  })
+}
+
 
 export function addCustomer(params) {
   return request({
@@ -28,6 +36,13 @@ export function searchCustomerList(params) {
     url: '/customerBase/searchCustomerList',
     method: 'post',
     data: params
+  })
+}
+
+export function softDeleteById(params) {
+  return request({
+    url: '/customerBase/softDeleteById?id='+params,
+    method: 'post'
   })
 }
 

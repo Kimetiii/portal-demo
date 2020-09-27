@@ -18,10 +18,14 @@ public interface CustomerBaseService {
 
 	List<CustomerBaseInfo> findAllCustomerBase();
 
+	List<CustomerBaseInfo> findAllCustomerBaseByDeleteStatus();
+
 	CustomerBaseInfo getInfoById(String id);
 
 	CustomerBaseInfoModel enforceRules(String ruleName,CustomerBaseInfoModel model);
 
 	List<CustomerBaseInfo> searchCustomerList(SearchModel searchModel);
+
+	void softDeleteById(String id);
 
 }

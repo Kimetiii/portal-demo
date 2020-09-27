@@ -35,10 +35,17 @@ public class CustomerBaseImpl implements CustomerBaseService {
 
     @Override
     public List<CustomerBaseInfo> findAllCustomerBase() {
+
         return customerBaseRepository.findAll();
     }
 
-	@Override
+    @Override
+    public List<CustomerBaseInfo> findAllCustomerBaseByDeleteStatus() {
+
+        return customerBaseRepository.findAllByDeleteStatus();
+    }
+
+    @Override
 	public CustomerBaseInfo getInfoById(String id) {
 		return customerBaseRepository.queryAllById(id);
 	}
@@ -69,6 +76,11 @@ public class CustomerBaseImpl implements CustomerBaseService {
 
         List<CustomerBaseInfo> customerBaseInfos = customerBaseRepository.searchCustomerList(channelSource, customerId, customerName, idNumber, responsible);
         return customerBaseInfos;
+    }
+
+    @Override
+    public void softDeleteById(String id) {
+        customerBaseRepository.softDeleteById(id);
     }
 
 

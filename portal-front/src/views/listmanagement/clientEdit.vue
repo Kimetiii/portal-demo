@@ -470,7 +470,8 @@ export default {
       addCustomer(data).then((res)=>{
         this.$router.go(-1);
       })
-    },
+    }
+
   }
 }
 </script>
