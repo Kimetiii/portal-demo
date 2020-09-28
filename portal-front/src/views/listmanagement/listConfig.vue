@@ -4,7 +4,7 @@
       <el-form :inline="true" :model="listConfig" class="demo-form-inline" style="width:1500px;padding-top: 10px;border-radius: 30px">
         <div style="margin-left:140px;">
           <el-form-item style="margin-left: 10px" label="客户来源" prop="channelSource">
-            <el-select v-model="listConfig.channelSource" placeholder="活动区域">
+            <el-select v-model="listConfig.channelSource" placeholder="请选择">
               <el-option label="" value=""></el-option>
               <el-option label="渠道" value="channel"></el-option>
               <el-option label="客户经理" value="Manager"></el-option>
@@ -221,7 +221,7 @@
         v-loading.fullscreen.lock="fullscreenLoading"
         element-loading-text="拼命加载中"
         element-loading-spinner="el-icon-loading"
-        style="margin-left:100px;margin-top: 20px;width: 1300px">
+        style="margin-left:100px;margin-top: 20px;width: 1400px">
         <el-table-column prop="channelSource" align="center" label="客戶來源" width="200px">
           <template slot-scope="scope">
             {{ scope.row.channelSource }}
@@ -240,6 +240,11 @@
         <el-table-column prop="phone" align="center" label="手机号" width="300px">
           <template slot-scope="scope">
             {{ scope.row.phone }}
+          </template>
+        </el-table-column>
+        <el-table-column prop="completeStatus" align="center" label="完成情况" width="100px">
+          <template slot-scope="scope">
+            {{ scope.row.completeStatus }}
           </template>
         </el-table-column>
         <el-table-column
@@ -268,194 +273,202 @@
 </template>
 <script>
   import VDistpicker from 'v-distpicker';
-  import {findAll,findAllCustomerByDeleteStatus} from "@/api/customer";
+  import {findAllCustomerByDeleteStatus} from "@/api/customer";
   import {getCustomerById} from "@/api/customer";
   import {searchCustomerList} from "@/api/customer";
-  import {softDeleteById} from "@/api/customer";
+  import {softDeleteById,findAll} from "@/api/customer";
 
   export default {
-    components: { VDistpicker },
-  data() {
-    return {
-      listConfig: {
-        channelSource: '',
-        name: '',
-        idNumber: '',
-        id: '',
-        responsible: ''
-      },
-      customerInfo:{
-        id: '',
-        name: '',
-        channelSource: '',
-        formerName: '无',
-        idNumber: '',
-        sex: '',
-        phone: '',
-        educational: '',
-        residenceAddress: '',
-        healthStatus: '',
-        accountNature: '',
-        customerLabel: '',
-        responsible: '',
-        maritalStatus: '',
-        familySize: '',
-        summaryOfFamilyStatus: '',
-        // familyMembers: '',
-        // partOfData: [],
-        residentialAddress: '',
-        address: '',
-        residentialStatus: '',
-        lengthOfResidence: '1',
-        companyName: '',
-        workPhone: '',
-        unitAddress: '',
-        unitDetailAddress: '',
-        industryType: '',
-        profession: '',
-        position: '',
-        workingYears: '',
-        annualSalary: '',
-        // contact: '',
-        // partOfData: [],
-        familyMonthlyIncome: '',
-        numberOfDependents: '',
-        assetsToLiabilitiesRatio: '',
-        LoanToIncomeRatio: '',
-        averagePersonalIncome: '',
-        repaymentToIncomeRatio: '',
-        familyPropertyAssessment: '',
-        debtCoverageRatio: '',
-        repaymentRecord: '',
-        recordsAndYears: '',
-        breachOfContract: '',
-        overdraftSituation: '',
-        bankCardSituation: '',
-        creditCardDefault: '',
-        judicialRecords: '',
-        creditScore: ''
-      },
-      fold: '',
-      foldCode: 0,
-      readonly: true,
-      editCode: true,
-      foldStatus: '展开',
-      activeNames: ['1'],
-      dialogFormVisible: false,
-      pickerOptions: {
-        disabledDate(time) {
-          return time.getTime() > Date.now();
+    components: {VDistpicker},
+    data() {
+      return {
+        listConfig: {
+          channelSource: '',
+          name: '',
+          idNumber: '',
+          id: '',
+          responsible: ''
         },
-        shortcuts: [{
-          text: '今天',
-          onClick(picker) {
-            picker.$emit('pick', new Date());
-          }
-        }, {
-          text: '昨天',
-          onClick(picker) {
-            const date = new Date();
-            date.setTime(date.getTime() - 3600 * 1000 * 24);
-            picker.$emit('pick', date);
-          }
-        }, {
-          text: '一周前',
-          onClick(picker) {
-            const date = new Date();
-            date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
-            picker.$emit('pick', date);
-          }
-        }]
-      },
-      partOfData: [],
-      currentPage: 1, // 当前页码
-      total: '', // 总条数
-      pageSize: 10,// 每页的数据条数
-      fullscreenLoading: true
-    }
-  },
+        customerInfo: {
+          id: '',
+          name: '',
+          channelSource: '',
+          formerName: '无',
+          idNumber: '',
+          sex: '',
+          phone: '',
+          educational: '',
+          residenceAddress: '',
+          healthStatus: '',
+          accountNature: '',
+          customerLabel: '',
+          responsible: '',
+          maritalStatus: '',
+          familySize: '',
+          summaryOfFamilyStatus: '',
+          // familyMembers: '',
+          // partOfData: [],
+          residentialAddress: '',
+          address: '',
+          residentialStatus: '',
+          lengthOfResidence: '1',
+          companyName: '',
+          workPhone: '',
+          unitAddress: '',
+          unitDetailAddress: '',
+          industryType: '',
+          profession: '',
+          position: '',
+          workingYears: '',
+          annualSalary: '',
+          // contact: '',
+          // partOfData: [],
+          familyMonthlyIncome: '',
+          numberOfDependents: '',
+          assetsToLiabilitiesRatio: '',
+          LoanToIncomeRatio: '',
+          averagePersonalIncome: '',
+          repaymentToIncomeRatio: '',
+          familyPropertyAssessment: '',
+          debtCoverageRatio: '',
+          repaymentRecord: '',
+          recordsAndYears: '',
+          breachOfContract: '',
+          overdraftSituation: '',
+          bankCardSituation: '',
+          creditCardDefault: '',
+          judicialRecords: '',
+          creditScore: '',
+          deleteStatus: 0,
+          completeStatus: '待完成'
+        },
+        fold: '',
+        foldCode: 0,
+        readonly: true,
+        editCode: true,
+        foldStatus: '展开',
+        activeNames: ['1'],
+        dialogFormVisible: false,
+        pickerOptions: {
+          disabledDate(time) {
+            return time.getTime() > Date.now();
+          },
+          shortcuts: [{
+            text: '今天',
+            onClick(picker) {
+              picker.$emit('pick', new Date());
+            }
+          }, {
+            text: '昨天',
+            onClick(picker) {
+              const date = new Date();
+              date.setTime(date.getTime() - 3600 * 1000 * 24);
+              picker.$emit('pick', date);
+            }
+          }, {
+            text: '一周前',
+            onClick(picker) {
+              const date = new Date();
+              date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+              picker.$emit('pick', date);
+            }
+          }]
+        },
+        partOfData: [],
+        currentPage: 1, // 当前页码
+        total: '', // 总条数
+        pageSize: 10,// 每页的数据条数
+        fullscreenLoading: true,
+      }
+    },
     mounted() {
       this.fetchData()
     },
     methods: {
+      //显示所有未删除
       fetchData() {
         this.listLoading = true
         findAllCustomerByDeleteStatus()
           .then(res => {
-            console.log(res.data.data)
-          this.partOfData = res.data.data
-          this.listLoading = false
-          this.fullscreenLoading = false
-        })
+            console.log(res.data)
+            this.partOfData = res.data.data
+            this.listLoading = false
+            this.fullscreenLoading = false
+          })
       },
-      search:function() {
-        var searchParams = {customerName: this.listConfig.name,
-          customerId:this.listConfig.id,
-          idNumber:this.listConfig.idNumber,
-          channelSource:this.listConfig.channelSource,
-          responsible:this.listConfig.responsible};
-        searchCustomerList(searchParams).then((res)=>
-        {
-          if(res.data.data.length==0){
+      //查询
+      search: function () {
+        var searchParams = {
+          customerName: this.listConfig.name,
+          customerId: this.listConfig.id,
+          idNumber: this.listConfig.idNumber,
+          channelSource: this.listConfig.channelSource,
+          responsible: this.listConfig.responsible
+        };
+        searchCustomerList(searchParams).then((res) => {
+          if (res.data.data.length == 0) {
             alert("未找到指定信息！")
             return
-          }
-          else {
+          } else {
             this.partOfData = res.data.data
           }
         })
       },
-      //查看的方法体
-      check:function (params) {
-         this.dialogFormVisible=true
-        getCustomerById(params).then((res)=>{
+      //查看
+      check: function (params) {
+        this.dialogFormVisible = true
+        getCustomerById(params).then((res) => {
           this.customerInfo = res.data.data
         })
       },
-      delete1:function (params){
-        alert("您确定要删除该用户信息吗？")
-        softDeleteById(params).then((res)=>{
-          this.$router.go(0)
-        })
+      //删除
+      delete1: function (params) {
+          this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }).then(() => {
+            softDeleteById(params).then((res) => {
+            })
+            this.$message({
+              type: 'success',
+              message: '删除成功!'
+            })
+            this.$router.go(0);
+          }).catch(() => {
+            this.$message({
+              type: 'info',
+              message: '已取消删除'
+            });
+          });
       },
-    // handleSizeChange(val) {
-    //   console.log(`每页 ${val} 条`)
-    //   this.currentPage = 1
-    //   this.pageSize = val
-    // },
-    handleCurrentChange(val) {
-      console.log(`当前页: ${val}`)
-      this.currentPage = val
-    },
-    onSubmit() {
-      console.log('submit!')
-    },
-    handleChange(val) {
-      console.log(val)
-    },
-    foldChange() {
-      if (this.foldCode == 0) {
-        this.foldCode = 1
-        this.foldStatus = '收起'
-      } else {
-        this.foldCode = 0
-        this.foldStatus = '展开'
+      handleCurrentChange(val) {
+        console.log(`当前页: ${val}`)
+        this.currentPage = val
+      },
+      foldChange() {
+        if (this.foldCode == 0) {
+          this.foldCode = 1
+          this.foldStatus = '收起'
+        } else {
+          this.foldCode = 0
+          this.foldStatus = '展开'
+        }
+      },
+      resetForm() {
+        this.listConfig.channelSource = ''
+        this.listConfig.name = ''
+        this.listConfig.idNumber = ''
+        this.listConfig.id = ''
+        this.listConfig.responsible = ''
+        this.fetchData()
+      },
+      handleDelete() {
+        this.partOfData.splice(index, 1)
       }
-    },
-    resetForm() {
-      this.listConfig.clientResouces = ''
-      this.listConfig.client = ''
-      this.listConfig.clientName = ''
-      this.listConfig.clientNumber = ''
-      this.listConfig.clientID = ''
-      this.listConfig.settingTime = ''
-      this.listConfig.Manager = ''
-    },
-    handleDelete() {
-      this.partOfData.splice(index, 1)
     }
   }
-}
+
 </script>
 <style scoped>
 </style>

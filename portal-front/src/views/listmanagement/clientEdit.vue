@@ -3,7 +3,7 @@
   <div id="container" style="width:1600px;margin-left: 50px;margin-top: 40px;border-radius: 0px">
     <el-tabs style="margin-left: 20px;margin-top: 40px">
       <el-tab-pane label="基本信息>>" >
-        <span>{{this.customerInfo.name}}: 基本信息</span>
+        <span>基本信息</span>
         <el-form :model="customerInfo" :rules="rules" ref="ruleForm" label-position="top" style="width:800px;margin-left: 100px;padding-top: 10px" label-width="100px" class="demo-ruleForm" lable="借款人基本信息">
           <el-form-item label="客户号" prop="id" >
             <el-input v-model="customerInfo.id" placeholder="请输入" v-bind:disabled="disabled"></el-input>
@@ -78,7 +78,7 @@
         </el-form>
       </el-tab-pane>
       <el-tab-pane label="家庭信息>>">
-        <span>{{this.customerInfo.name}}: 家庭信息</span>
+        <span>家庭信息</span>
         <el-form :model="customerInfo" :rules="rules" ref="ruleForm" label-position="top" style="width:800px;margin-left: 100px;padding-top: 10px" label-width="100px" class="demo-ruleForm" lable="家庭信息">
           <el-form-item label="婚姻状况">
             <el-radio-group v-model="customerInfo.maritalStatus">
@@ -97,7 +97,7 @@
         </el-form>
       </el-tab-pane>
       <el-tab-pane label="居住信息>>">
-        <span>{{this.customerInfo.name}}: 居住信息</span>
+        <span>居住信息</span>
         <el-form :model="customerInfo" :rules="rules" ref="ruleForm" label-position="top" style="width:800px;margin-left: 100px;padding-top: 10px" label-width="100px" class="demo-ruleForm" lable="居住信息">
           <el-form-item label="居住地址" prop="residentialAddress">
             <el-input v-model="customerInfo.residentialAddress"></el-input>
@@ -119,7 +119,7 @@
         </el-form>
       </el-tab-pane>
       <el-tab-pane label="就业信息>>">
-        <span>{{this.customerInfo.name}}: 就业信息</span>
+        <span>就业信息</span>
         <el-form :model="customerInfo" :rules="rules" ref="ruleForm" label-position="top" style="width:800px;margin-left: 100px;padding-top: 10px" label-width="100px" class="demo-ruleForm" lable="就业信息">
           <el-form-item label="单位名称" prop="companyName">
             <el-input v-model="customerInfo.companyName" placeholder="请输入"></el-input>
@@ -283,7 +283,7 @@
         </el-form>
       </el-tab-pane>
       <el-tab-pane label="经济状况>>">
-        <span>{{this.customerInfo.name}}: 经济状况</span>
+        <span>经济状况</span>
         <el-form :model="customerInfo" :rules="rules" ref="ruleForm" label-position="top" style="width:800px;margin-left: 100px;padding-top: 10px" label-width="140px" class="demo-ruleForm" lable="经济状况">
           <el-form-item label="家庭月收入" prop="familyMonthlyIncome">
             <el-input v-model="customerInfo.familyMonthlyIncome" placeholder="请输入"></el-input>
@@ -312,7 +312,7 @@
         </el-form>
       </el-tab-pane>
       <el-tab-pane label="信用状况">
-        <span>{{this.customerInfo.name}}: 信用状况</span>
+        <span>信用状况</span>
         <el-form :model="customerInfo" :rules="rules" ref="ruleForm" label-position="top" style="width:800px;margin-left: 100px;padding-top: 10px" label-width="140px" class="demo-ruleForm" lable="信用状况">
           <el-form-item label="还款记录" prop="repaymentRecord">
             <el-input v-model="customerInfo.repaymentRecord" placeholder="请输入"></el-input>
@@ -406,7 +406,9 @@ export default {
         bankCardSituation: '',
         creditCardDefault: '',
         judicialRecords: '',
-        creditScore: ''
+        creditScore: '',
+        deleteStatus: 0,
+        completeStatus: ''
       },
       rules: {
         name: {
@@ -421,18 +423,6 @@ export default {
             trigger: 'blur'
           }
         ],
-        relationship: {
-          required: true,
-          message: '请选择关系'
-        },
-        occupation: {
-          required: true,
-          message: '请选择职业'
-        },
-        physicalCondition: {
-          required: true,
-          message: '请输入'
-        },
         phone: [
           {
             required: true,
@@ -450,26 +440,51 @@ export default {
     }
   },
   mounted() {
+    if(this.customerInfo.id == null){
+      this.$router.go(-1);
+    }
       getCustomerById(this.customerInfo.id).then((res)=>{
         this.customerInfo = res.data.data
       })
     },
   methods:{
     returnBack:function () {
-     alert("您确认取消修改吗？")
-      getCustomerById(this.customerInfo.id).then((res)=>{
-        console.log(res.data)
-        this.customerInfo = res.data.data
-      })
+        this.$confirm('此操作将失去所编辑的信息, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          getCustomerById(this.customerInfo.id).then((res)=>{
+            this.customerInfo = res.data.data
+          })
+          this.$message({
+            type: 'success',
+            message: '恢复成功!'
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消恢复'
+          });
+        });
+
     },
     backHistory(){
       this.$router.go(-1);//返回上一层
     },
     update: function (data){
-      alert("你确定修改并保存借款人信息吗？")
-      addCustomer(data).then((res)=>{
-        this.$router.go(-1);
-      })
+        this.$confirm('保存成功！', '提示', {
+          confirmButtonText: '保存并退出',
+          cancelButtonText: '继续编辑',
+          type: 'warning'
+        }).then(() => {
+          addCustomer(data).then((res)=>{
+          })
+          this.$router.go(-1);
+        }).catch(() => {
+          // this.$router.go(0);
+        });
+
     }
 
   }

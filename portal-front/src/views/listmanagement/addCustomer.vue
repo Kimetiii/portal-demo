@@ -1,13 +1,9 @@
 <template>
   <div id="addCustomer">
-    <div id="container" style="width:1600px;margin-left: 50px;margin-top: 40px;box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)">
       <el-tabs style="margin-left: 20px;margin-top: 40px">
-        <el-tab-pane label="借款人基本信息>>" >
-          <span>借款人基本信息</span>
-          <el-form :model="allInfo" :rules="rules" ref="ruleForm" label-position="top" style="width:800px;height:1500px;margin-left: 100px;padding-top: 10px" label-width="100px" class="demo-ruleForm" lable="借款人基本信息">
-            <el-form-item label="客户号" prop="id">
-              <el-input v-model="allInfo.id" placeholder="请输入"></el-input>
-            </el-form-item>
+        <el-tab-pane label="基本信息>>" >
+          <span>基本信息</span>
+          <el-form :model="allInfo" :rules="rules" ref="ruleForm" label-position="top" style="width:800px;margin-left: 100px;padding-top: 10px" label-width="100px" class="demo-ruleForm" lable="借款人基本信息">
             <el-form-item label="渠道来源" prop="channelSource">
               <el-select v-model="allInfo.channelSource" placeholder="请选择">
                 <el-option label="渠道" value="channel"></el-option>
@@ -75,12 +71,11 @@
                 <el-option label="赵六" value="赵六"></el-option>
               </el-select>
             </el-form-item>
-
           </el-form>
         </el-tab-pane>
         <el-tab-pane label="家庭信息>>">
           <span>家庭信息</span>
-          <el-form :model="allInfo" :rules="rules" ref="ruleForm" label-position="top" style="width:800px;height:800px;margin-left: 100px;padding-top: 10px" label-width="100px" class="demo-ruleForm" lable="家庭信息">
+          <el-form :model="allInfo" :rules="rules" ref="ruleForm" label-position="top" style="width:800px;margin-left: 100px;padding-top: 10px" label-width="100px" class="demo-ruleForm" lable="家庭信息">
             <el-form-item label="婚姻状况">
               <el-radio-group v-model="allInfo.maritalStatus">
                 <el-radio label="未婚"></el-radio>
@@ -95,132 +90,11 @@
             <el-form-item label="家庭情况概况" prop="summaryOfFamilyStatus">
               <el-input type="textarea" v-model="allInfo.summaryOfFamilyStatus" placeholder="请简要描述家庭情况"></el-input>
             </el-form-item>
-            <!--            <el-form-item label="家庭成员" prop="familyMembers" style="width: 800px">-->
-            <!--              <el-table-->
-            <!--                :data="allInfo.tableData"-->
-            <!--                border-->
-            <!--                style="width: 100%;margin-bottom: 20px;margin-right: 20px;">-->
-            <!--                <el-table-column-->
-            <!--                  prop="relationship"-->
-            <!--                  label="关系"-->
-            <!--                  align="center"-->
-            <!--                  width="120">-->
-            <!--                  <template slot-scope="scope">-->
-            <!--                    <el-form-item v-if="scope.row.edit" :prop="'tableData.' + scope.$index + '.relationship'" :rules='rules.relationship'>-->
-            <!--                      <el-select v-model="scope.row.relationship" placeholder="请选择">-->
-            <!--                        <el-option label="配偶" value="partner">配偶</el-option>-->
-            <!--                        <el-option label="父母" value="parents">父母</el-option>-->
-            <!--                        <el-option label="子女" value="child">子女</el-option>-->
-            <!--                        <el-option label="亲戚" value="relative">亲戚</el-option>-->
-            <!--                        <el-option label="朋友" value="feiends">朋友</el-option>-->
-            <!--                        <el-option label="同事" value="colleague">同事</el-option>-->
-            <!--                      </el-select>-->
-            <!--                    </el-form-item>-->
-            <!--                    <span v-else>-->
-            <!--                      <p v-if="scope.row.relationship==partner">配偶</p>-->
-            <!--                      <p v-if="scope.row.relationship==parents">父母</p>-->
-            <!--                      <p v-if="scope.row.relationship==child">子女</p>-->
-            <!--                      <p v-if="scope.row.relationship==relative">亲戚</p>-->
-            <!--                      <p v-if="scope.row.relationship==feiends">朋友</p>-->
-            <!--                      <p v-if="scope.row.relationship==colleague">同事</p>-->
-            <!--                    </span>-->
-            <!--                  </template>-->
-            <!--                </el-table-column>-->
-            <!--                <el-table-column-->
-            <!--                  prop="name"-->
-            <!--                  label="姓名"-->
-            <!--                  align="center"-->
-            <!--                  width="120">-->
-            <!--                  <template slot-scope="scope">-->
-            <!--                    <el-form-item v-if="scope.row.edit" :prop="'tableData.' + scope.$index + '.name'" :rules='rules.name'>-->
-            <!--                      <el-input v-model="scope.row.name" placeholder="姓名"></el-input>-->
-            <!--                    </el-form-item>-->
-            <!--                    <span v-else>{{scope.row.name}}</span>-->
-            <!--                  </template>-->
-            <!--                </el-table-column>-->
-            <!--                <el-table-column-->
-            <!--                  prop="occupation"-->
-            <!--                  label="职业"-->
-            <!--                  align="center"-->
-            <!--                  width="120">-->
-            <!--                  <template slot-scope="scope">-->
-            <!--                    <el-form-item v-if="scope.row.edit" :prop="'tableData.' + scope.$index + '.occupation'" :rules='rules.occupation'>-->
-            <!--                      <el-select v-model="scope.row.occupation" placeholder="请选择">-->
-            <!--                        <el-option label="办事人员和有关人员" value="handler"></el-option>-->
-            <!--                        <el-option label="社会生产服务和生活服务人员" value="serviceStaff"></el-option>-->
-            <!--                        <el-option label="军人" value="soldier"></el-option>-->
-            <!--                        <el-option label="党的机关、国家机关、群众团体和社会组织、企业单位负责人" value="leader"></el-option>-->
-            <!--                        <el-option label="农、林、牧、渔业生产及辅助人员" value="farmer"></el-option>-->
-            <!--                        <el-option label="专业技术人员" value="technicalPersonnel"></el-option>-->
-            <!--                        <el-option label="生产制造及有关人员" value="manufacturingPersonnel"></el-option>-->
-            <!--                        <el-option label="其他不便分类的工作人员" value="others"></el-option>-->
-            <!--                      </el-select>-->
-            <!--                    </el-form-item>-->
-            <!--                    <span v-else>-->
-            <!--                      <p v-if="scope.row.occupation==partner">办事人员和有关人员</p>-->
-            <!--                      <p v-if="scope.row.occupation==serviceStaff">社会生产服务和生活服务人员</p>-->
-            <!--                      <p v-if="scope.row.occupation==soldier">军人</p>-->
-            <!--                      <p v-if="scope.row.occupation==leader">党的机关、国家机关、群众团体和社会组织、企业单位负责人</p>-->
-            <!--                      <p v-if="scope.row.occupation==farmer">农、林、牧、渔业生产及辅助人员</p>-->
-            <!--                      <p v-if="scope.row.occupation==technicalPersonnel">专业技术人员</p>-->
-            <!--                      <p v-if="scope.row.occupation==manufacturingPersonnel">生产制造及有关人员</p>-->
-            <!--                      <p v-if="scope.row.occupation==others">其他不便分类的工作人员</p>-->
-            <!--                    </span>-->
-            <!--                  </template>-->
-            <!--                </el-table-column>-->
-            <!--                <el-table-column-->
-            <!--                  prop="physicalCondition"-->
-            <!--                  label="健康状况"-->
-            <!--                  align="center"-->
-            <!--                  width="100">-->
-            <!--                  <template slot-scope="scope">-->
-            <!--                    <el-form-item v-if="scope.row.edit" :prop="'tableData.' + scope.$index + '.physicalCondition'" :rules='rules.physicalCondition'>-->
-            <!--                      <el-input v-model="scope.row.physicalCondition" placeholder="健康状况"></el-input>-->
-            <!--                    </el-form-item>-->
-            <!--                    <span v-else>{{scope.row.physicalCondition}}</span>-->
-            <!--                  </template>-->
-            <!--                </el-table-column>-->
-            <!--                <el-table-column-->
-            <!--                  prop="tele"-->
-            <!--                  label="手机号码"-->
-            <!--                  align="center"-->
-            <!--                  width="180">-->
-            <!--                  <template slot-scope="scope">-->
-            <!--                    <el-form-item v-if="scope.row.edit" :prop="'tableData.' + scope.$index + '.tele'" :rules='rules.tele'>-->
-            <!--                      <el-input v-model="scope.row.tele" placeholder="手机号码"></el-input>-->
-            <!--                    </el-form-item>-->
-            <!--                    <span v-else>{{scope.row.tele}}</span>-->
-            <!--                  </template>-->
-            <!--                </el-table-column>-->
-            <!--                <el-table-column-->
-            <!--                  label="操作"-->
-            <!--                  align="center"-->
-            <!--                  width="58">-->
-            <!--                  <template slot-scope="scope">-->
-            <!--&lt;!&ndash;                   确认添加&ndash;&gt;-->
-            <!--&lt;!&ndash;                    <el-button v-if="scope.row.edit" type="text" size="medium" @click="confirmAdd(scope.row,'tableData')">&ndash;&gt;-->
-            <!--&lt;!&ndash;                      <i class="el-icon-check" aria-hidden="true"></i>&ndash;&gt;-->
-            <!--&lt;!&ndash;                    </el-button>&ndash;&gt;-->
-            <!--&lt;!&ndash;                    <div v-else>&ndash;&gt;-->
-            <!--&lt;!&ndash;                    编辑数据&ndash;&gt;-->
-            <!--&lt;!&ndash;                    <el-button type="text" size="medium" @click="editData(scope.row)">&ndash;&gt;-->
-            <!--&lt;!&ndash;                      <i class="el-icon-edit" aria-hidden="true"></i>&ndash;&gt;-->
-            <!--&lt;!&ndash;                    </el-button>&ndash;&gt;-->
-            <!--&lt;!&ndash;                    删除数据&ndash;&gt;-->
-            <!--                    <el-button type="text" size="medium" @click="deleteFamilyMemberData(scope.row,scope.$index)">-->
-            <!--                      <i class="el-icon-delete" aria-hidden="true"></i>-->
-            <!--                    </el-button>-->
-            <!--&lt;!&ndash;                    </div>&ndash;&gt;-->
-            <!--                  </template>-->
-            <!--                </el-table-column>-->
-            <!--              </el-table>-->
-            <!--              <el-button type="success" @click="addFamilyMembers" size="mini">添加家庭成员</el-button>-->
-            <!--            </el-form-item>-->
           </el-form>
         </el-tab-pane>
         <el-tab-pane label="居住信息>>">
           <span>居住信息</span>
-          <el-form :model="allInfo" :rules="rules" ref="ruleForm" label-position="top" style="width:800px;height:800px;margin-left: 100px;padding-top: 10px" label-width="100px" class="demo-ruleForm" lable="居住信息">
+          <el-form :model="allInfo" :rules="rules" ref="ruleForm" label-position="top" style="width:800px;margin-left: 100px;padding-top: 10px" label-width="100px" class="demo-ruleForm" lable="居住信息">
             <el-form-item label="居住地址" prop="residentialAddress">
               <v-distpicker province="" city="" area="" v-model="allInfo.residentialAddress"></v-distpicker>
             </el-form-item>
@@ -242,7 +116,7 @@
         </el-tab-pane>
         <el-tab-pane label="就业信息>>">
           <span>就业信息</span>
-          <el-form :model="allInfo" :rules="rules" ref="ruleForm" label-position="top" style="width:800px;height:2000px;margin-left: 100px;padding-top: 10px" label-width="100px" class="demo-ruleForm" lable="就业信息">
+          <el-form :model="allInfo" :rules="rules" ref="ruleForm" label-position="top" style="width:800px;margin-left: 100px;padding-top: 10px" label-width="100px" class="demo-ruleForm" lable="就业信息">
             <el-form-item label="单位名称" prop="companyName">
               <el-input v-model="allInfo.companyName" placeholder="请输入"></el-input>
             </el-form-item>
@@ -304,109 +178,11 @@
                 <i slot="suffix" style="font-style:normal;margin-right: 20px;">万元</i>
               </el-input>
             </el-form-item>
-            <!--            <el-form-item label="联系人" prop="contact" style="width: 800px">-->
-            <!--              <el-table-->
-            <!--                :data="allInfo.tableData"-->
-            <!--                border-->
-            <!--                style="width: 100%;margin-bottom: 20px;margin-right: 20px;">-->
-            <!--                <el-table-column-->
-            <!--                  prop="relationship"-->
-            <!--                  label="关系"-->
-            <!--                  align="center"-->
-            <!--                  width="150">-->
-            <!--                  <template slot-scope="scope">-->
-            <!--                    <el-form-item v-if="scope.row.edit" :prop="'tableData.' + scope.$index + '.relationship'" :rules='rules.relationship'>-->
-            <!--                      <el-select v-model="scope.row.relationship" placeholder="请选择">-->
-            <!--                        <el-option label="配偶" value="partner">配偶</el-option>-->
-            <!--                        <el-option label="父母" value="parents">父母</el-option>-->
-            <!--                        <el-option label="子女" value="child">子女</el-option>-->
-            <!--                        <el-option label="亲戚" value="relative">亲戚</el-option>-->
-            <!--                        <el-option label="朋友" value="feiends">朋友</el-option>-->
-            <!--                        <el-option label="同事" value="colleague">同事</el-option>-->
-            <!--                      </el-select>-->
-            <!--                    </el-form-item>-->
-            <!--                    <span v-else>-->
-            <!--                      <p v-if="scope.row.relationship==partner">配偶</p>-->
-            <!--                      <p v-if="scope.row.relationship==parents">父母</p>-->
-            <!--                      <p v-if="scope.row.relationship==child">子女</p>-->
-            <!--                      <p v-if="scope.row.relationship==relative">亲戚</p>-->
-            <!--                      <p v-if="scope.row.relationship==feiends">朋友</p>-->
-            <!--                      <p v-if="scope.row.relationship==colleague">同事</p>-->
-            <!--                    </span>-->
-            <!--                  </template>-->
-            <!--                </el-table-column>-->
-            <!--                <el-table-column-->
-            <!--                  prop="name"-->
-            <!--                  label="姓名"-->
-            <!--                  align="center"-->
-            <!--                  width="150">-->
-            <!--                  <template slot-scope="scope">-->
-            <!--                    <el-form-item v-if="scope.row.edit" :prop="'tableData.' + scope.$index + '.name'" :rules='rules.name'>-->
-            <!--                      <el-input v-model="scope.row.name" placeholder="请输入"></el-input>-->
-            <!--                    </el-form-item>-->
-            <!--                    <span v-else>{{scope.row.name}}</span>-->
-            <!--                  </template>-->
-            <!--                </el-table-column>-->
-            <!--                <el-table-column-->
-            <!--                  prop="occupation"-->
-            <!--                  label="职业"-->
-            <!--                  align="center"-->
-            <!--                  width="140">-->
-            <!--                  <template slot-scope="scope">-->
-            <!--                    <el-form-item v-if="scope.row.edit" :prop="'tableData.' + scope.$index + '.occupation'" :rules='rules.occupation'>-->
-            <!--                      <el-select v-model="scope.row.occupation" placeholder="请选择">-->
-            <!--                        <el-option label="办事人员和有关人员" value="handler"></el-option>-->
-            <!--                        <el-option label="社会生产服务和生活服务人员" value="serviceStaff"></el-option>-->
-            <!--                        <el-option label="军人" value="soldier"></el-option>-->
-            <!--                        <el-option label="党的机关、国家机关、群众团体和社会组织、企业单位负责人" value="leader"></el-option>-->
-            <!--                        <el-option label="农、林、牧、渔业生产及辅助人员" value="farmer"></el-option>-->
-            <!--                        <el-option label="专业技术人员" value="technicalPersonnel"></el-option>-->
-            <!--                        <el-option label="生产制造及有关人员" value="manufacturingPersonnel"></el-option>-->
-            <!--                        <el-option label="其他不便分类的工作人员" value="others"></el-option>-->
-            <!--                      </el-select>-->
-            <!--                    </el-form-item>-->
-            <!--                    <span v-else>-->
-            <!--                      <p v-if="scope.row.occupation==partner">办事人员和有关人员</p>-->
-            <!--                      <p v-if="scope.row.occupation==serviceStaff">社会生产服务和生活服务人员</p>-->
-            <!--                      <p v-if="scope.row.occupation==soldier">军人</p>-->
-            <!--                      <p v-if="scope.row.occupation==leader">党的机关、国家机关、群众团体和社会组织、企业单位负责人</p>-->
-            <!--                      <p v-if="scope.row.occupation==farmer">农、林、牧、渔业生产及辅助人员</p>-->
-            <!--                      <p v-if="scope.row.occupation==technicalPersonnel">专业技术人员</p>-->
-            <!--                      <p v-if="scope.row.occupation==manufacturingPersonnel">生产制造及有关人员</p>-->
-            <!--                      <p v-if="scope.row.occupation==others">其他不便分类的工作人员</p>-->
-            <!--                    </span>-->
-            <!--                  </template>-->
-            <!--                </el-table-column>-->
-            <!--                <el-table-column-->
-            <!--                  prop="tele"-->
-            <!--                  label="手机号码"-->
-            <!--                  align="center"-->
-            <!--                  width="200">-->
-            <!--                  <template slot-scope="scope">-->
-            <!--                    <el-form-item v-if="scope.row.edit" :prop="'tableData.' + scope.$index + '.tele'" :rules='rules.tele'>-->
-            <!--                      <el-input v-model="scope.row.tele" placeholder="手机号码"></el-input>-->
-            <!--                    </el-form-item>-->
-            <!--                    <span v-else>{{scope.row.tele}}</span>-->
-            <!--                  </template>-->
-            <!--                </el-table-column>-->
-            <!--                <el-table-column-->
-            <!--                  label="操作"-->
-            <!--                  align="center"-->
-            <!--                  width="58">-->
-            <!--                  <template slot-scope="scope">-->
-            <!--                    <el-button type="text" size="medium" @click="deleteEmployContactData(scope.row,scope.$index)">-->
-            <!--                      <i class="el-icon-delete" aria-hidden="true"></i>-->
-            <!--                    </el-button>-->
-            <!--                  </template>-->
-            <!--                </el-table-column>-->
-            <!--              </el-table>-->
-            <!--              <el-button type="success" @click="addEmployContact" size="mini">添加联系人</el-button>-->
-            <!--            </el-form-item>-->
           </el-form>
         </el-tab-pane>
         <el-tab-pane label="经济状况>>">
           <span>经济状况</span>
-          <el-form :model="allInfo" :rules="rules" ref="ruleForm" label-position="top" style="width:800px;height:1800px;margin-left: 100px;padding-top: 10px" label-width="140px" class="demo-ruleForm" lable="经济状况">
+          <el-form :model="allInfo" :rules="rules" ref="ruleForm" label-position="top" style="width:800px;margin-left: 100px;padding-top: 10px" label-width="140px" class="demo-ruleForm" lable="经济状况">
             <el-form-item label="家庭月收入" prop="familyMonthlyIncome">
               <el-input v-model="allInfo.familyMonthlyIncome" placeholder="请输入"></el-input>
             </el-form-item>
@@ -435,7 +211,7 @@
         </el-tab-pane>
         <el-tab-pane label="信用状况">
           <span>信用状况</span>
-          <el-form :model="allInfo" :rules="rules" ref="ruleForm" label-position="top" style="width:800px;height:1800px;margin-left: 100px;padding-top: 10px" label-width="140px" class="demo-ruleForm" lable="信用状况">
+          <el-form :model="allInfo" :rules="rules" ref="ruleForm" label-position="top" style="width:800px;margin-left: 100px;padding-top: 10px" label-width="140px" class="demo-ruleForm" lable="信用状况">
             <el-form-item label="还款记录" prop="repaymentRecord">
               <el-input v-model="allInfo.repaymentRecord" placeholder="请输入"></el-input>
             </el-form-item>
@@ -460,11 +236,12 @@
             <el-form-item label="个人信用度评分" prop="creditScore">
               <el-input v-model="allInfo.creditScore" placeholder="请输入"></el-input>
             </el-form-item>
-            <el-divider></el-divider>
-            <el-button type="primary" round style="margin-left: 380px"  @click="addNew(allInfo)">提交客户信息</el-button>
           </el-form>
         </el-tab-pane>
       </el-tabs>
+    <div style="margin-bottom: 100px;margin-top: 50px">
+      <el-button type="primary" round style="margin-left: 380px"  @click="addNew(allInfo)">提交客户信息</el-button>
+      <el-button type="danger" round   @click="cancle">取消</el-button>
     </div>
   </div>
 </template>
@@ -474,147 +251,171 @@
 import { addCustomer } from "@/api/customer";
 
  export default {
-  components: { VDistpicker },
-  data() {
-    return {
-      allInfo:{
-          id: '',
-          name: '',
-          channelSource: '',
-          formerName: '无',
-          idNumber: '',
-          sex: '',
-          phone: '',
-          educational: '',
-          residenceAddress: '',
-          healthStatus: '',
-          accountNature: '',
-          customerLabel: '',
-        responsible: '',
-          maritalStatus: '',
-          familySize: '',
-          summaryOfFamilyStatus: '',
-          // familyMembers: '',
-          // tableData: [],
-          residentialAddress: '',
-          address: '',
-          residentialStatus: '',
-          lengthOfResidence: '1',
-          companyName: '',
-          workPhone: '',
-          unitAddress: '',
-          unitDetailAddress: '',
-          industryType: '',
-          profession: '',
-          position: '',
-          workingYears: '',
-          annualSalary: '',
-          // contact: '',
-          // tableData: [],
-          familyMonthlyIncome: '',
-          numberOfDependents: '',
-          assetsToLiabilitiesRatio: '',
-          LoanToIncomeRatio: '',
-          averagePersonalIncome: '',
-          repaymentToIncomeRatio: '',
-          familyPropertyAssessment: '',
-          debtCoverageRatio: '',
-          repaymentRecord: '',
-          recordsAndYears: '',
-          breachOfContract: '',
-          overdraftSituation: '',
-          bankCardSituation: '',
-          creditCardDefault: '',
-          judicialRecords: '',
-          creditScore: ''
-      },
-      active: '0',
-      rules: {
-        name: {
-          required: true,
-          message: '请输入'
-        },
-        idNumber: [
-          { required: true, message: '请填写证件号码', trigger: 'blur' },
-          {
-            pattern: /(^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$)|(^[1-9]\d{5}\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{2}$)/,
-            message: '证件号码格式有误！',
-            trigger: 'blur'
-          }
-        ],
-        relationship: {
-          required: true,
-          message: '请选择关系'
-        },
-        occupation: {
-          required: true,
-          message: '请选择职业'
-        },
-        physicalCondition: {
-          required: true,
-          message: '请输入'
-        },
-        phone: [
-          {
-            required: true,
-            message: '请输入手机号',
-            trigger: 'blur'
-          },
-          {
-            pattern: /^1[3|4|5|7|8][0-9]{9}$/,
-            message: '手机号格式不对',
-            trigger: 'blur'
-          }
-        ]
-      }
-    }
-  },
-  methods: {
-    addNew: function (data){
-      console.log(data)
-      addCustomer(data).then((res)=>{
-        console.log(res.data)
-      })
-    },
-    next() {
-      if (this.active++ > 2) this.active = 0
-    }
-    // addFamilyMembers() {
-    //   this.allInfo .tableData.push({
-    //     edit: true
-    //   })
-    // },
-    // addEmployContact() {
-    //   this.allInfo.tableData.push({
-    //     edit: true
-    //   })
-    // },
-    // addShareholder() {
-    //   this.company.tableData.push({
-    //     edit: true
-    //   })
-    // },
-    // confirmAdd(row, formName) {
-    //   this.$refs[formName].validate((valid) => {
-    //     if (valid) {
-    //       row.edit = false;
-    //     }
-    //   })
-    // },
-    // editData(row) {
-    //   row.edit = true
-    // },
-    //     deleteFamilyMemberData(row, index) {
-    //       this.allInfo .tableData.splice(index, 1)
-    //     },
-    //     deleteEmployContactData(row, index) {
-    //       this.allInfo.tableData.splice(index, 1)
-    //     },
-    //     deleteShareholderData(row, index) {
-    //       this.company.tableData.splice(index, 1)
-    // },
-  }
-}
+   components: {VDistpicker},
+   data() {
+     return {
+       allInfo: {
+         id: '',
+         name: '',
+         channelSource: '',
+         formerName: '无',
+         idNumber: '',
+         sex: '',
+         phone: '',
+         educational: '',
+         residenceAddress: '',
+         healthStatus: '',
+         accountNature: '',
+         customerLabel: '',
+         responsible: '',
+         maritalStatus: '',
+         familySize: '',
+         summaryOfFamilyStatus: '',
+         residentialAddress: '',
+         address: '',
+         residentialStatus: '',
+         lengthOfResidence: '1',
+         companyName: '',
+         workPhone: '',
+         unitAddress: '',
+         unitDetailAddress: '',
+         industryType: '',
+         profession: '',
+         position: '',
+         workingYears: '',
+         annualSalary: '',
+         familyMonthlyIncome: '',
+         numberOfDependents: '',
+         assetsToLiabilitiesRatio: '',
+         LoanToIncomeRatio: '',
+         averagePersonalIncome: '',
+         repaymentToIncomeRatio: '',
+         familyPropertyAssessment: '',
+         debtCoverageRatio: '',
+         repaymentRecord: '',
+         recordsAndYears: '',
+         breachOfContract: '',
+         overdraftSituation: '',
+         bankCardSituation: '',
+         creditCardDefault: '',
+         judicialRecords: '',
+         creditScore: '',
+         deleteStatus: 0,
+         completeStatus: '待完成'
+       },
+       active: '0',
+       rules: {
+         name: {
+           required: true,
+           message: '请输入'
+         },
+         idNumber: [
+           {required: true, message: '请填写证件号码', trigger: 'blur'},
+           {
+             pattern: /(^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$)|(^[1-9]\d{5}\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{2}$)/,
+             message: '证件号码格式有误！',
+             trigger: 'blur'
+           }
+         ],
+         phone: [
+           {
+             required: true,
+             message: '请输入手机号',
+             trigger: 'blur'
+           },
+           {
+             pattern: /^1[3|4|5|7|8][0-9]{9}$/,
+             message: '手机号格式不对',
+             trigger: 'blur'
+           }
+         ]
+       }
+     }
+   },
+   methods: {
+     addNew: function (data) {
+       if(this.allInfo.channelSource ==''){
+         alert("请填写渠道来源相关信息！")
+         return
+       }else{
+         if(this.allInfo.name ==''){
+           alert("请填写用户姓名！")
+           return
+         }else{
+           if(/(^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$)|(^[1-9]\d{5}\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{2}$)/.test(this.allInfo.idNumber)){
+           }else if(this.allInfo.idNumber ==''){
+             alert("请输入身份证号！")
+             return
+           }else {
+             alert("请检查，身份证号输入有误！")
+             return
+           }
+           if(/^1[3|4|5|7|8][0-9]{9}$/.test(this.allInfo.phone)){
+           }else if(this.allInfo.phone == ''){
+             alert("请输入手机号码")
+             return
+           }else {
+             alert("请检查，手机号码输入有误！")
+             return
+           }
+         }
+        }
+       var isNull = false
+       for (var val in this.allInfo) {
+          if (this.allInfo[val] ==''){
+            this.$confirm('检测到未填写的内容，是否在离开页面前保存修改？', '确认信息', {
+              distinguishCancelAndClose: true,
+              confirmButtonText: '保存',
+              cancelButtonText: '继续编辑'
+            })
+              .then(() => {
+                addCustomer(data).then((res) => {
+                  console.log(res)
+                  this.$router.go(-1);
+                this.$message({
+                  type: 'info',
+                  message: '保存成功'
+                     });
+                  })
+                })
+              .catch(action => {
+                this.$message({
+                  type: 'info',
+                  message: action === 'cancel'
+                    ? '放弃保存并停留在当前页面'
+                    : '停留在当前页面'
+                })
+              });
+       }
+       }
+     },
+     cancle: function () {
+       this.$confirm('检测到未保存的内容，是否在离开页面前保存修改？', '确认信息', {
+         distinguishCancelAndClose: true,
+         confirmButtonText: '保存',
+         cancelButtonText: '放弃修改'
+       })
+         .then(() => {
+           this.$message({
+             type: 'info',
+             message: '保存修改'
+
+           });
+         })
+         .catch(action => {
+           this.$message({
+             type: 'info',
+             message: action === 'cancel'
+               ? '放弃保存并离开页面'
+               : '停留在当前页面'
+           })
+         });
+     },
+     next() {
+       if (this.active++ > 2) this.active = 0
+     }
+   }
+ }
 </script>
 <style scoped>
 </style>

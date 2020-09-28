@@ -24,7 +24,7 @@ public interface CustomerBaseRepository extends JpaRepository<CustomerBaseInfo, 
 
 	@Query(value = "select *\n" +
 			" from t_customer_base_info\n" +
-			" where delete_status <> 'isDelete' or delete_status is null " ,nativeQuery = true)
+			" where delete_status = 0 " ,nativeQuery = true)
 	List<CustomerBaseInfo> findAllByDeleteStatus();
 
 
@@ -42,7 +42,7 @@ public interface CustomerBaseRepository extends JpaRepository<CustomerBaseInfo, 
 	@Transactional
 	@Modifying
 	@Query(value = "update t_customer_base_info\n"+
-			"set delete_status = 'isDelete'\n"+
+			"set delete_status = 1\n"+
 			"where id = ?1", nativeQuery = true)
 	int softDeleteById(String id);
 

@@ -61,6 +61,12 @@ public class CustomerBaseInfo {
 	@Column(name = "customer_label", length = 32)
 	private String customerLabel; // 客户标签
 
+	@Column(name = "delete_status", length = 32)
+	private Boolean deleteStatus; // 删除状态
+
+	@Column( length = 32)
+	private String completeStatus; // 完成情况
+
 	/**
 	 * 家庭信息
 	 */
@@ -185,6 +191,5 @@ public class CustomerBaseInfo {
 	@Column(length = 32)
 	private Double creditScore; // 个人信用度评分
 
-	@Column(name = "delete_status", length = 32)
-	private String deleteStatus; // 删除状态
+
 }
