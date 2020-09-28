@@ -3,6 +3,7 @@ package com.example.portalback.drools.controller;
 import com.example.portalback.common.entity.ResponseObj;
 import com.example.portalback.drools.service.RuleService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,7 +23,7 @@ public class DroolRuleController {
 	private RuleService ruleService;
 
 
-	@RequestMapping("/rule")
+	@PostMapping("/rule")
 	public ResponseObj rule() {
 		return ResponseObj.success(ruleService.rule());
 	}

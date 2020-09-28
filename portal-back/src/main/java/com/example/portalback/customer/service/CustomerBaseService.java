@@ -22,7 +22,7 @@ public interface CustomerBaseService {
 
 	CustomerBaseInfo getInfoById(String id);
 
-	CustomerBaseInfoModel enforceRules(String ruleName,CustomerBaseInfoModel model);
+	CustomerBaseInfo enforceRules(String ruleName,CustomerBaseInfoModel model);
 
 	List<CustomerBaseInfo> searchCustomerList(SearchModel searchModel);
 

@@ -24,9 +24,13 @@ public class ActivityRuleEntity {
 
 	private Long taskId;
 
+	private String ruleName;
+
 	private String event;
 
 	private String ruleValue;
+
+	private String score;
 
 	private Byte priority;
 

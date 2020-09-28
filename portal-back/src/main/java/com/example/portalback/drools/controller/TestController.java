@@ -34,7 +34,7 @@ public class TestController {
 		testService.creditCardApply(null,null);
 	}
 
-	@RequestMapping("/select1")
+	@PostMapping("/select1")
 	public String select1(Map<String, Object> map) {
 		ActivityRuleEntity activityRule = testService.select1();
 		map.put("hello", JSON.toJSON(activityRule));
@@ -42,13 +42,13 @@ public class TestController {
 		return "/index";
 	}
 
-	@RequestMapping("/selectAll")
+	@PostMapping("/selectAll")
 	public List<ActivityRule> selectAll() {
 		List<ActivityRule> list = testService.selectAll();
 		return list;
 	}
 
-	@RequestMapping("/index")
+	@PostMapping("/index")
 	public String index(Map<String, Object> map) {
 		log.info("index");
 		map.put("hello", "from HiController map");

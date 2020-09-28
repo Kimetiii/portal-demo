@@ -1,6 +1,7 @@
 package com.example.portalback.drools.controller;
 
 import com.example.portalback.drools.service.ActivityRuleService;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,7 +32,7 @@ public class RuleController {
 	 * @param map map
 	 * @return index
 	 */
-	@RequestMapping("/loadRule")
+	@PostMapping("/loadRule")
 	public String loadRule(Map<String, Object> map) {
 		activityRuleService.loadRule();
 		map.put("hello", " loadRule");
@@ -39,14 +40,14 @@ public class RuleController {
 
 	}
 
-	@RequestMapping("/useRule")
+	@PostMapping("/useRule")
 	public String useRule(Map<String, Object> map) {
 		activityRuleService.useRule("123456", "13712750166");
 		map.put("hello", " useRule");
 		return "/index";
 	}
 
-	@RequestMapping("/useRule2")
+	@PostMapping("/useRule2")
 	public String useRule2(Map<String, Object> map) {
 		activityRuleService.useRule("123456", "13712750156");
 		map.put("hello", " useRule2");

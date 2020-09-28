@@ -1,5 +1,7 @@
 package com.example.portalback.customer.entity;
 
+import com.example.portalback.annotation.Fact;
+import com.example.portalback.drools.domain.enums.ActivityEvent;
 import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
@@ -15,6 +17,7 @@ import javax.persistence.*;
 @Data
 @Table(name = "T_CUSTOMER_BASE_INFO")
 @DynamicUpdate
+@Fact(ActivityEvent.CUSTOMER)
 public class CustomerBaseInfo {
 
 	@Id
@@ -66,7 +69,7 @@ public class CustomerBaseInfo {
 	private String maritalStatus; // 婚姻状况
 
 	@Column(name = "family_size", length = 32)
-	private String familySize; // 家庭人数
+	private Integer familySize; // 家庭人数
 
 	@Column(name = "family_status", length = 32)
 	private String familyStatus; // 家庭状况概况
@@ -93,7 +96,7 @@ public class CustomerBaseInfo {
 	private String residenceStatus; // 居住状态
 
 	@Column(length = 32)
-	private String lengthOfResidence; // 居住年限
+	private Integer lengthOfResidence; // 居住年限
 
 	/**
 	 * 就业信息
@@ -121,20 +124,20 @@ public class CustomerBaseInfo {
 	private String position; // 职务
 
 	@Column(length = 32)
-	private String workingYears; // 工作年限
+	private Integer workingYears; // 工作年限
 
 	@Column(length = 32)
-	private String annualSalary; // 年薪
+	private Double annualSalary; // 年薪
 
 	/**
 	 * 经济状况
 	 */
 
 	@Column(length = 32)
-	private String familyMonthlyIncome; // 家庭月收入
+	private Double familyMonthlyIncome; // 家庭月收入
 
 	@Column(length = 32)
-	private String numberOfDependents; // 抚养人数
+	private Integer numberOfDependents; // 抚养人数
 
 	@Column(length = 32)
 	private String assetsToLiabilitiesRatio; // 资产与负债比
@@ -180,7 +183,7 @@ public class CustomerBaseInfo {
 	private String judicialRecords; // 公安司法的不良记录
 
 	@Column(length = 32)
-	private String creditScore; // 个人信用度评分
+	private Double creditScore; // 个人信用度评分
 
 	@Column(name = "delete_status", length = 32)
 	private String deleteStatus; // 删除状态

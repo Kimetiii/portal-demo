@@ -87,14 +87,14 @@ public class CustomerBaseInfoModel {
 
 	private String workingYears; // 工作年限
 
-	private String annualSalary; // 年薪
+	private Double annualSalary; // 年薪
 
 	/**
 	 * 经济状况
 	 */
-	private String familyMonthlyIncome; // 家庭月收入
+	private Double familyMonthlyIncome; // 家庭月收入
 
-	private String numberOfDependents; // 抚养人数
+	private Integer numberOfDependents; // 抚养人数
 
 	private String assetsToLiabilitiesRatio; // 资产与负债比
 
@@ -126,7 +126,8 @@ public class CustomerBaseInfoModel {
 
 	private String judicialRecords; // 公安司法的不良记录
 
-	private String creditScore; // 个人信用度评分
+	private Double creditScore; // 个人信用度评分
+
 
 	public static CustomerBaseInfo formatEntity(CustomerBaseInfoModel customerBaseInfoModel) {
 		CustomerBaseInfo customerBaseInfo = new CustomerBaseInfo();

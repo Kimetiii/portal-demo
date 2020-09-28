@@ -1,16 +1,23 @@
 package com.example.portalback.drools.domain;
 
+import lombok.Data;
+
 import java.util.Date;
 
 /**
  * 数据库的规则结构
  */
+@Data
 public class ActivityRule {
     private Integer id;
 
     private Long taskId;
 
     private String event;
+
+    private String ruleName;
+
+    private String score;
 
     private String ruleValue;
 

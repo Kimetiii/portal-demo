@@ -28,7 +28,7 @@ public class TestService {
 	KieTemplate kieTemplate;
 
 	public List<ActivityRule> selectAll() {
-		List<ActivityRuleEntity> activityRules = activityRuleRepository.selectAll();
+		List<ActivityRuleEntity> activityRules = activityRuleRepository.findAll();
 		List<ActivityRule> list = new ArrayList<>();
 		for (ActivityRuleEntity activityRule : activityRules) {
 			ActivityRule rule = new ActivityRule();
@@ -39,7 +39,7 @@ public class TestService {
 	}
 
 	public ActivityRuleEntity select1() {
-		return activityRuleRepository.selectByPrimaryKey(1);
+		return activityRuleRepository.findAllById(1);
 	}
 
 	/**

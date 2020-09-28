@@ -13,11 +13,7 @@ public interface ActivityRuleRepository extends JpaRepository<ActivityRuleEntity
 	 *
 	 * @return 规则信息集合
 	 */
-	@Query(value = "select\n" +
-			"        id, task_id, event, rule_value, priority, awardee_type, send_award_times, create_by,\n" +
-			"        create_time, update_by, update_time, is_delete, is_sms_notice\n" +
-			"        from activity_rule WHERE is_delete=0", nativeQuery = true)
-	List<ActivityRuleEntity> selectAll();
+	List<ActivityRuleEntity> findAll();
 
 	/**
 	 * 根据主键查询单条规则
@@ -30,6 +26,6 @@ public interface ActivityRuleRepository extends JpaRepository<ActivityRuleEntity
 			"      create_time, update_by, update_time, is_delete, is_sms_notice\n" +
 			"    from activity_rule\n" +
 			"    where id =?1", nativeQuery = true)
-	ActivityRuleEntity selectByPrimaryKey(Integer id);
+	ActivityRuleEntity findAllById(Integer id);
 
 }

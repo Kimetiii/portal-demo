@@ -1,17 +1,22 @@
 package com.example.portalback.drools.domain;
 
+import lombok.Data;
+
 import java.util.Date;
 import java.util.List;
 
 /**
  * 规则的数据结构
  */
+@Data
 public class RuleDTO {
 
     private ActivityRule rule;
+    private String ruleName;
     private Date beginTime;
     private Date endTime;
     private List<Integer> joinChannel;
+    private String score;
 
     public ActivityRule getRule() {
         return rule;

@@ -1,0 +1,32 @@
+template header
+
+rule
+accumulateFlag
+eventType
+ruleCode
+ruleId
+awardeeType
+priority
+beginTime
+endTime
+score
+
+
+package creditCardApply;
+
+import com.example.portalback.customer.entity.*;
+
+template "judge condition"
+
+rule "judge_@{ruleCode}"
+date-effective "@{beginTime}"
+date-expires "@{endTime}"
+when
+  // 条件语句 LHS
+  $c:@{eventType}(@{rule});
+then
+ // RHS
+   $c.setCreditScore(@{score});
+end
+
+end template

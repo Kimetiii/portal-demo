@@ -94,9 +94,11 @@ public class ActivityRuleService {
 		List<RuleDTO> ruleDTOList = new ArrayList<>();
 		for (ActivityRule dto : list) {
 			RuleDTO ruleDTO = new RuleDTO();
+			ruleDTO.setRuleName(dto.getRuleName());
 			ruleDTO.setBeginTime(begin);
 			ruleDTO.setEndTime(end);
 			ruleDTO.setRule(dto);
+			ruleDTO.setScore(dto.getScore());
 			ruleDTOList.add(ruleDTO);
 		}
 		return ruleDTOList;
