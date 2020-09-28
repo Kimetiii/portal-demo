@@ -273,10 +273,9 @@
 </template>
 <script>
   import VDistpicker from 'v-distpicker';
-  import {findAllCustomerByDeleteStatus} from "@/api/customer";
   import {getCustomerById} from "@/api/customer";
   import {searchCustomerList} from "@/api/customer";
-  import {softDeleteById,findAll} from "@/api/customer";
+  import {softDeleteById,findAllCustomerByDeleteStatus} from "@/api/customer";
 
   export default {
     components: {VDistpicker},
@@ -390,7 +389,6 @@
         this.listLoading = true
         findAllCustomerByDeleteStatus()
           .then(res => {
-            console.log(res.data)
             this.partOfData = res.data.data
             this.listLoading = false
             this.fullscreenLoading = false
@@ -405,10 +403,9 @@
           channelSource: this.listConfig.channelSource,
           responsible: this.listConfig.responsible
         };
-        searchCustomerList(searchParams).then((res) => {
-          if (res.data.data.length == 0) {
+        searchCustomerList(searchParams).then(res => {
+          if (res.data.data.length === 0) {
             alert("未找到指定信息！")
-            return
           } else {
             this.partOfData = res.data.data
           }
@@ -447,7 +444,7 @@
         this.currentPage = val
       },
       foldChange() {
-        if (this.foldCode == 0) {
+        if (this.foldCode === 0) {
           this.foldCode = 1
           this.foldStatus = '收起'
         } else {
