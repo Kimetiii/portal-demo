@@ -45,15 +45,19 @@ public class CustomerBaseInfoModel {
 
 	private String customerLabel; // 客户标签
 
+	private Boolean deleteStatus; // 客户标签
+
+	private String completeStatus; // 客户标签
+
 	/**
 	 * 家庭信息
 	 */
 
 	private String maritalStatus; // 婚姻状况 0 未婚 1 已婚
 
-	private String familySize; // 家庭人数
+	private Integer familySize; // 家庭人数
 
-	private String summaryOfFamilyStatus; // 家庭状况概况
+	private String familyStatus; // 家庭状况概况
 
 	/**
 	 * 居住信息
@@ -61,11 +65,11 @@ public class CustomerBaseInfoModel {
 
 	private String residentialAddress; // 居住地址
 
-	private String detailedAddress; // 详细地址
+	private String address; // 详细地址
 
 	private String residenceStatus; // 居住状态
 
-	private String lengthOfResidence; // 居住年限
+	private Integer lengthOfResidence; // 居住年限
 
 	/**
 	 * 就业信息
@@ -85,7 +89,7 @@ public class CustomerBaseInfoModel {
 
 	private String position; // 职务
 
-	private String workingYears; // 工作年限
+	private Integer workingYears; // 工作年限
 
 	private Double annualSalary; // 年薪
 
@@ -98,7 +102,7 @@ public class CustomerBaseInfoModel {
 
 	private String assetsToLiabilitiesRatio; // 资产与负债比
 
-	private String LoanToIncomeRatio; // 收入还贷比
+	private String loanToIncomeRatio; // 收入还贷比
 
 	private String averagePersonalIncome; // 个人年平均收入
 

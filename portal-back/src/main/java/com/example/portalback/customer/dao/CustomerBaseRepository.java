@@ -32,11 +32,12 @@ public interface CustomerBaseRepository extends JpaRepository<CustomerBaseInfo, 
 
 	@Query(value = "select *\n" +
 			"from t_customer_base_info\n" +
-			"where channel_source = ?1\n" +
+			"where (channel_source = ?1\n" +
 			"   or id = ?2\n" +
 			"   or name = ?3\n"+
 			"   or id_number = ?4\n"+
-			"   or responsible = ?5", nativeQuery = true)
+			"   or responsible = ?5\n)"+
+			"	and  delete_status = 0 ", nativeQuery = true)
 	List<CustomerBaseInfo> searchCustomerList(String channelSource, String customerId, String customerName, String idNumber, String responsible);
 
 	@Transactional

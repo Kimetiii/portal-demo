@@ -75,6 +75,7 @@
               <el-option label="赵六" value="赵六"></el-option>
             </el-select>
           </el-form-item>
+
         </el-form>
       </el-tab-pane>
       <el-tab-pane label="家庭信息>>">
@@ -91,8 +92,8 @@
           <el-form-item label="家庭人数" prop="familySize">
             <el-input v-model="customerInfo.familySize" placeholder="请输入"></el-input>
           </el-form-item>
-          <el-form-item label="家庭情况概况" prop="summaryOfFamilyStatus">
-            <el-input type="textarea" v-model="customerInfo.summaryOfFamilyStatus" placeholder="请简要描述家庭情况"></el-input>
+          <el-form-item label="家庭情况概况" prop="familyStatus">
+            <el-input type="textarea" v-model="customerInfo.familyStatus" placeholder="请简要描述家庭情况"></el-input>
           </el-form-item>
         </el-form>
       </el-tab-pane>
@@ -105,8 +106,8 @@
           <el-form-item label="详细地址" prop="address">
             <el-input v-model="customerInfo.address" placeholder="请具体到街道小区/村组"></el-input>
           </el-form-item>
-          <el-form-item label="居住状态" prop="residentialStatus">
-            <el-select v-model="customerInfo.residentialStatus" placeholder="请选择">
+          <el-form-item label="居住状态" prop="residenceStatus">
+            <el-select v-model="customerInfo.residenceStatus" placeholder="请选择">
               <el-option label="自购无贷" value="Noloan"></el-option>
               <el-option label="自购按揭" value="mortgage"></el-option>
               <el-option label="集体宿舍" value="dormitory"></el-option>
@@ -294,8 +295,8 @@
           <el-form-item label="资产与负债比" prop="assetsToLiabilitiesRatio">
             <el-input v-model="customerInfo.assetsToLiabilitiesRatio" placeholder="请输入"></el-input>
           </el-form-item>
-          <el-form-item label="收入还贷比" prop="LoanToIncomeRatio">
-            <el-input v-model="customerInfo.LoanToIncomeRatio" placeholder="请输入"></el-input>
+          <el-form-item label="收入还贷比" prop="loanToIncomeRatio">
+            <el-input v-model="customerInfo.loanToIncomeRatio" placeholder="请输入"></el-input>
           </el-form-item>
           <el-form-item label="个人年平均收入" prop="averagePersonalIncome">
             <el-input v-model="customerInfo.averagePersonalIncome" placeholder="请输入"></el-input>
@@ -373,12 +374,12 @@ export default {
         responsible: '',
         maritalStatus: '',
         familySize: '',
-        summaryOfFamilyStatus: '',
+        familyStatus: '',
         // familyMembers: '',
         // tableData: [],
         residentialAddress: '',
         address: '',
-        residentialStatus: '',
+        residenceStatus: '',
         lengthOfResidence: '1',
         companyName: '',
         workPhone: '',
@@ -394,7 +395,7 @@ export default {
         familyMonthlyIncome: '',
         numberOfDependents: '',
         assetsToLiabilitiesRatio: '',
-        LoanToIncomeRatio: '',
+        loanToIncomeRatio: '',
         averagePersonalIncome: '',
         repaymentToIncomeRatio: '',
         familyPropertyAssessment: '',

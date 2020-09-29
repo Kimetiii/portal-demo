@@ -32,6 +32,7 @@ public class CustomerBaseInfo {
 	@Column(name = "channel_source", length = 32)
 	private String channelSource; // 渠道来源 *客户经理 *本人 * 客户转介
 
+	@Column(name = "responsible", length = 32)
 	private String responsible; // 经办客户经理
 
 	@Column(name = "former_name", length = 32)
@@ -149,7 +150,7 @@ public class CustomerBaseInfo {
 	private String assetsToLiabilitiesRatio; // 资产与负债比
 
 	@Column(length = 32)
-	private String LoanToIncomeRatio; // 收入还贷比
+	private String loanToIncomeRatio; // 收入还贷比
 
 	@Column(length = 32)
 	private String averagePersonalIncome; // 个人年平均收入

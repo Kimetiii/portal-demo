@@ -15,7 +15,7 @@
             <el-form-item label="姓名" prop="name">
               <el-input v-model="allInfo.name" placeholder="请输入"></el-input>
             </el-form-item>
-            <el-form-item label="曾用名" prop="fomerName">
+            <el-form-item label="曾用名" prop="formerName">
               <el-input v-model="allInfo.formerName" placeholder="默认为：无"></el-input>
             </el-form-item>
             <el-form-item label="身份证号" prop="idNumber">
@@ -43,8 +43,10 @@
                 <el-option label="其他" value="others"></el-option>
               </el-select>
             </el-form-item>
-            <el-form-item label="户籍地址" prop="residenceAddress">
-              <v-distpicker province="" city="" area="" v-model="allInfo.residenceAddress" placeholder="请输入"></v-distpicker>
+            <el-form-item label="户籍地址" prop="residenceAddress" >
+              <template>
+                <v-distpicker @selected="selected1"></v-distpicker>
+              </template>
             </el-form-item>
             <el-form-item label="健康状况" prop="healthStatus">
               <el-select v-model="allInfo.healthStatus">
@@ -84,11 +86,11 @@
                 <el-radio label="丧偶"></el-radio>
               </el-radio-group>
             </el-form-item>
-            <el-form-item label="家庭人数" prop="familySize">
+            <el-form-item   label="家庭人数" prop="familySize">
               <el-input v-model="allInfo.familySize" placeholder="请输入"></el-input>
             </el-form-item>
-            <el-form-item label="家庭情况概况" prop="summaryOfFamilyStatus">
-              <el-input type="textarea" v-model="allInfo.summaryOfFamilyStatus" placeholder="请简要描述家庭情况"></el-input>
+            <el-form-item label="家庭情况概况" prop="familyStatus">
+              <el-input type="textarea" v-model="allInfo.familyStatus" placeholder="请简要描述家庭情况"></el-input>
             </el-form-item>
           </el-form>
         </el-tab-pane>
@@ -96,14 +98,16 @@
           <span>居住信息</span>
           <el-form :model="allInfo" :rules="rules" ref="ruleForm" label-position="top" style="width:800px;margin-left: 100px;padding-top: 10px" label-width="100px" class="demo-ruleForm" lable="居住信息">
             <el-form-item label="居住地址" prop="residentialAddress">
-              <v-distpicker province="" city="" area="" v-model="allInfo.residentialAddress"></v-distpicker>
+              <template>
+                <v-distpicker @selected="selected2"></v-distpicker>
+              </template>
             </el-form-item>
             <el-form-item label="详细地址" prop="address">
               <el-input v-model="allInfo.address" placeholder="请具体到街道小区/村组"></el-input>
             </el-form-item>
-            <el-form-item label="居住状态" prop="residentialStatus">
-              <el-select v-model="allInfo.residentialStatus" placeholder="请选择">
-                <el-option label="自购无贷" value="Noloan"></el-option>
+            <el-form-item label="居住状态" prop="residenceStatus">
+              <el-select v-model="allInfo.residenceStatus" placeholder="请选择">
+                <el-option label="自购无贷" value="noLoan"></el-option>
                 <el-option label="自购按揭" value="mortgage"></el-option>
                 <el-option label="集体宿舍" value="dormitory"></el-option>
                 <el-option label="租房" value="Renting"></el-option>
@@ -124,7 +128,9 @@
               <el-input v-model="allInfo.workPhone" placeholder="请输入"></el-input>
             </el-form-item>
             <el-form-item label="单位地址" prop="unitAddress">
-              <v-distpicker province="" city="" area="" v-model="allInfo.unitAddress"></v-distpicker>
+              <template>
+                <v-distpicker @selected="selected3"></v-distpicker>
+              </template>
             </el-form-item>
             <el-form-item label="详细地址" prop="unitDetailAddress">
               <el-input v-model="allInfo.unitDetailAddress" placeholder="请输入"></el-input>
@@ -192,8 +198,8 @@
             <el-form-item label="资产与负债比" prop="assetsToLiabilitiesRatio">
               <el-input v-model="allInfo.assetsToLiabilitiesRatio" placeholder="请输入"></el-input>
             </el-form-item>
-            <el-form-item label="收入还贷比" prop="LoanToIncomeRatio">
-              <el-input v-model="allInfo.LoanToIncomeRatio" placeholder="请输入"></el-input>
+            <el-form-item label="收入还贷比" prop="loanToIncomeRatio">
+              <el-input v-model="allInfo.loanToIncomeRatio" placeholder="请输入"></el-input>
             </el-form-item>
             <el-form-item label="个人年平均收入" prop="averagePersonalIncome">
               <el-input v-model="allInfo.averagePersonalIncome" placeholder="请输入"></el-input>
@@ -241,7 +247,7 @@
       </el-tabs>
     <div style="margin-bottom: 100px;margin-top: 50px">
       <el-button type="primary" round style="margin-left: 380px"  @click="addNew(allInfo)">提交客户信息</el-button>
-      <el-button type="danger" round   @click="cancle">取消</el-button>
+      <el-button type="danger" round   @click="cancel">取消</el-button>
     </div>
   </div>
 </template>
@@ -251,13 +257,14 @@
 import { addCustomer } from "@/api/customer";
 
  export default {
-   components: {VDistpicker},
+   components: { VDistpicker },
    data() {
      return {
        allInfo: {
          id: '',
          name: '',
          channelSource: '',
+         responsible: '',
          formerName: '无',
          idNumber: '',
          sex: '',
@@ -267,13 +274,14 @@ import { addCustomer } from "@/api/customer";
          healthStatus: '',
          accountNature: '',
          customerLabel: '',
-         responsible: '',
+         deleteStatus: 0,
+         completeStatus: '待完成',
          maritalStatus: '',
          familySize: '',
-         summaryOfFamilyStatus: '',
+         familyStatus: '',
          residentialAddress: '',
          address: '',
-         residentialStatus: '',
+         residenceStatus: '',
          lengthOfResidence: '1',
          companyName: '',
          workPhone: '',
@@ -287,7 +295,7 @@ import { addCustomer } from "@/api/customer";
          familyMonthlyIncome: '',
          numberOfDependents: '',
          assetsToLiabilitiesRatio: '',
-         LoanToIncomeRatio: '',
+         loanToIncomeRatio: '',
          averagePersonalIncome: '',
          repaymentToIncomeRatio: '',
          familyPropertyAssessment: '',
@@ -300,11 +308,13 @@ import { addCustomer } from "@/api/customer";
          creditCardDefault: '',
          judicialRecords: '',
          creditScore: '',
-         deleteStatus: 0,
-         completeStatus: '待完成'
        },
        active: '0',
        rules: {
+         channelSource: {
+           required: true,
+           message: '请输入'
+         },
          name: {
            required: true,
            message: '请输入'
@@ -334,68 +344,95 @@ import { addCustomer } from "@/api/customer";
    },
    methods: {
      addNew: function (data) {
-       if(this.allInfo.channelSource ==''){
-         alert("请填写渠道来源相关信息！")
+     if(this.allInfo.channelSource ==''){
+       alert("请填写渠道来源相关信息！")
+       return
+     }else{
+       if(this.allInfo.name ==''){
+         alert("请填写用户姓名！")
          return
        }else{
-         if(this.allInfo.name ==''){
-           alert("请填写用户姓名！")
+         if(/(^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$)|(^[1-9]\d{5}\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{2}$)/.test(this.allInfo.idNumber)){
+         }else if(this.allInfo.idNumber ==''){
+           alert("请输入身份证号！")
            return
-         }else{
-           if(/(^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$)|(^[1-9]\d{5}\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{2}$)/.test(this.allInfo.idNumber)){
-           }else if(this.allInfo.idNumber ==''){
-             alert("请输入身份证号！")
-             return
-           }else {
-             alert("请检查，身份证号输入有误！")
-             return
-           }
-           if(/^1[3|4|5|7|8][0-9]{9}$/.test(this.allInfo.phone)){
-           }else if(this.allInfo.phone == ''){
-             alert("请输入手机号码")
-             return
-           }else {
-             alert("请检查，手机号码输入有误！")
-             return
+         }else {
+           alert("请检查，身份证号输入有误！")
+           return
+         }
+         if(/^1[3|4|5|7|8][0-9]{9}$/.test(this.allInfo.phone)){
+         }else if(this.allInfo.phone == ''){
+           alert("请输入手机号码")
+           return
+         }else {
+           alert("请检查，手机号码输入有误！")
+           return
+         }
+       }
+      }
+         var isnull =true
+       console.log(this.allInfo)
+         for (var val in this.allInfo) {
+           if (this.allInfo[val] == '') {
+             isnull = false
+             this.$confirm('检测到未填写的内容，是否在离开页面前保存修改？', '确认信息', {
+               distinguishCancelAndClose: true,
+               confirmButtonText: '保存',
+               cancelButtonText: '继续编辑'
+             })
+               .then(() => {
+                 addCustomer(data).then((res) => {
+                   this.$router.go(-1);
+                   this.$message({
+                     type: 'info',
+                     message: '保存成功'
+                   });
+                 })
+               })
+               .catch(action => {
+                 this.$message({
+                   type: 'info',
+                   message: action === 'cancel'
+                     ? '放弃保存'
+                     : '回到当前页面'
+                 })
+               });
            }
          }
-        }
-       var isNull = false
-       for (var val in this.allInfo) {
-          if (this.allInfo[val] ==''){
-            this.$confirm('检测到未填写的内容，是否在离开页面前保存修改？', '确认信息', {
-              distinguishCancelAndClose: true,
-              confirmButtonText: '保存',
-              cancelButtonText: '继续编辑'
-            })
-              .then(() => {
-                addCustomer(data).then((res) => {
-                  console.log(res)
-                  this.$router.go(-1);
-                this.$message({
-                  type: 'info',
-                  message: '保存成功'
-                     });
-                  })
-                })
-              .catch(action => {
-                this.$message({
-                  type: 'info',
-                  message: action === 'cancel'
-                    ? '放弃保存并停留在当前页面'
-                    : '停留在当前页面'
-                })
-              });
-       }
+       if(isnull){
+         this.$confirm('已完成信息填写', '确认信息', {
+           distinguishCancelAndClose: true,
+           confirmButtonText: '保存',
+           cancelButtonText: '继续编辑'
+         })
+           .then(() => {
+             this.allInfo.completeStatus='已完成'
+             addCustomer(data).then((res) => {
+               this.$router.go(-1);
+               this.$message({
+                 type: 'info',
+                 message: '保存成功'
+               });
+             })
+           })
+           .catch(action => {
+             this.$message({
+               type: 'info',
+               message: action === 'cancel'
+                 ? '放弃保存并停留在当前页面'
+                 : '停留在当前页面'
+             })
+           })
        }
      },
-     cancle: function () {
+     cancel: function () {
        this.$confirm('检测到未保存的内容，是否在离开页面前保存修改？', '确认信息', {
          distinguishCancelAndClose: true,
          confirmButtonText: '保存',
-         cancelButtonText: '放弃修改'
+         cancelButtonText: '放弃'
        })
          .then(() => {
+           this.$router.go(-1)
            this.$message({
              type: 'info',
              message: '保存修改'
@@ -403,6 +440,7 @@ import { addCustomer } from "@/api/customer";
            });
          })
          .catch(action => {
+           this.$router.go(-1)
            this.$message({
              type: 'info',
              message: action === 'cancel'
@@ -413,6 +451,18 @@ import { addCustomer } from "@/api/customer";
      },
      next() {
        if (this.active++ > 2) this.active = 0
+     },
+     selected1(data){
+       this.allInfo.residenceAddress=data.province.value +''+ data.city.value + data.area.value
+     },
+     selected2(data){
+       this.allInfo.residentialAddress=data.province.value +''+ data.city.value + data.area.value
+       console.log( this.allInfo.residentialAddress)
+     },
+     selected3(data){
+       this.allInfo.unitAddress=data.province.value +''+ data.city.value + data.area.value
+       console.log( this.allInfo.unitAddress)
+
      }
    }
  }
