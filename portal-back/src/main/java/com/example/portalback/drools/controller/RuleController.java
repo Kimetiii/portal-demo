@@ -1,9 +1,10 @@
 package com.example.portalback.drools.controller;
 
+import com.example.portalback.common.entity.ResponseObj;
+import com.example.portalback.drools.entity.ActivityRuleEntity;
+import com.example.portalback.drools.model.RuleModel;
 import com.example.portalback.drools.service.ActivityRuleService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Map;
@@ -38,6 +39,55 @@ public class RuleController {
 		map.put("hello", " loadRule");
 		return "/index";
 
+	}
+
+	/**
+	 * 新增规则
+	 *
+	 * @param ruleModel 主要分为 type LHS RHS
+	 *                  type ： 指定 FACT 类型 暂时只开放客户类型(CUSTOMER)
+	 *                  LHS ： 规则文件条件字段 存储拼接字符串
+	 *                  RHS ：执行规则分数
+	 * @return ResponseObj
+	 */
+	@PostMapping("/addRule")
+	public ResponseObj addRule(@RequestBody RuleModel ruleModel) {
+		try {
+			ActivityRuleEntity activityRuleEntity = activityRuleService.addRule(ruleModel);
+			return ResponseObj.success(activityRuleEntity);
+		} catch (Exception e) {
+			return ResponseObj.failure(e);
+		}
+	}
+
+	/**
+	 * 删除规则
+	 *
+	 * @param ruleId 规则id
+	 * @return ResponseObj
+	 */
+	@GetMapping("deleteRuleById")
+	public ResponseObj deleteRuleById(@RequestParam String ruleId) {
+		try {
+			activityRuleService.deleteRuleById(ruleId);
+			return ResponseObj.success();
+		} catch (Exception e) {
+			return ResponseObj.failure(e);
+		}
+	}
+
+	/**
+	 * 获取所有规则信息
+	 *
+	 * @return ResponseObj
+	 */
+	@GetMapping("getAllRules")
+	public ResponseObj getAllRules() {
+		try {
+			return ResponseObj.success(activityRuleService.findAll());
+		} catch (Exception e) {
+			return ResponseObj.failure(e);
+		}
 	}
 
 	@PostMapping("/useRule")

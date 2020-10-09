@@ -1,12 +1,10 @@
 package com.example.portalback.drools.entity;
 
 import lombok.Data;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -14,13 +12,15 @@ import java.util.Date;
  */
 @Data
 @Entity
+@DynamicUpdate
 @Table(name = "ACTIVITY_RULE")
 public class ActivityRuleEntity {
 
 	@Id
-	@GeneratedValue(generator = "uuidGenerator")
-	@GenericGenerator(name = "uuidGenerator", strategy = "uuid")
-	private Integer id;
+	@GenericGenerator(name = "id", strategy = "uuid")
+	@GeneratedValue(generator = "id")
+	@Column(name = "id", length = 32)
+	private String id;
 
 	private Long taskId;
 
@@ -30,7 +30,7 @@ public class ActivityRuleEntity {
 
 	private String ruleValue;
 
-	private String score;
+	private Double score;
 
 	private Byte priority;
 

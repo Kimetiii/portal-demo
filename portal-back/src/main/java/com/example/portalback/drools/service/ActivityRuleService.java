@@ -3,20 +3,25 @@ package com.example.portalback.drools.service;
 import com.alibaba.fastjson.JSON;
 import com.example.portalback.annotation.Fact;
 import com.example.portalback.common.util.CopyUtil;
+import com.example.portalback.common.util.LoginUtils;
+import com.example.portalback.drools.dao.ActivityRuleRepository;
 import com.example.portalback.drools.domain.ActivityRule;
 import com.example.portalback.drools.domain.RegisterMqDTO;
 import com.example.portalback.drools.domain.RuleDTO;
 import com.example.portalback.drools.domain.RuleExecutorResult;
 import com.example.portalback.drools.domain.fact.BaseFact;
 import com.example.portalback.drools.domain.fact.RegisterFact;
+import com.example.portalback.drools.entity.ActivityRuleEntity;
 import com.example.portalback.drools.executor.RuleExecutor;
 import com.example.portalback.drools.generator.RuleGenerator;
+import com.example.portalback.drools.model.RuleModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -31,11 +36,43 @@ import java.util.UUID;
  **/
 
 @Service
+@Transactional
 public class ActivityRuleService {
 	public static final Logger log = LoggerFactory.getLogger(RuleService.class);
 
 	@Resource
 	TestService testService;
+
+	@Resource
+	ActivityRuleRepository activityRuleRepository;
+
+	/**
+	 * 增加规则
+	 *
+	 * @param ruleModel 规则入参
+	 */
+	public ActivityRuleEntity addRule(RuleModel ruleModel) {
+		ActivityRuleEntity activityRuleEntity = new ActivityRuleEntity();
+		activityRuleEntity.setRuleName(ruleModel.getRuleName());
+		activityRuleEntity.setEvent(ruleModel.getEvent());
+		activityRuleEntity.setRuleValue(ruleModel.getRuleValue());
+		activityRuleEntity.setScore(ruleModel.getScore());
+		activityRuleEntity.setCreateBy(LoginUtils.getUserName());
+		activityRuleEntity.setCreateTime(new Date());
+		activityRuleEntity.setUpdateBy(LoginUtils.getUserName());
+		activityRuleEntity.setUpdateTime(new Date());
+		ActivityRuleEntity save = activityRuleRepository.save(activityRuleEntity);
+		return save;
+	}
+
+	/**
+	 * 查询所有规则
+	 *
+	 * @return List<ActivityRuleEntity>
+	 */
+	public List<ActivityRuleEntity> findAll() {
+		return activityRuleRepository.findAll();
+	}
 
 	/**
 	 * 加载规则
@@ -53,6 +90,10 @@ public class ActivityRuleService {
 		} catch (Exception e) {
 			log.error("RuleService.loadRule。e={}", e.getMessage(), e);
 		}
+	}
+
+	public void deleteRuleById(String ruleId) {
+		activityRuleRepository.deleteById(ruleId);
 	}
 
 	/**

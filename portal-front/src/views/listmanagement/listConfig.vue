@@ -1,7 +1,8 @@
 <template>
   <div>
     <div id="container" style="width:95%;margin-left: 20px;margin-top: 40px;border-radius: 0px">
-      <el-form :inline="true" :model="listConfig" class="demo-form-inline" style="width:1500px;padding-top: 10px;border-radius: 30px">
+      <el-form :inline="true" :model="listConfig" class="demo-form-inline"
+               style="width:1500px;padding-top: 10px;border-radius: 30px">
         <div style="margin-left:140px;">
           <el-form-item style="margin-left: 10px" label="客户来源" prop="channelSource">
             <el-select v-model="listConfig.channelSource" placeholder="请选择">
@@ -15,14 +16,16 @@
           <el-form-item label="客户姓名" prop="name">
             <el-input v-model="listConfig.name" placeholder="请输入" auto-complete="off"></el-input>
           </el-form-item>
-          <el-button type="text" @click="foldChange">{{foldStatus}}</el-button>
+          <el-button type="text" @click="foldChange">{{ foldStatus }}</el-button>
           <el-form-item class="margin" v-if="foldCode===0">
-            <el-button type="primary"  @click="search()" style="margin-left: 20px">查询</el-button>
-            <el-button type="success" onclick="location='http://dut.portal.com:8080/#/ListManagement/clientAdd'">新增</el-button>
+            <el-button type="primary" @click="search()" style="margin-left: 20px">查询</el-button>
+            <el-button type="success" onclick="location='http://dut.portal.com:8080/#/ListManagement/clientAdd'">新增
+            </el-button>
             <el-button class="button" @click="resetForm">重置</el-button>
           </el-form-item>
         </div>
-        <el-form :inline="true" :model="listConfig" v-if="foldCode==1"  class="demo-form-inline" style="padding-top: 10px;margin-left: 150px">
+        <el-form :inline="true" :model="listConfig" v-if="foldCode==1" class="demo-form-inline"
+                 style="padding-top: 10px;margin-left: 150px">
           <el-form-item label="证件号码" prop="idNumber">
             <el-input v-model="listConfig.idNumber" placeholder="请输入" style="width: 150px"></el-input>
           </el-form-item>
@@ -38,19 +41,20 @@
               <el-option label="赵六" value="赵六"></el-option>
             </el-select>
           </el-form-item>
-          <el-button type="primary"  @click="search()" style="margin-left: 20px" trigger="click">查询</el-button>
-          <el-button type="success" onclick="location='http://dut.portal.com:8080/#/ListManagement/clientAdd'">新增</el-button>
+          <el-button type="primary" @click="search()" style="margin-left: 20px" trigger="click">查询</el-button>
+          <el-button type="success" onclick="location='http://dut.portal.com:8080/#/ListManagement/clientAdd'">新增
+          </el-button>
           <el-button class="button" @click="resetForm">重置</el-button>
         </el-form>
       </el-form>
       <div>
         <el-dialog :visible.sync="dialogFormVisible" width="60%">
-          <div style="font-size: 16px;color: cornflowerblue;margin: 0 auto" >用户:{{this.customerInfo.name}}</div>
-          <el-form :model="customerInfo" aria-readonly="true" >
+          <div style="font-size: 16px;color: cornflowerblue;margin: 0 auto">用户:{{ this.customerInfo.name }}</div>
+          <el-form :model="customerInfo" aria-readonly="true">
             <el-tabs style="margin-left: 20px;margin-top: 40px">
               <el-tab-pane label="基本信息">
                 <h2 style="font-size: 16px;color: cornflowerblue">基本信息</h2>
-                <el-form-item label="客户号" prop="id" >
+                <el-form-item label="客户号" prop="id">
                   <el-input v-model="customerInfo.id" autocomplete="off" readonly="readonly"></el-input>
                 </el-form-item>
                 <el-form-item label="渠道来源" prop="channelSource">
@@ -119,7 +123,8 @@
                   <el-input v-model="customerInfo.residentialStatus" readonly="readonly"></el-input>
                 </el-form-item>
                 <el-form-item label="居住年限" prop="lengthOfResidence">
-                  <el-input-number v-model="customerInfo.lengthOfResidence" v-bind:disabled="editCode" controls-position="right" :min="1"></el-input-number>
+                  <el-input-number v-model="customerInfo.lengthOfResidence" v-bind:disabled="editCode"
+                                   controls-position="right" :min="1"></el-input-number>
                 </el-form-item>
               </el-tab-pane>
               <el-tab-pane label="就业信息">
@@ -128,7 +133,7 @@
                   <el-input v-model="customerInfo.companyName" readonly="readonly"></el-input>
                 </el-form-item>
                 <el-form-item label="单位电话" prop="workPhone">
-                  <el-input v-model="customerInfo.workPhone"readonly="readonly"></el-input>
+                  <el-input v-model="customerInfo.workPhone" readonly="readonly"></el-input>
                 </el-form-item>
                 <el-form-item label="单位地址" prop="unitAddress">
                   <el-input v-model="customerInfo.unitAddress" readonly="readonly"></el-input>
@@ -137,16 +142,17 @@
                   <el-input v-model="customerInfo.unitDetailAddress" readonly="readonly"></el-input>
                 </el-form-item>
                 <el-form-item label="行业类型" prop="industryType" size="120px">
-                  <el-input v-model="customerInfo.industryType"  readonly="readonly"></el-input>
+                  <el-input v-model="customerInfo.industryType" readonly="readonly"></el-input>
                 </el-form-item>
-                <el-form-item label="职业" prop="profession" >
+                <el-form-item label="职业" prop="profession">
                   <el-input v-model="customerInfo.profession" readonly="readonly"></el-input>
                 </el-form-item>
-                <el-form-item label="职务" prop="position" >
+                <el-form-item label="职务" prop="position">
                   <el-input v-model="customerInfo.position" readonly="readonly"></el-input>
                 </el-form-item>
                 <el-form-item label="工作年限" prop="workingYears">
-                  <el-input-number v-model="customerInfo.workingYears" v-bind:disabled="editCode" controls-position="right" :min="0"></el-input-number>
+                  <el-input-number v-model="customerInfo.workingYears" v-bind:disabled="editCode"
+                                   controls-position="right" :min="0"></el-input-number>
                 </el-form-item>
                 <el-form-item label="年薪" prop="annualSalary">
                   <el-input v-model="customerInfo.annualSalary" readonly="readonly">
@@ -195,14 +201,14 @@
                 <el-form-item label="信用卡透支情况等方面的详细调查" prop="overdraftSituation">
                   <el-input v-model="customerInfo.overdraftSituation" readonly="readonly"></el-input>
                 </el-form-item>
-                <el-form-item label="银行卡持有情况及银行账户情况" prop="bankCardSituation" >
+                <el-form-item label="银行卡持有情况及银行账户情况" prop="bankCardSituation">
                   <el-input v-model="customerInfo.bankCardSituation" readonly="readonly"></el-input>
                 </el-form-item>
                 <el-form-item label="个人贷款或信用卡违约情况" prop="creditCardDefault">
                   <el-input v-model="customerInfo.creditCardDefault" readonly="readonly"></el-input>
                 </el-form-item>
                 <el-form-item label="公安司法的不良记录" prop="judicialRecords">
-                  <el-input v-model="customerInfo.judicialRecords" readonly="readonly" ></el-input>
+                  <el-input v-model="customerInfo.judicialRecords" readonly="readonly"></el-input>
                 </el-form-item>
                 <el-form-item label="个人信用度评分" prop="creditScore">
                   <el-input v-model="customerInfo.creditScore" readonly="readonly"></el-input>
@@ -211,7 +217,8 @@
             </el-tabs>
           </el-form>
           <div>
-            <el-button type="danger"  style="margin-left: 950px" @click.native.prevent="dialogFormVisible=false">退出</el-button>
+            <el-button type="danger" style="margin-left: 950px" @click.native.prevent="dialogFormVisible=false">退出
+            </el-button>
           </div>
         </el-dialog>
       </div>
@@ -253,218 +260,220 @@
           label="操作"
           width="298px">
           <template slot-scope="scope">
-            <el-button type="primary" size="small" @click.native="$router.push({name:'clientEdit',params:{'id':scope.row.id}})">编辑</el-button>
+            <el-button type="primary" size="small"
+                       @click.native="$router.push({name:'clientEdit',params:{'id':scope.row.id}})">编辑
+            </el-button>
             <el-button @click.native.prevent="check(scope.row.id)" type="success" size="small">查看</el-button>
-            <el-button  @click.native.prevent="delete1(scope.row.id)" size="mini" type="danger">删除</el-button>
+            <el-button @click.native.prevent="delete1(scope.row.id)" size="mini" type="danger">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
       <div class="block" style="margin-top:15px">
-        <el-pagination   @current-change="handleCurrentChange"
-             :current-page="currentPage"
-             :page-size="pageSize"
-             layout="total, prev, pager, next, jumper"
-             :total="partOfData.length"
-             style="margin-left: 500px">
+        <el-pagination @current-change="handleCurrentChange"
+                       :current-page="currentPage"
+                       :page-size="pageSize"
+                       layout="total, prev, pager, next, jumper"
+                       :total="partOfData.length"
+                       style="margin-left: 500px">
         </el-pagination>
       </div>
     </div>
   </div>
 </template>
 <script>
-  import VDistpicker from 'v-distpicker';
-  import {getCustomerById} from "@/api/customer";
-  import {searchCustomerList} from "@/api/customer";
-  import {softDeleteById,findAllCustomerByDeleteStatus} from "@/api/customer";
+import VDistpicker from 'v-distpicker';
+import {getCustomerById} from "@/api/customer";
+import {searchCustomerList} from "@/api/customer";
+import {softDeleteById, findAllCustomerByDeleteStatus} from "@/api/customer";
 
-  export default {
-    components: {VDistpicker},
-    data() {
-      return {
-        listConfig: {
-          channelSource: '',
-          name: '',
-          idNumber: '',
-          id: '',
-          responsible: ''
+export default {
+  components: {VDistpicker},
+  data() {
+    return {
+      listConfig: {
+        channelSource: '',
+        name: '',
+        idNumber: '',
+        id: '',
+        responsible: ''
+      },
+      customerInfo: {
+        id: '',
+        name: '',
+        channelSource: '',
+        formerName: '无',
+        idNumber: '',
+        sex: '',
+        phone: '',
+        educational: '',
+        residenceAddress: '',
+        healthStatus: '',
+        accountNature: '',
+        customerLabel: '',
+        responsible: '',
+        maritalStatus: '',
+        familySize: '',
+        summaryOfFamilyStatus: '',
+        // familyMembers: '',
+        // partOfData: [],
+        residentialAddress: '',
+        address: '',
+        residentialStatus: '',
+        lengthOfResidence: '1',
+        companyName: '',
+        workPhone: '',
+        unitAddress: '',
+        unitDetailAddress: '',
+        industryType: '',
+        profession: '',
+        position: '',
+        workingYears: '',
+        annualSalary: '',
+        // contact: '',
+        // partOfData: [],
+        familyMonthlyIncome: '',
+        numberOfDependents: '',
+        assetsToLiabilitiesRatio: '',
+        LoanToIncomeRatio: '',
+        averagePersonalIncome: '',
+        repaymentToIncomeRatio: '',
+        familyPropertyAssessment: '',
+        debtCoverageRatio: '',
+        repaymentRecord: '',
+        recordsAndYears: '',
+        breachOfContract: '',
+        overdraftSituation: '',
+        bankCardSituation: '',
+        creditCardDefault: '',
+        judicialRecords: '',
+        creditScore: '',
+        deleteStatus: 0,
+        completeStatus: '待完成'
+      },
+      fold: '',
+      foldCode: 0,
+      readonly: true,
+      editCode: true,
+      foldStatus: '展开',
+      activeNames: ['1'],
+      dialogFormVisible: false,
+      pickerOptions: {
+        disabledDate(time) {
+          return time.getTime() > Date.now();
         },
-        customerInfo: {
-          id: '',
-          name: '',
-          channelSource: '',
-          formerName: '无',
-          idNumber: '',
-          sex: '',
-          phone: '',
-          educational: '',
-          residenceAddress: '',
-          healthStatus: '',
-          accountNature: '',
-          customerLabel: '',
-          responsible: '',
-          maritalStatus: '',
-          familySize: '',
-          summaryOfFamilyStatus: '',
-          // familyMembers: '',
-          // partOfData: [],
-          residentialAddress: '',
-          address: '',
-          residentialStatus: '',
-          lengthOfResidence: '1',
-          companyName: '',
-          workPhone: '',
-          unitAddress: '',
-          unitDetailAddress: '',
-          industryType: '',
-          profession: '',
-          position: '',
-          workingYears: '',
-          annualSalary: '',
-          // contact: '',
-          // partOfData: [],
-          familyMonthlyIncome: '',
-          numberOfDependents: '',
-          assetsToLiabilitiesRatio: '',
-          LoanToIncomeRatio: '',
-          averagePersonalIncome: '',
-          repaymentToIncomeRatio: '',
-          familyPropertyAssessment: '',
-          debtCoverageRatio: '',
-          repaymentRecord: '',
-          recordsAndYears: '',
-          breachOfContract: '',
-          overdraftSituation: '',
-          bankCardSituation: '',
-          creditCardDefault: '',
-          judicialRecords: '',
-          creditScore: '',
-          deleteStatus: 0,
-          completeStatus: '待完成'
-        },
-        fold: '',
-        foldCode: 0,
-        readonly: true,
-        editCode: true,
-        foldStatus: '展开',
-        activeNames: ['1'],
-        dialogFormVisible: false,
-        pickerOptions: {
-          disabledDate(time) {
-            return time.getTime() > Date.now();
-          },
-          shortcuts: [{
-            text: '今天',
-            onClick(picker) {
-              picker.$emit('pick', new Date());
-            }
-          }, {
-            text: '昨天',
-            onClick(picker) {
-              const date = new Date();
-              date.setTime(date.getTime() - 3600 * 1000 * 24);
-              picker.$emit('pick', date);
-            }
-          }, {
-            text: '一周前',
-            onClick(picker) {
-              const date = new Date();
-              date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
-              picker.$emit('pick', date);
-            }
-          }]
-        },
-        partOfData: [],
-        currentPage: 1, // 当前页码
-        total: '', // 总条数
-        pageSize: 10,// 每页的数据条数
-        fullscreenLoading: true,
+        shortcuts: [{
+          text: '今天',
+          onClick(picker) {
+            picker.$emit('pick', new Date());
+          }
+        }, {
+          text: '昨天',
+          onClick(picker) {
+            const date = new Date();
+            date.setTime(date.getTime() - 3600 * 1000 * 24);
+            picker.$emit('pick', date);
+          }
+        }, {
+          text: '一周前',
+          onClick(picker) {
+            const date = new Date();
+            date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+            picker.$emit('pick', date);
+          }
+        }]
+      },
+      partOfData: [],
+      currentPage: 1, // 当前页码
+      total: '', // 总条数
+      pageSize: 10,// 每页的数据条数
+      fullscreenLoading: true,
+    }
+  },
+  mounted() {
+    this.fetchData()
+  },
+  methods: {
+    //显示所有未删除
+    fetchData() {
+      this.listLoading = true
+      findAllCustomerByDeleteStatus()
+        .then(res => {
+          this.partOfData = res.data.data
+          this.listLoading = false
+          this.fullscreenLoading = false
+        })
+    },
+    //查询
+    search: function () {
+      var searchParams = {
+        customerName: this.listConfig.name,
+        customerId: this.listConfig.id,
+        idNumber: this.listConfig.idNumber,
+        channelSource: this.listConfig.channelSource,
+        responsible: this.listConfig.responsible
+      };
+      searchCustomerList(searchParams).then(res => {
+        if (res.data.data.length === 0) {
+          alert("未找到指定信息！")
+        } else {
+          this.partOfData = res.data.data
+        }
+      })
+    },
+    //查看
+    check: function (params) {
+      this.dialogFormVisible = true
+      getCustomerById(params).then((res) => {
+        this.customerInfo = res.data.data
+      })
+    },
+    //删除
+    delete1: function (params) {
+      this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        softDeleteById(params).then((res) => {
+        })
+        this.$message({
+          type: 'success',
+          message: '删除成功!'
+        })
+        this.$router.go(0);
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        });
+      });
+    },
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`)
+      this.currentPage = val
+    },
+    foldChange() {
+      if (this.foldCode === 0) {
+        this.foldCode = 1
+        this.foldStatus = '收起'
+      } else {
+        this.foldCode = 0
+        this.foldStatus = '展开'
       }
     },
-    mounted() {
+    resetForm() {
+      this.listConfig.channelSource = ''
+      this.listConfig.name = ''
+      this.listConfig.idNumber = ''
+      this.listConfig.id = ''
+      this.listConfig.responsible = ''
       this.fetchData()
     },
-    methods: {
-      //显示所有未删除
-      fetchData() {
-        this.listLoading = true
-        findAllCustomerByDeleteStatus()
-          .then(res => {
-            this.partOfData = res.data.data
-            this.listLoading = false
-            this.fullscreenLoading = false
-          })
-      },
-      //查询
-      search: function () {
-        var searchParams = {
-          customerName: this.listConfig.name,
-          customerId: this.listConfig.id,
-          idNumber: this.listConfig.idNumber,
-          channelSource: this.listConfig.channelSource,
-          responsible: this.listConfig.responsible
-        };
-        searchCustomerList(searchParams).then(res => {
-          if (res.data.data.length === 0) {
-            alert("未找到指定信息！")
-          } else {
-            this.partOfData = res.data.data
-          }
-        })
-      },
-      //查看
-      check: function (params) {
-        this.dialogFormVisible = true
-        getCustomerById(params).then((res) => {
-          this.customerInfo = res.data.data
-        })
-      },
-      //删除
-      delete1: function (params) {
-          this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
-            confirmButtonText: '确定',
-            cancelButtonText: '取消',
-            type: 'warning'
-          }).then(() => {
-            softDeleteById(params).then((res) => {
-            })
-            this.$message({
-              type: 'success',
-              message: '删除成功!'
-            })
-            this.$router.go(0);
-          }).catch(() => {
-            this.$message({
-              type: 'info',
-              message: '已取消删除'
-            });
-          });
-      },
-      handleCurrentChange(val) {
-        console.log(`当前页: ${val}`)
-        this.currentPage = val
-      },
-      foldChange() {
-        if (this.foldCode === 0) {
-          this.foldCode = 1
-          this.foldStatus = '收起'
-        } else {
-          this.foldCode = 0
-          this.foldStatus = '展开'
-        }
-      },
-      resetForm() {
-        this.listConfig.channelSource = ''
-        this.listConfig.name = ''
-        this.listConfig.idNumber = ''
-        this.listConfig.id = ''
-        this.listConfig.responsible = ''
-        this.fetchData()
-      },
-      handleDelete() {
-        this.partOfData.splice(index, 1)
-      }
+    handleDelete() {
+      this.partOfData.splice(index, 1)
     }
   }
+}
 
 </script>
 <style scoped>

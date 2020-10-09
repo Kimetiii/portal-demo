@@ -1,6 +1,6 @@
 <template>
   <div>
-    <H1>TODO......</H1>
+    <H1 style="margin-left: 10px">变量管理</H1>
   </div>
 </template>
 
