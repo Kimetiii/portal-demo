@@ -3,16 +3,23 @@
     <H2 style="margin-left: 30px"> 编辑drools规则模型</H2>
     <el-card v-for="o in ruleList" class="box-card" style="margin-left: 30px;margin-top: 10px">
       <div slot="header" class="clearfix">
-        模型名称： <span v-if='!o.isChange'>{{ o.ruleName }}</span>
+        <span style="font-family:'微软雅黑';font-weight: bold">模型名称：</span>
+        <span v-if='!o.isChange'>{{ o.ruleName }}</span>
         <el-input v-model=o.ruleName v-else style="width: 600px"><</el-input>
         <el-button type="success" style="float:right" @click="changeRule(o.id)">修改</el-button>
       </div>
-      <div>规则条件：<span v-if='!o.isChange' > {{ o.ruleValue }}</span>
+      <div>
+        <span style="font-family:'微软雅黑';font-weight: bold">
+          规则条件：
+        </span>
+        <span v-if='!o.isChange'> {{ o.ruleValue }}</span>
         <el-input v-model="o.ruleValue" style="width: 600px" v-else>
         </el-input>
       </div>
-      <div style="margin-top: 10px">规则分数：<span v-if='!o.isChange'>{{ o.score }}</span>
-        <el-input-number v-else v-model="o.score"></el-input-number>
+      <div style="margin-top: 10px">
+        <span style="font-family:'微软雅黑';font-weight: bold">
+          规则分数：</span><span v-if='!o.isChange'>{{ o.score }}</span>
+        <el-input-number style="margin-left: 5px" v-else v-model="o.score"></el-input-number>
       </div>
       <div>
         <el-button v-show='o.isChange'
@@ -81,6 +88,14 @@ export default {
         }
       })
     },
+    addRule4Page(param) {
+      addRule(param)
+        .then(res => {
+          if (res.data.msg === 'success') {
+            Message.success('保存成功！')
+          }
+        })
+    },
     saveRule(id) {
       this.ruleList.forEach(res => {
         if (res.id === id) {
@@ -103,12 +118,6 @@ export default {
         }
       })
       this.addRule4Page(this.ruleModel)
-    },
-    addRule4Page(param) {
-      addRule(param)
-        .then(
-          Message.success('保存成功！')
-        )
     },
     addNewRule() {
       this.ruleList.push(
