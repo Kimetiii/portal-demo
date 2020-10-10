@@ -3,7 +3,7 @@
     <H2 style="margin-left: 30px"> 编辑drools规则模型</H2>
     <el-card v-for="o in ruleList" class="box-card" style="margin-left: 30px;margin-top: 10px">
       <div slot="header" class="clearfix">
-        <span style="font-family:'微软雅黑';font-weight: bold">模型名称：</span>
+        <span style="font-family:'微软雅黑',serif;font-weight: bold">模型名称：</span>
         <span v-if='!o.isChange'>{{ o.ruleName }}</span>
         <el-input v-model=o.ruleName v-else style="width: 600px"><</el-input>
         <el-button type="success" style="float:right" @click="changeRule(o.id)" v-if='!o.isChange'>修改</el-button>
@@ -15,7 +15,7 @@
         </el-button>
       </div>
       <div>
-        <span style="font-family:'微软雅黑';font-weight: bold">
+        <span style="font-family:'微软雅黑',serif;font-weight: bold">
           规则条件：
         </span>
         <span v-if='!o.isChange'> {{ o.ruleValue }}</span>
@@ -23,13 +23,13 @@
         </el-input>
       </div>
       <div style="margin-top: 10px">
-        <span style="font-family:'微软雅黑';font-weight: bold">
+        <span style="font-family:'微软雅黑',serif;font-weight: bold">
           规则分数：</span><span v-if='!o.isChange'>{{ o.score }}</span>
         <el-input-number style="margin-left: 5px" v-else v-model="o.score"></el-input-number>
       </div>
 
     </el-card>
-    <el-button style="margin-left: 30px;width: 800px;margin-top: 20px"
+    <el-button style="margin-left: 30px;width: 800px;margin-top: 20px;font-family:'微软雅黑',serif;font-weight: bold"
                type="primary"
                @click="addNewRule">新建规则文件
     </el-button>
