@@ -412,7 +412,8 @@ export default {
         channelSource: this.listConfig.channelSource,
         responsible: this.listConfig.responsible
       };
-      searchCustomerList(searchParams).then(res => {
+      searchCustomerList(searchParams)
+        .then(res => {
         if (res.data.data.length === 0) {
           alert("未找到指定信息！")
         } else {

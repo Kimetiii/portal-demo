@@ -8,7 +8,7 @@ spring:
     update: 5
   datasource:
     druid:
-      url: jdbc:mysql://localhost:3306/portal_song
+      url: jdbc:mysql://localhost:3306/portal_song?useSSL=false
 #      url:  jdbc:mysql://localhost:3306/portal@song?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
       username: root
       password: root

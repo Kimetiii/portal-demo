@@ -53,6 +53,7 @@ public class ActivityRuleService {
 	 */
 	public ActivityRuleEntity addRule(RuleModel ruleModel) {
 		ActivityRuleEntity activityRuleEntity = new ActivityRuleEntity();
+		activityRuleEntity.setId(ruleModel.getId());
 		activityRuleEntity.setRuleName(ruleModel.getRuleName());
 		activityRuleEntity.setEvent(ruleModel.getEvent());
 		activityRuleEntity.setRuleValue(ruleModel.getRuleValue());
