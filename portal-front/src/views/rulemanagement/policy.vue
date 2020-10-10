@@ -6,7 +6,13 @@
         <span style="font-family:'微软雅黑';font-weight: bold">模型名称：</span>
         <span v-if='!o.isChange'>{{ o.ruleName }}</span>
         <el-input v-model=o.ruleName v-else style="width: 600px"><</el-input>
-        <el-button type="success" style="float:right" @click="changeRule(o.id)">修改</el-button>
+        <el-button type="success" style="float:right" @click="changeRule(o.id)" v-if='!o.isChange'>修改</el-button>
+        <el-button v-show='o.isChange'
+                   v-else
+                   type="primary"
+                   style="float:right;margin-bottom: 10px"
+                   @click="saveRule(o.id)">保存
+        </el-button>
       </div>
       <div>
         <span style="font-family:'微软雅黑';font-weight: bold">
@@ -21,13 +27,7 @@
           规则分数：</span><span v-if='!o.isChange'>{{ o.score }}</span>
         <el-input-number style="margin-left: 5px" v-else v-model="o.score"></el-input-number>
       </div>
-      <div>
-        <el-button v-show='o.isChange'
-                   type="primary"
-                   style="float:right;margin-bottom: 10px"
-                   @click="saveRule(o.id)">保存
-        </el-button>
-      </div>
+
     </el-card>
     <el-button style="margin-left: 30px;width: 800px;margin-top: 20px"
                type="primary"
@@ -82,11 +82,20 @@ export default {
         })
     },
     changeRule(id) {
+      let flag = true
       this.ruleList.forEach(res => {
-        if (res.id === id) {
-          res.isChange = true;
+        if (res.isChange === true) {
+          Message.error('请先编辑并保存未保存的规则')
+          flag = false;
         }
       })
+      if(flag){
+        this.ruleList.forEach(res => {
+          if (res.id === id) {
+            res.isChange = true;
+          }
+        })
+      }
     },
     addRule4Page(param) {
       addRule(param)
@@ -120,27 +129,35 @@ export default {
       this.addRule4Page(this.ruleModel)
     },
     addNewRule() {
-      this.ruleList.push(
-        {
-          id: '',
-          ruleName: '',
-          awardeeType: '',
-          createBy: '',
-          createTime: '',
-          event: '',
-          isDelete: '',
-          isSmsNotice: '',
-          priority: '',
-          ruleValue: '',
-          score: '',
-          sendAwardTimes: '',
-          taskId: '',
-          updateBy: '',
-          updateTime: '',
-          isChange: true
-        })
+      let flag = true
+      this.ruleList.forEach(res => {
+        if (res.id === '') {
+          Message.error('请先编辑并保存未保存的规则')
+          flag = false;
+        }
+      })
+      if (flag) {
+        this.ruleList.push(
+          {
+            id: '',
+            ruleName: '',
+            awardeeType: '',
+            createBy: '',
+            createTime: '',
+            event: '',
+            isDelete: '',
+            isSmsNotice: '',
+            priority: '',
+            ruleValue: '',
+            score: '',
+            sendAwardTimes: '',
+            taskId: '',
+            updateBy: '',
+            updateTime: '',
+            isChange: true
+          })
+      }
     }
-
   }
 }
 </script>
