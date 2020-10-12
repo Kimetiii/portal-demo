@@ -1,6 +1,12 @@
 <template>
   <div>
-    <H2 style="margin-left: 30px"> 编辑drools规则模型</H2>
+    <H2 style="margin-left: 30px;"> 编辑drools规则模型</H2>
+    <el-button
+      style="margin-left: 30px"
+      type="text"
+      icon="el-icon-refresh"
+      @click="refreshRule()">刷新规则文件（物理）
+    </el-button>
     <el-card v-for="o in ruleList" class="box-card" style="margin-left: 30px;margin-top: 10px">
       <div slot="header" class="clearfix">
         <span style="font-family:'微软雅黑',serif;font-weight: bold">模型名称：</span>
@@ -59,7 +65,7 @@
 
 <script>
 
-import {addRule, deleteRuleById, getRules} from '@/api/rule'
+import {addRule, deleteRuleById, getRules, loadRule} from '@/api/rule'
 import Message from "element-ui/packages/message/src/main";
 
 export default {
@@ -201,6 +207,14 @@ export default {
           res.isChange = false;
         }
       })
+    },
+    refreshRule() {
+      loadRule()
+        .then(res => {
+          if (res.data.msg === 'success') {
+            Message.success('刷新规则成功~');
+          }
+        })
     }
   }
 }

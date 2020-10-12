@@ -28,16 +28,18 @@ public class RuleController {
 	ActivityRuleService activityRuleService;
 
 	/**
-	 * 这里是一个加载规则的接口
+	 * 加载生成 drools 规则文件
 	 *
-	 * @param map map
-	 * @return index
+	 * @return ResponseObj
 	 */
 	@PostMapping("/loadRule")
-	public String loadRule(Map<String, Object> map) {
-		activityRuleService.loadRule();
-		map.put("hello", " loadRule");
-		return "/index";
+	public ResponseObj loadRule() {
+		try {
+			activityRuleService.loadRule();
+			return ResponseObj.success("文件生成成功！", "success");
+		} catch (Exception e) {
+			return ResponseObj.failure(e);
+		}
 
 	}
 
