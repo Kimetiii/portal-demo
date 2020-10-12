@@ -17,7 +17,7 @@ public class ActivityRule {
 
     private String ruleName;
 
-    private String score;
+	private Double score;
 
     private String ruleValue;
 

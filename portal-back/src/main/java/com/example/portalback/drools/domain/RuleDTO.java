@@ -16,7 +16,7 @@ public class RuleDTO {
     private Date beginTime;
     private Date endTime;
     private List<Integer> joinChannel;
-    private String score;
+    private Double score;
 
     public ActivityRule getRule() {
         return rule;

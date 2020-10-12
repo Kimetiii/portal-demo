@@ -33,7 +33,7 @@ public class RuleGenerator {
 		Map<String, String> ruleMap = new HashMap<>();
 		List<String> ruleDrls = new ArrayList<>();
 		ruleDTOs.forEach(dto ->
-						ruleMap.put(dto.getRuleName(), applyRuleTemplate(dto))
+				ruleMap.put(dto.getRuleName(), applyRuleTemplate(dto))
 		);
 		// 这里尝试直接生成规则文件
 		createDrlFile(ruleMap);
@@ -41,6 +41,7 @@ public class RuleGenerator {
 		createOrRefreshDrlInMemory(ruleDrls);
 	}
 
+	// todo 需要判断是否存在同名文件 存在文件 做重写处理
 	private void createDrlFile(Map<String, String> ruleMap) {
 
 		ruleMap.forEach((k, v) -> {
@@ -140,7 +141,7 @@ public class RuleGenerator {
 	private static void writeFileAppend(String filePath, String Content) {
 		FileWriter fw = null;
 		try {
-			fw = new FileWriter(filePath, true);
+			fw = new FileWriter(filePath, false);
 			fw.write(Content);
 			fw.flush();
 			fw.close();
@@ -178,7 +179,7 @@ public class RuleGenerator {
 
 		data.put("rule", rule.getRuleValue());
 		data.put("awardeeType", rule.getAwardeeType());
-		data.put("score",rule.getScore());
+		data.put("score", rule.getScore());
 //      data.put("ruleId", rule.getId());
 //      data.put("joinChannels", ruleDTO.getJoinChannel());
 //      data.put("priority", rule.getPriority());

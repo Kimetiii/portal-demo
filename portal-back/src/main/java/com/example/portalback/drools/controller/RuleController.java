@@ -67,7 +67,7 @@ public class RuleController {
 	 * @return ResponseObj
 	 */
 	@GetMapping("deleteRuleById")
-	public ResponseObj deleteRuleById(@RequestParam String ruleId) {
+	public ResponseObj deleteRuleById(@RequestParam("id") String ruleId) {
 		try {
 			activityRuleService.deleteRuleById(ruleId);
 			return ResponseObj.success();

@@ -5,8 +5,15 @@
       <div slot="header" class="clearfix">
         <span style="font-family:'微软雅黑',serif;font-weight: bold">模型名称：</span>
         <span v-if='!o.isChange'>{{ o.ruleName }}</span>
-        <el-input v-model=o.ruleName v-else style="width: 600px"><</el-input>
-        <el-button type="success" style="float:right" @click="changeRule(o.id)" v-if='!o.isChange'>修改</el-button>
+        <el-input v-model=o.ruleName
+                  v-else
+                  style="width: 600px"><
+        </el-input>
+        <el-button type="success"
+                   style="float:right"
+                   @click="changeRule(o.id)"
+                   v-if='!o.isChange'>修改
+        </el-button>
         <el-button v-show='o.isChange'
                    v-else
                    type="primary"
@@ -24,10 +31,24 @@
       </div>
       <div style="margin-top: 10px">
         <span style="font-family:'微软雅黑',serif;font-weight: bold">
-          规则分数：</span><span v-if='!o.isChange'>{{ o.score }}</span>
-        <el-input-number style="margin-left: 5px" v-else v-model="o.score"></el-input-number>
+          规则分数：</span>
+        <span v-if='!o.isChange'>{{ o.score }}</span>
+        <el-input-number style="margin-left: 5px"
+                         v-else
+                         v-model="o.score"></el-input-number>
       </div>
-
+      <div>
+        <el-button v-show='o.isChange'
+                   type="danger"
+                   style="float:right;margin-bottom: 10px"
+                   @click="deleteRule4Page(o.id)">删除
+        </el-button>
+        <el-button v-show='o.isChange'
+                   type="info"
+                   style="float:right;margin-bottom: 10px;margin-right: 10px"
+                   @click="cancel4Page(o.id)">取消
+        </el-button>
+      </div>
     </el-card>
     <el-button style="margin-left: 30px;width: 800px;margin-top: 20px;font-family:'微软雅黑',serif;font-weight: bold"
                type="primary"
@@ -38,7 +59,7 @@
 
 <script>
 
-import {addRule, getRules} from '@/api/rule'
+import {addRule, deleteRuleById, getRules} from '@/api/rule'
 import Message from "element-ui/packages/message/src/main";
 
 export default {
@@ -89,7 +110,7 @@ export default {
           flag = false;
         }
       })
-      if(flag){
+      if (flag) {
         this.ruleList.forEach(res => {
           if (res.id === id) {
             res.isChange = true;
@@ -103,6 +124,7 @@ export default {
           if (res.data.msg === 'success') {
             Message.success('保存成功！')
           }
+          this.getRules4Page()
         })
     },
     saveRule(id) {
@@ -157,6 +179,28 @@ export default {
             isChange: true
           })
       }
+    },
+    deleteRule4Page(ruleId) {
+      deleteRuleById(ruleId)
+        .then(res => {
+          if (res.data.msg === 'success') {
+            Message.success('删除成功！');
+          } else {
+            Message.error('删除失败！');
+          }
+          this.getRules4Page()
+        })
+
+    },
+    cancel4Page(id) {
+      this.ruleList.forEach(res => {
+        if (id === '') {
+          this.getRules4Page();
+        }
+        if (id === res.id) {
+          res.isChange = false;
+        }
+      })
     }
   }
 }

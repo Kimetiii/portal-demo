@@ -22,10 +22,8 @@ rule "judge_@{ruleCode}"
 date-effective "@{beginTime}"
 date-expires "@{endTime}"
 when
-  // 条件语句 LHS
   $c:@{eventType}(@{rule});
 then
- // RHS
    $c.setCreditScore(@{score});
 end
 
