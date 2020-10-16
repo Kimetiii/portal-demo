@@ -72,6 +72,7 @@ public class RuleGenerator {
 		}*/
 	}
 
+
 	/**
 	 * 功能描述:
 	 * <覆盖写入>

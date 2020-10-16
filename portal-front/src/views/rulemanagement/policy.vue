@@ -66,7 +66,7 @@
         <el-button v-show='o.isChange'
                    type="danger"
                    style="float:right;margin-bottom: 10px"
-                   @click="deleteRule4Page(o.id)">删除
+                   @click="deleteRule4Page(o)">删除
         </el-button>
         <el-button v-show='o.isChange'
                    type="info"
@@ -275,8 +275,8 @@ export default {
           })
       }
     },
-    deleteRule4Page(ruleId) {
-      deleteRuleById(ruleId)
+    deleteRule4Page(ruleModel) {
+      deleteRuleById(ruleModel)
         .then(res => {
           if (res.data.msg === 'success') {
             Message.success('删除成功！');

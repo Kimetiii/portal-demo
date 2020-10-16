@@ -62,16 +62,10 @@ public class RuleController {
 		}
 	}
 
-	/**
-	 * 删除规则
-	 *
-	 * @param ruleId 规则id
-	 * @return ResponseObj
-	 */
-	@GetMapping("deleteRuleById")
-	public ResponseObj deleteRuleById(@RequestParam("id") String ruleId) {
+	@PostMapping("deleteRuleById")
+	public ResponseObj deleteRuleById(@RequestBody RuleModel ruleModel) {
 		try {
-			activityRuleService.deleteRuleById(ruleId);
+			activityRuleService.deleteRuleById(ruleModel);
 			return ResponseObj.success();
 		} catch (Exception e) {
 			return ResponseObj.failure(e);

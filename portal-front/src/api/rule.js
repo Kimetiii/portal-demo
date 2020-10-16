@@ -47,10 +47,10 @@ export function loadRule(params) {
  * @returns {AxiosPromise}id
  * @param id
  */
-export function deleteRuleById(id) {
+export function deleteRuleById(params) {
   return request({
     url: '/ruleLoadAndUse/deleteRuleById',
-    method: 'get',
-    params: { id: id }
+    method: 'post',
+    data: params
   })
 }

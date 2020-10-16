@@ -3,6 +3,7 @@ package com.example.portalback.drools.service;
 import com.alibaba.fastjson.JSON;
 import com.example.portalback.annotation.Fact;
 import com.example.portalback.common.util.CopyUtil;
+import com.example.portalback.common.util.FileUtils;
 import com.example.portalback.common.util.LoginUtils;
 import com.example.portalback.drools.dao.ActivityRuleRepository;
 import com.example.portalback.drools.domain.ActivityRule;
@@ -93,8 +94,11 @@ public class ActivityRuleService {
 		}
 	}
 
-	public void deleteRuleById(String ruleId) {
-		activityRuleRepository.deleteById(ruleId);
+	public void deleteRuleById(RuleModel ruleModel) {
+		// todo 删除规则文件
+		String path = "D:\\test/" + ruleModel.getRuleName() + ".drl";
+		FileUtils.deleteFile(path);
+		activityRuleRepository.deleteById(ruleModel.getId());
 	}
 
 	/**
