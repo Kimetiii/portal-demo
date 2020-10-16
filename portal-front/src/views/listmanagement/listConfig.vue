@@ -19,7 +19,7 @@
           <el-button type="text" @click="foldChange">{{ foldStatus }}</el-button>
           <el-form-item class="margin" v-if="foldCode===0">
             <el-button type="primary" @click="search()" style="margin-left: 20px">查询</el-button>
-            <el-button type="success" onclick="location='http://dut.portal.com:8080/#/ListManagement/clientAdd'">新增
+            <el-button type="success" @click="addNewInfo">新增
             </el-button>
             <el-button class="button" @click="resetForm">重置</el-button>
           </el-form-item>
@@ -42,7 +42,7 @@
             </el-select>
           </el-form-item>
           <el-button type="primary" @click="search()" style="margin-left: 20px" trigger="click">查询</el-button>
-          <el-button type="success" onclick="location='http://dut.portal.com:8080/#/ListManagement/clientAdd'">新增
+          <el-button type="success" @click="addNewInfo">新增
           </el-button>
           <el-button class="button" @click="resetForm">重置</el-button>
         </el-form>
@@ -63,7 +63,7 @@
                 <el-form-item label="姓名" prop="name">
                   <el-input v-model="customerInfo.name" readonly="readonly"></el-input>
                 </el-form-item>
-                <el-form-item label="曾用名" prop="fomerName">
+                <el-form-item label="曾用名" prop="formerName">
                   <el-input v-model="customerInfo.formerName" readonly="readonly"></el-input>
                 </el-form-item>
                 <el-form-item label="身份证号" prop="idNumber">
@@ -393,6 +393,12 @@ export default {
     this.fetchData()
   },
   methods: {
+    addNewInfo() {
+      this.$router.push({
+        path: '/ListManagement/clientAdd',
+        name: 'clientAdd'
+      })
+    },
     //显示所有未删除
     fetchData() {
       this.listLoading = true
@@ -414,12 +420,12 @@ export default {
       };
       searchCustomerList(searchParams)
         .then(res => {
-        if (res.data.data.length === 0) {
-          alert("未找到指定信息！")
-        } else {
-          this.partOfData = res.data.data
-        }
-      })
+          if (res.data.data.length === 0) {
+            alert("未找到指定信息！")
+          } else {
+            this.partOfData = res.data.data
+          }
+        })
     },
     //查看
     check: function (params) {

@@ -55,7 +55,7 @@ public class ActivityRuleService {
 		ActivityRuleEntity activityRuleEntity = new ActivityRuleEntity();
 		activityRuleEntity.setId(ruleModel.getId());
 		activityRuleEntity.setRuleName(ruleModel.getRuleName());
-		activityRuleEntity.setEvent(ruleModel.getEvent());
+		activityRuleEntity.setEvent("CUSTOMER"); // TODO 这里先直接写死 FACT 类型 后期可以做成动态选择
 		activityRuleEntity.setRuleValue(ruleModel.getRuleValue());
 		activityRuleEntity.setScore(ruleModel.getScore());
 		activityRuleEntity.setCreateBy(LoginUtils.getUserName());

@@ -32,14 +32,33 @@
           规则条件：
         </span>
         <span v-if='!o.isChange'> {{ o.ruleValue }}</span>
-        <el-input v-model="o.ruleValue" style="width: 600px" v-else>
-        </el-input>
+        <!-- 这里需要编辑规则的LHR -->
+                <el-input v-model="o.ruleValue" style="width: 600px" v-else>
+                </el-input>
+        <!--todo 设计方案B 下拉框拼接-->
+        <!--        <el-select v-model="value" placeholder="请选择" v-else style="margin-left: 5px;width: 150px">
+                  <el-option
+                    v-for="item in options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                  </el-option>
+                </el-select>-->
+
+<!--        <el-cascader
+          v-for="o in LHSList"
+          v-else
+          v-model="value"
+          :options="options"
+          style="margin-left: 5px"
+          @change="handleChange"></el-cascader>-->
       </div>
+  <!--    <el-button v-if='o.isChange' style="width: 750px;margin-top: 5px;float: right" @click="addLHSPod()">新增规则元素</el-button>-->
       <div style="margin-top: 10px">
         <span style="font-family:'微软雅黑',serif;font-weight: bold">
           规则分数：</span>
         <span v-if='!o.isChange'>{{ o.score }}</span>
-        <el-input-number style="margin-left: 5px"
+        <el-input-number style="margin-left: 5px;margin-top: 5px"
                          v-else
                          v-model="o.score"></el-input-number>
       </div>
@@ -90,7 +109,74 @@ export default {
         updateTime: ''
       },
       isChange: false,
-      ruleList: []
+      ruleList: [],
+      LHSList: [],
+      value: '',
+      options: [
+        {
+          value: 'age',
+          label: '年龄',
+          children: [{
+            value: '>',
+            label: '大于',
+            children: [
+              {
+                value: '20',
+                label: '20'
+              },
+              {
+                value: '30',
+                label: '30'
+              },
+              {
+                value: '40',
+                label: '40'
+              },]
+          },
+            {
+              value: '<',
+              label: '小于',
+              children: [
+                {
+                  value: '20',
+                  label: '20'
+                },
+                {
+                  value: '30',
+                  label: '30'
+                },
+                {
+                  value: '40',
+                  label: '40'
+                },]
+            },
+            {
+              value: '==',
+              label: '等于',
+              children: [
+                {
+                  value: '20',
+                  label: '20'
+                },
+                {
+                  value: '30',
+                  label: '30'
+                },
+                {
+                  value: '40',
+                  label: '40'
+                },]
+            },]
+        }, {
+          value: 'educational',
+          label: '学历情况'
+        }, {
+          value: 'annualSalary',
+          label: '年收入'
+        }, {
+          value: 'debtCoverageRatio',
+          label: '债务覆盖率'
+        }],
     }
   },
   mounted() {
@@ -99,6 +185,9 @@ export default {
   created() {
   },
   methods: {
+    handleChange(value) {
+      console.log(value);
+    },
     getRules4Page() {
       getRules()
         .then(res => {
@@ -215,6 +304,11 @@ export default {
             Message.success('刷新规则成功~');
           }
         })
+    },
+    addLHSPod() {
+      this.LHSList.push({
+
+      })
     }
   }
 }

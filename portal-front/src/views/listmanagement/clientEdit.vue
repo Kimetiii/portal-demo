@@ -19,7 +19,7 @@
           <el-form-item label="姓名" prop="name">
             <el-input v-model="customerInfo.name" placeholder="请输入"></el-input>
           </el-form-item>
-          <el-form-item label="曾用名" prop="fomerName">
+          <el-form-item label="曾用名" prop="formerName">
             <el-input v-model="customerInfo.formerName" placeholder="默认为：无"></el-input>
           </el-form-item>
           <el-form-item label="身份证号" prop="idNumber">
