@@ -33,8 +33,8 @@
         </span>
         <span v-if='!o.isChange'> {{ o.ruleValue }}</span>
         <!-- 这里需要编辑规则的LHR -->
-                <el-input v-model="o.ruleValue" style="width: 600px" v-else>
-                </el-input>
+        <el-input v-model="o.ruleValue" style="width: 600px" v-else>
+        </el-input>
         <!--todo 设计方案B 下拉框拼接-->
         <!--        <el-select v-model="value" placeholder="请选择" v-else style="margin-left: 5px;width: 150px">
                   <el-option
@@ -45,15 +45,15 @@
                   </el-option>
                 </el-select>-->
 
-<!--        <el-cascader
-          v-for="o in LHSList"
-          v-else
-          v-model="value"
-          :options="options"
-          style="margin-left: 5px"
-          @change="handleChange"></el-cascader>-->
+        <!--        <el-cascader
+                  v-for="o in LHSList"
+                  v-else
+                  v-model="value"
+                  :options="options"
+                  style="margin-left: 5px"
+                  @change="handleChange"></el-cascader>-->
       </div>
-  <!--    <el-button v-if='o.isChange' style="width: 750px;margin-top: 5px;float: right" @click="addLHSPod()">新增规则元素</el-button>-->
+      <!--    <el-button v-if='o.isChange' style="width: 750px;margin-top: 5px;float: right" @click="addLHSPod()">新增规则元素</el-button>-->
       <div style="margin-top: 10px">
         <span style="font-family:'微软雅黑',serif;font-weight: bold">
           规则分数：</span>
@@ -86,6 +86,7 @@
 
 import {addRule, deleteRuleById, getRules, loadRule} from '@/api/rule'
 import Message from "element-ui/packages/message/src/main";
+import {MessageBox} from 'element-ui'
 
 export default {
   name: 'policy.vue',
@@ -276,14 +277,28 @@ export default {
       }
     },
     deleteRule4Page(ruleModel) {
-      deleteRuleById(ruleModel)
-        .then(res => {
-          if (res.data.msg === 'success') {
-            Message.success('删除成功！');
-          } else {
-            Message.error('删除失败！');
-          }
-          this.getRules4Page()
+      MessageBox.confirm('此操作将永久删除规则文件, 是否继续?', '提示', {
+        confirmButtonText: '确定删除',
+        cancelButtonText: '算了',
+        type: 'warning',
+        center: true
+      })
+        .then(() => {
+          deleteRuleById(ruleModel)
+            .then(res => {
+              if (res.data.msg === 'success') {
+                Message.success('删除成功！');
+              } else {
+                Message.error('删除失败！');
+              }
+              this.getRules4Page()
+            })
+        })
+        .catch(() => {
+          Message({
+            type: 'info',
+            message: '已取消删除'
+          })
         })
 
     },
@@ -306,9 +321,7 @@ export default {
         })
     },
     addLHSPod() {
-      this.LHSList.push({
-
-      })
+      this.LHSList.push({})
     }
   }
 }
