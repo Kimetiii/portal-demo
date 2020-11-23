@@ -37,6 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.cors();
 		http.authorizeRequests()
 				.requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
+				.antMatchers("/customerBase/findAllCustomer").permitAll() // 这里开放白名单
 				// 这里是硬编码权限 只限于简单的用户权限 这里的角色名称严格区分大小写
 				.antMatchers("/sys/admin/**").access("hasRole('ADMIN')") // 管理员角色鉴权
 				.antMatchers("/ledger/**").access("hasRole('FINANCE')") // 财务角色鉴权
