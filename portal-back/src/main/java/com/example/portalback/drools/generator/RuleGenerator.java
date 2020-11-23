@@ -37,7 +37,7 @@ public class RuleGenerator {
 		);
 		// 这里尝试直接生成规则文件
 		createDrlFile(ruleMap);
-		//规则的加载
+		// 规则的加载
 		createOrRefreshDrlInMemory(ruleDrls);
 	}
 
