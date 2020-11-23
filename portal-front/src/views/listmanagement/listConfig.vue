@@ -430,9 +430,10 @@ export default {
     //查看
     check: function (params) {
       this.dialogFormVisible = true
-      getCustomerById(params).then((res) => {
-        this.customerInfo = res.data.data
-      })
+      getCustomerById(params)
+        .then((res) => {
+          this.customerInfo = res.data.data
+        })
     },
     //删除
     delete1: function (params) {
@@ -440,15 +441,17 @@ export default {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
-      }).then(() => {
-        softDeleteById(params).then((res) => {
-        })
-        this.$message({
-          type: 'success',
-          message: '删除成功!'
-        })
-        this.$router.go(0);
-      }).catch(() => {
+      })
+        .then(() => {
+          softDeleteById(params)
+            .then((res) => {
+            })
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          })
+          this.$router.go(0);
+        }).catch(() => {
         this.$message({
           type: 'info',
           message: '已取消删除'
