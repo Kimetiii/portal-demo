@@ -45,7 +45,7 @@ public class RuleGenerator {
 	private void createDrlFile(Map<String, String> ruleMap) {
 
 		ruleMap.forEach((k, v) -> {
-			String path = "D:\\test/" + k + ".drl";
+			String path = "/home/rules/" + k + ".drl";
 			File file = new File(path);
 			try {
 				if (!file.exists()) {
@@ -205,7 +205,7 @@ public class RuleGenerator {
 		kieFileSystem.generateAndWritePomXML(RuleExecutor.getReleaseId());
 
 		for (String str : rules) {
-			String temPath = "D:\\test/" + UUID.randomUUID() + ".drl";
+			String temPath = "/home/rules/" + UUID.randomUUID() + ".drl";
 			kieFileSystem.write(temPath, str);
 
 		}
