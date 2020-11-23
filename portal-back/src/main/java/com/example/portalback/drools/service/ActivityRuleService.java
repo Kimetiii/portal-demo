@@ -96,7 +96,7 @@ public class ActivityRuleService {
 
 	public void deleteRuleById(RuleModel ruleModel) {
 		// todo 删除规则文件
-		String path = "D:\\test/" + ruleModel.getRuleName() + ".drl";
+		String path = "/home/rules/" + ruleModel.getRuleName() + ".drl";
 		FileUtils.deleteFile(path);
 		activityRuleRepository.deleteById(ruleModel.getId());
 	}
